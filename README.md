@@ -42,5 +42,8 @@ virtualenv venv
 
 Now install some Python tools that we will be using
 ```sh
-pip install sacrebleu TODO
+pip install sacrebleu bpe TODO
 ```
+
+### Preprocessing the data
+TODO: decide how much we want them to do by themselves
