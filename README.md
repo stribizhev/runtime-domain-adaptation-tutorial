@@ -46,4 +46,93 @@ pip install sacrebleu bpe TODO
 ```
 
 ### Preprocessing the data
-TODO: decide how much we want them to do by themselves
+Preprocessing the data involves:
+1. punctuation normalization,
+2. tokenization,
+3. truecasing,
+4. byte-pair encoding.
+
+These steps are needed to convert the text into a form that's expected by the
+NMT model.
+
+#### Set some variables
+These will be used down below.
+```sh
+# TODO
+prefix=$1
+src=$2
+trg=$3
+prefix_dev=$4
+```
+
+#### Punctuation normalization
+Punctuation normalization attempts to reduce the variability of punctuation use
+in text by converting classes of similar punctuation into a single normal form.
+E.g., multiple spaces are converted to a single space, quote characters like «,
+'', „ are converted to ", etc.
+
+Apply `normalize-punctuation.perl` from Moses scripts to the source and target
+side of the parallel corpus.
+
+```sh
+# Process source
+cat ${prefix}.${src} \
+  | ~/software/mosesdecoder/scripts/tokenizer/normalize-punctuation.perl \
+  > ${prefix}.norm.${src}
+
+# Process target
+cat ${prefix}.${trg} \
+  | ~/software/mosesdecoder/scripts/tokenizer/normalize-punctuation.perl \
+  > ${prefix}.norm.${trg}
+```
+
+#### Tokenization
+Tokenization separates TODO 
+
+```sh
+# Process source
+cat ${prefix}.norm.${src} \
+  | ~/software/mosesdecoder/scripts/tokenizer/tokenizer.perl -l ${src} -no-escape -threads 8 \
+  > ${prefix}.tok.${src}
+
+# Process target
+cat ${prefix}.norm.${trg} \
+  | ~/software/mosesdecoder/scripts/tokenizer/tokenizer.perl -l ${trg} -no-escape -threads 8 \
+  > ${prefix}.tok.${trg}
+```
+
+#### Truecasing
+Truecasing converts word casing into a standard form regardless of its place in
+the sentence. E.g., common nouns that appear at the start of the sentence get
+lowercased, proper nouns get uppercased.
+
+Truecasing uses a pre-trained truecasing model that must match the one that was
+used when training the system.
+
+```sh
+# Process source
+~/software/mosesdecoder/scripts/recaser/truecase.perl \
+  --model trucase.${src} -a \
+  < ${prefix}.tok.${src} \
+  > ${prefix}.tc.${src}
+
+# Process target
+~/software/mosesdecoder/scripts/recaser/truecase.perl \
+  --model trucase.${trg} -a \
+  < ${prefix}.tok.${trg} \
+  > ${prefix}.tc.${trg}
+```
+
+#### Apply BPE
+Byte-pair encoding (BPE) breaks down words into subword units -- a set of common
+parts shared among all words. E.g.,
+> equipment and materials are necessary but not supplied
+turns into
+> equipment and materi@@ als are n@@ ec@@ es@@ sary but not suppl@@ ied
+
+```sh
+# Process source
+$TODO_BPE_DIR/apply_bpe.py -c ${src}${trg}.bpe < ${prefix_dev}.tc.${src} > ${prefix_dev}.bpe.${src}
+# Process target
+$TODO_BPE_DIR/apply_bpe.py -c ${src}${trg}.bpe < ${prefix_dev}.tc.${trg} > ${prefix_dev}.bpe.${trg}
+```
