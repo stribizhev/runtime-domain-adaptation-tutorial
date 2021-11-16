@@ -42,6 +42,8 @@ def translate_and_save(url, sources, targets, uuid):
         print(translation)
         save(source, target, uuid)
 
+    delete_all_updates(uuid)
+
 
 
 if __name__ == "__main__":
