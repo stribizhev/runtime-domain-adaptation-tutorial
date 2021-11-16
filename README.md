@@ -136,3 +136,36 @@ $TODO_BPE_DIR/apply_bpe.py -c ${src}${trg}.bpe < ${prefix_dev}.tc.${src} > ${pre
 # Process target
 $TODO_BPE_DIR/apply_bpe.py -c ${src}${trg}.bpe < ${prefix_dev}.tc.${trg} > ${prefix_dev}.bpe.${trg}
 ```
+
+
+## Translation
+To evaluate the effectiveness of runtime-domain adaptation, we will compare how
+it performs relative to regular translation. To do so, we will simulate a human
+translator who's translating a document by post-editing an NMT system's outputs.
+In scenario a) the *translator* will be continuously submitting the post-edited
+sentences to supply the NMT system with examples to use to adapt to the domain
+of the document. In scenario b) run-time domain adaptation will not be used.
+
+### Runtime domain adaptation (scenario a)
+Run the `client.py` script by supplying it with an url to the runtime domain
+adaptation webservice, your unique ID and source and target files.
+
+```sh
+./client.py --uid $UID \
+  --source ./TODO/source --target ./TODO/target \
+  http://localhost:$PORT \
+  > output.dynamic.$trg
+```
+
+### Regular translation (scenario b)
+To translate without using runtime domain adaptation, simply use the same
+command as previously without supplying the `--target` option.
+
+```sh
+./client.py --uid $UID \
+  --source ./TODO/source \
+  http://localhost:$PORT \
+  > output.regular.$trg
+```
+
+### Calculating results
