@@ -169,3 +169,12 @@ command as previously without supplying the `--target` option.
 ```
 
 ### Calculating results
+Calculate BLEU for both outputs to compare the quality of translations.
+
+```sh
+# Calculate BLEU for the translations that used runtime domain adaptation
+sacrebleu output.dynamic.$trg < ./TODO/target | tee dynamic.bleu
+
+# Calculate BLEU for the translations that didn't use runtime domain adaptation
+sacrebleu output.regular.$trg < ./TODO/target | tee regular.bleu
+```
