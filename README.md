@@ -21,12 +21,12 @@ instructions online.
 We will need Python 3 (we've used Python 3.6.9 when testing the instructions in
 the tutorial) and Perl to run data processing scripts, Virtualenv to allow
 installing Python packages locally without root permissions (instead of
-system-wide).
+system-wide), git to download some code.
 ```sh
 # Update the package list
 sudo apt-get update
 # Install the software
-sudo apt-get install python3 perl virtualenv
+sudo apt-get install python3 perl virtualenv git
 ```
 
 ### Install Python tools in a virtual environment
@@ -42,6 +42,13 @@ virtualenv venv --python=/usr/bin/python3
 Now install some Python tools that we will be using
 ```sh
 pip install sacrebleu bpe requests TODO
+```
+
+### Download Moses
+We will be using the scripts from Moses decoder to pre-process data. Clone the
+official Moses git repository to your home directory.
+```
+git clone https://github.com/moses-smt/mosesdecoder.git ~/mosesdecoder
 ```
 
 ## Data preparation
