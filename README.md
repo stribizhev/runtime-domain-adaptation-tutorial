@@ -34,7 +34,7 @@ Use the `virtualenv` command to create a local directory called `venv` (or any
 other name you choose) for storing the Python tools. Then activate the virtual environment.
 ```sh
 # Create the virtual environment
-virtualenv venv
+virtualenv venv --python=/usr/bin/python3
 # Activate it
 . ./venv/bin/activate
 ```
