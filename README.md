@@ -6,6 +6,44 @@ model to the text at hand.
 
 TODO
 
+## Software dependencies
+We will be using multiple different tools to preprocess the data and measure the
+translation quality at the end. These tools must be installed before we begin.
+
+### Pre-installed tools
+These tools should already be available on the shared server we're using for the
+tutorial. You should install these only if you're following the tutorial using
+your own computer. These tools should be easily available through your Linux
+distribution's package manager. The setup instructions will target Ubuntu using
+the `apt` packaging tool. If you're not using Linux, please search for setup
+instructions online.
+
+We will need Python 3 (we've used Python 3.6.9 when testing the instructions in
+the tutorial) and Perl to run data processing scripts, Virtualenv to allow
+installing Python packages locally without root permissions (instead of
+system-wide).
+```sh
+# Update the package list
+sudo apt-get update
+# Install the software
+sudo apt-get install python3 perl virtualenv
+```
+
+### Install Python tools in a virtual environment
+Use the `virtualenv` command to create a local directory called `venv` (or any
+other name you choose) for storing the Python tools. Then activate the virtual environment.
+```sh
+# Create the virtual environment
+virtualenv venv
+# Activate it
+. ./venv/bin/activate
+```
+
+Now install some Python tools that we will be using
+```sh
+pip install sacrebleu bpe requests TODO
+```
+
 ## Data preparation
 First we need to prepare the data that we will be using to adapt the generic NMT
 model to the domain of the document we want to translate. We will download the
@@ -17,32 +55,6 @@ You should download and extract the data.
 wget http://TODO.tar.gz
 tar zxvf TODO.tar.gz
 cd TODO
-```
-
-### Creating the anaconda environment
-We will be using `virtualenv` to set up a virtual Python environment to host the
-tools we will be using for data preprocessing. Virtualenv should be easily
-available through your Linux distribution's package manager, e.g.,
-```sh
-# Ubuntu
-sudo apt-get install virtualenv
-# Arch Linux
-sudo pacman -S python-virtualenv
-```
-but it should be already available on the shared server we're using for the tutorial.
-
-Use the `virtualenv` command to create a local directory called `venv` (or any
-other name you choose) for storing the Python tools. Then activate the virtual environment.
-```sh
-# create the virtual environment
-virtualenv venv
-# activate it
-. ./venv/bin/activate
-```
-
-Now install some Python tools that we will be using
-```sh
-pip install sacrebleu bpe TODO
 ```
 
 ### Preprocessing the data
