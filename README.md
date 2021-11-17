@@ -79,9 +79,10 @@ These will be used down below.
 ```sh
 # TODO
 prefix=$1
-src=$2
-trg=$3
+src=en
+trg=de
 prefix_dev=$4
+moses_scripts=~/mosesdecoder/scripts
 ```
 
 #### Punctuation normalization
@@ -96,12 +97,12 @@ side of the parallel corpus.
 ```sh
 # Process source
 cat ${prefix}.${src} \
-  | ~/software/mosesdecoder/scripts/tokenizer/normalize-punctuation.perl \
+  | $moses_scritps/scripts/tokenizer/normalize-punctuation.perl \
   > ${prefix}.norm.${src}
 
 # Process target
 cat ${prefix}.${trg} \
-  | ~/software/mosesdecoder/scripts/tokenizer/normalize-punctuation.perl \
+  | $moses_scritps/scripts/tokenizer/normalize-punctuation.perl \
   > ${prefix}.norm.${trg}
 ```
 
@@ -111,12 +112,12 @@ Tokenization separates TODO
 ```sh
 # Process source
 cat ${prefix}.norm.${src} \
-  | ~/software/mosesdecoder/scripts/tokenizer/tokenizer.perl -l ${src} -no-escape -threads 1 \
+  | $moses_scritps/scripts/tokenizer/tokenizer.perl -l ${src} -no-escape -threads 1 \
   > ${prefix}.tok.${src}
 
 # Process target
 cat ${prefix}.norm.${trg} \
-  | ~/software/mosesdecoder/scripts/tokenizer/tokenizer.perl -l ${trg} -no-escape -threads 1 \
+  | $moses_scritps/scripts/tokenizer/tokenizer.perl -l ${trg} -no-escape -threads 1 \
   > ${prefix}.tok.${trg}
 ```
 
@@ -130,13 +131,13 @@ used when training the system.
 
 ```sh
 # Process source
-~/software/mosesdecoder/scripts/recaser/truecase.perl \
+$moses_scritps/scripts/recaser/truecase.perl \
   --model trucase.${src} -a \
   < ${prefix}.tok.${src} \
   > ${prefix}.tc.${src}
 
 # Process target
-~/software/mosesdecoder/scripts/recaser/truecase.perl \
+$moses_scritps/scripts/recaser/truecase.perl \
   --model trucase.${trg} -a \
   < ${prefix}.tok.${trg} \
   > ${prefix}.tc.${trg}
