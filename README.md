@@ -104,12 +104,12 @@ Tokenization separates TODO
 ```sh
 # Process source
 cat ${prefix}.norm.${src} \
-  | ~/software/mosesdecoder/scripts/tokenizer/tokenizer.perl -l ${src} -no-escape -threads 8 \
+  | ~/software/mosesdecoder/scripts/tokenizer/tokenizer.perl -l ${src} -no-escape -threads 1 \
   > ${prefix}.tok.${src}
 
 # Process target
 cat ${prefix}.norm.${trg} \
-  | ~/software/mosesdecoder/scripts/tokenizer/tokenizer.perl -l ${trg} -no-escape -threads 8 \
+  | ~/software/mosesdecoder/scripts/tokenizer/tokenizer.perl -l ${trg} -no-escape -threads 1 \
   > ${prefix}.tok.${trg}
 ```
 
