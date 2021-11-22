@@ -57,7 +57,7 @@ model to the domain of the document we want to translate. We will download the
 data and the model, set up some tools and preprocess the data.
 
 ### Downloading the data and the NMT model
-You should download and extract the data.
+You should download MT and data preprocessing models. Data is found in `data` folder.
 ```sh
 wget http://TODO.tar.gz
 tar zxvf TODO.tar.gz
