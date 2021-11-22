@@ -199,3 +199,6 @@ sacrebleu output.dynamic.$trg < ./TODO/target | tee dynamic.bleu
 # Calculate BLEU for the translations that didn't use runtime domain adaptation
 sacrebleu output.regular.$trg < ./TODO/target | tee regular.bleu
 ```
+
+### Big Picture
+![Delta BLEU vs token-to-type ratio](https://github.com/tilde-nlp/runtime-domain-adaptation-tutorial/edit/master/bleu_vs_ttr.png?raw=true)
