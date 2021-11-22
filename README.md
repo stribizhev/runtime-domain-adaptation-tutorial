@@ -41,7 +41,7 @@ virtualenv venv --python=/usr/bin/python3
 
 Now install some Python tools that we will be using
 ```sh
-pip install sacrebleu bpe requests TODO
+pip install sacrebleu subword-nmt requests TODO
 ```
 
 ### Download Moses
@@ -57,7 +57,7 @@ model to the domain of the document we want to translate. We will download the
 data and the model, set up some tools and preprocess the data.
 
 ### Downloading the data and the NMT model
-You should download and extract the data.
+You should download MT and data preprocessing models. Data is found in `data` folder.
 ```sh
 wget http://TODO.tar.gz
 tar zxvf TODO.tar.gz
@@ -83,6 +83,7 @@ src=en
 trg=de
 prefix_dev=$4
 moses_scripts=~/mosesdecoder/scripts
+models=~/models
 ```
 
 #### Punctuation normalization
@@ -132,13 +133,13 @@ used when training the system.
 ```sh
 # Process source
 $moses_scripts/recaser/truecase.perl \
-  --model trucase.${src} -a \
+  --model ${models}/trucase.${src} -a \
   < ${prefix}.tok.${src} \
   > ${prefix}.tc.${src}
 
 # Process target
 $moses_scripts/recaser/truecase.perl \
-  --model trucase.${trg} -a \
+  --model ${models}/trucase.${trg} -a \
   < ${prefix}.tok.${trg} \
   > ${prefix}.tc.${trg}
 ```
@@ -152,9 +153,9 @@ turns into
 
 ```sh
 # Process source
-$TODO_BPE_DIR/apply_bpe.py -c ${src}${trg}.bpe < ${prefix_dev}.tc.${src} > ${prefix_dev}.bpe.${src}
+subword-nmt apply-bpe -c ${models}/${trg}${src}.bpe < ${prefix}.tc.${src} > ${prefix}.bpe.${src}
 # Process target
-$TODO_BPE_DIR/apply_bpe.py -c ${src}${trg}.bpe < ${prefix_dev}.tc.${trg} > ${prefix_dev}.bpe.${trg}
+subword-nmt apply-bpe -c ${models}/${trg}${src}.bpe < ${prefix}.tc.${trg} > ${prefix}.bpe.${trg}
 ```
 
 
