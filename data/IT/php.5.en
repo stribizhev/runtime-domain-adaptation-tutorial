@@ -1,0 +1,100 @@
+In the beginning of the chapter we said that we 'll be describing the various statement types, and as promised, expressions can be statements.
+However, not every expression is a statement.
+In this case, a statement has the form of 'expr' ';' that is, an expression followed by a semicolon.
+In '$b=$a=5 ;', $a=5 is a valid expression, but it's not a statement by itself. '$b=$a=5;' however is a valid statement.
+One last thing worth mentioning is the truth value of expressions.
+PHP provides a full and powerful implementation of expressions, and documenting it entirely goes beyond the scope of this manual.
+The above examples should give you a good idea about what expressions are and how you can construct useful expressions.
+In PHP 3 and PHP 4 constructors behave differently.
+The PHP 4 semantics are strongly preferred.
+Constructors are functions in a class that are automatically called when you create a new instance of a class with new.
+In PHP 3, a function becomes a constructor when it has the same name as the class.
+This defines a class Auto_Cart that is a Cart plus a constructor which initializes the cart with one item of article number "10" each time a new Auto_Cart is being made with "new ".
+Constructors can take arguments and these arguments can be optional, which makes them much more useful.
+To be able to still use the class without parameters, all parameters to constructors should be made optional by providing default values.
+You also can use the @ operator to mute errors occuring in the constructor, e.g. @new.
+In PHP 3, derived classes and constructors have a number of limitations.
+The following examples should be read carefully to understand these limitations.
+In PHP 3, no constructor is being called in the above example.
+The rule in PHP 3 is: 'A constructor is a function of the same name as the class.'.
+This is fixed in PHP 4 by introducing another rule:
+If a class has no constructor, the constructor of the base class is being called, if it exists.
+In PHP 3, the function B() in class A will suddenly become a constructor in class B, although it was never intended to be.
+PHP 3 does not care if the function is being defined in class B, or if it has been inherited.
+This is fixed in PHP 4 by modifying the rule to: 'A constructor is a function of the same name as the class it is being defined in.'.
+Neither PHP 3 nor PHP 4 call constructors of the base class automatically from a constructor of a derived class.
+It is your responsibility to propagate the call to constructors upstream where appropriate.
+There are no destructors in PHP 3 or PHP 4.
+You may use register_shutdown_function() instead to simulate most effects of destructors.
+Destructors are functions that are called automatically when an object is destroyed, either with unset() or by simply going out of scope.
+There are no destructors in PHP.
+A class is a collection of variables and functions working with these variables.
+A class is defined using the following syntax:
+This defines a class named Cart that consists of an associative array of articles in the cart and two functions to add and remove items from this cart.
+The following cautionary notes are valid for PHP 4.
+The name stdClass is used interally by Zend and is reserved.
+You cannot have a class named stdClass in PHP.
+The function names __sleep and __wakeup The function names __sleep and __wakeup are magical in PHP classes.
+You cannot have functions with these names in any of your classes unless you want the magic functionality associated with them.
+See below for more information.
+PHP reserves all function names starting with __ as magical.
+It is recommended that you do not use function names with __ in PHP unless you want some documented magic functionality.
+To initialize variables with non-constant values, you need an initialization function which is called automatically when an object is being constructed from the class.
+Such a function is called a constructor (see below).
+Classes are types, that is, they are blueprints for actual variables.
+You have to create a variable of the desired type with the new operator.
+This creates the objects $cart and $another_cart, both of the class Cart.
+3 items of article number 0815 are being added to $another_cart.
+Both, $cart and $another_cart, have functions add_item(), remove_item() and a variable items.
+These are distinct functions and variables.
+You can think of the objects as something similar to directories in a filesystem.
+In a filesystem you can have two different files README.TXT, as long as they are in different directories.
+Just like with directories where you 'll have to type the full pathname in order to reach each file from the toplevel directory, you have to specify the complete name of the function you want to call:
+In PHP terms, the toplevel directory would be the global namespace, and the pathname separator would be -.
+Thus, the names $cart - items and $another_cart - items name two different variables.
+Note that the variable is named $cart - items, not $cart - $items, that is, a variable name in PHP has only a single dollar sign.
+Within a class definition, you do not know under which name the object will be accessible in your program: at the time the Cart class was written, it was unknown that the object will be named $cart or $another_cart later.
+Thus, you cannot write $cart - items within the Cart class itself.
+Instead, in order to be able to access it' s own functions and variables from within a class, one can use the pseudo-variable $this which can be read as'my own 'or'current object'.
+Thus, '$this - items[$artnr] += $num' can be read as'add $num to the $artnr counter of my own items array 'or'add $num to the $artnr counter of the items array within the current object'.
+There are some nice functions to handle classes and objects.
+You might want to take a look at the Class / Object Functions
+serialize() checks if your class has a function with the magic name __sleep.
+If so, that function is being run prior to any serialization.
+It can clean up the object and is supposed to return an array with the names of all variables of that object that should be serialized.
+The intended use of __sleep is to close any database connections that object may have, committing pending data or perform similar cleanup tasks.
+Also, the function is useful if you have very large objects which need not be saved completely.
+Conversely, unserialize() checks for the presence of a function with the magic name __wakeup.
+The intended use of __wakeup is to reestablish any database connections that may have been lost during serialization and perform other reinitialization tasks.
+References inside the constructor
+Creating references within the constructor can lead to confusing results.
+This tutorial-like section helps you to avoid problems.
+Let us check out if there is a difference between $bar1 which has been created using the copy = operator and $bar2 which has been created using the reference = operator...
+Apparently there is no difference, but in fact there is a very significant one: $bar1 and $globalref[ 0] are _NOT_ referenced, they are NOT the same variable.
+This is because "new" does not return a reference by default, instead it returns a copy.
+There is no performance loss (since PHP 4 and up use reference counting) returning copies instead of references.
+/ / now we will change the name. what do you expect? / / you could expect that both $bar1 and $globalref[ 0] change their names... $bar1 - setName('set from outside'); / / as mentioned before this is not the case. $bar1 - echoName(); $globalref[0] - echoName(); / * output: set from outside set in constructor * / / / let us see what is different with $bar2 and $globalref[1] $bar2 - setName('set from outside'); / / luckily they are not only equal, they are the same variable / / thus $bar2 - name and $globalref[1] - name are the same too $bar2 - echoName(); $globalref[1] - echoName(); / * output: set from outside set from outside * /
+Another final example, try to understand it.
+The magic functions __sleep and __wakeup
+References Explained
+In PHP 3, objects will lose their class association throughout the process of serialization and unserialization.
+The resulting variable is of type object, but has no class and no methods, thus it is pretty useless (it has become just like an array with a funny syntax).
+The following information is valid for PHP 4 only.
+serialize() returns a string containing a byte-stream representation of any value that can be stored in PHP. unserialize() can use this string to recreate the original variable values.
+Using serialize to save an object will save all variables in an object.
+The functions in an object will not be saved, only the name of the class.
+That is, if you have an object $a of class A on page1.php and serialize this, you 'll get a string that refers to class A and contains all values of variabled contained in $a.
+If you want to be able to unserialize this on page2.php, recreating $a of class A, the definition of class A must be present in page2.php.
+This can be done for example by storing the class defintion of class A in an include file and including this file in both page1.php and page2.php.
+If you are using sessions and use session_register() to register objects, these objects are serialized automatically at the end of each PHP page, and are unserialized automatically on each of the following pages.
+This basically means that these objects can show up on any of your pages once they become part of your session.
+It is strongly recommended that you include the class definitions of all such registered objects on all of your pages, even if you do not actually use these classes on all of your pages.
+So if in the example above $a became part of a session by running session_register( "a"), you should include the file classa.inc on all of your pages, not only page1.php and page2.php.
+Remember basic arithmetic from school?
+Arithmetic Operators
+Sum of $a and $b.
+Difference of $a and $b.
+Product of $a and $b.
+Remainder of $a divided by $b.
+The division operator ("/") returns a float value anytime, even if the two operands are integers (or strings that get converted to integers).
+Assignment Operators

@@ -1,0 +1,100 @@
+In this example, we first define a base class and an extension of the class.
+The subclass Spinach adds a method to cook it and another to find out if it is cooked.
+?php / / base class with member properties and methods class Vegetable {var $edible; var $color; function Vegetable ($edible, $color="green ") {$this - edible = $edible; $this - color = $color;} function is_edible() {return $this - edible;} function what_color() {return $this - color;}} / / end of class Vegetable / / extends the base class class Spinach extends Vegetable {var $cooked = false; function Spinach() {$this - Vegetable (true, "green");} function cook_it() {$this - cooked = true;} function is_cooked() {return $this - cooked;}} / / end of class Spinach?
+We also define some utility functions, mainly to have a nice printout of the variables.
+Methods\n"; print_methods($leafy); echo "\nParentage:\n"; class_parentage("leafy", "Spinach"); class_parentage("leafy", "Vegetable");? / pre
+Object leafy does not belong to a subclass of Spinach Object leafy belongs to class spinach a subclass of Vegetable
+COM is a technology which allows the reuse of code written in any language (by any language) using a standard calling convention and hiding behind APIs the implementation details such as what machine the Component is stored on and the executable which houses it.
+It can be thought of as a super Remote Procedure Call (RPC) mechanism with some basic object roots.
+It separates implementation from interface.
+COM functions are only available on the Windows version of PHP.
+There is no installation needed to use these functions; they are part of the PHP core.
+The constants below are defined by this extension, and will only be available when the extension has either been compiled into PHP or dynamically loaded at runtime.
+ClibPDF lets you create PDF documents with PHP.
+ClibPDF functionality and API are similar to PDFlib.
+This documentation should be read alongside the ClibPDF manual since it explains the library in much greater detail.
+Many functions in the native ClibPDF and the PHP module, as well as in PDFlib, have the same name.
+All functions except for cpdf_open() take the handle for the document as their first parameter.
+Currently this handle is not used internally since ClibPDF does not support the creation of several PDF documents at the same time.
+Actually, you should not even try it, the results are unpredictable.
+I can 't oversee what the consequences in a multi threaded environment are.
+According to the author of ClibPDF this will change in one of the next releases (current version when this was written is 1.10).
+If you need this functionality use the pdflib module.
+A nice feature of ClibPDF (and PDFlib) is the ability to create the pdf document completely in memory without using temporary files.
+Another nice feature of ClibPDF is the fact that any page can be modified at any time even if a new page has been already opened.
+The function cpdf_set_current_page() allows to leave the current page and presume modifying an other page.
+Most of the functions are fairly easy to use.
+The most difficult part is probably creating a very simple PDF document at all.
+The following example should help you to get started.
+It creates a document with one page.
+The page contains the text "Times-Roman" in an outlined 30pt font.
+The text is underlined.
+In order to use the ClibPDF functions you need to install the ClibPDF package.
+It is available for download from FastIO, but requires that you purchase a license for commercial use.
+PHP requires that you use cpdflib = 2.
+To get these functions to work, you have to compile PHP with --with-cpdflib[ =DIR].
+DIR is the cpdflib install directory, defaults to / usr.
+In addition you can specify the jpeg library and the tiff library for ClibPDF to use.
+To do so add to your configure line the options --with-jpeg-dir[ =DIR] --with-tiff-dir[=DIR].
+The pdflib distribution contains a more complex example which creates a series of pages with an analog clock.
+Here is that example converted into PHP using the ClibPDF extension:
+Example 2. pdfclock example from pdflib 2.0 distribution
+See also the PDFlib extension documentation.
+The 'strength' of a password is tested by that checks length, use of upper and lower case and checked against the specified CrackLib dictionary.
+CrackLib example
+The functions provided by this extension check whether a character or string falls into a certain character class according to the current locale (see also setlocale()).
+When called with an integer argument these functions behave exactly like their C counterparts from ctype.h.
+When called with a string argument they will check every character in the string and will only return TRUE if every character in the string matches the requested criteria.
+When called with an empty string the result will always be TRUE.
+Passing anything else but a string or integer will return FALSE immediately.
+None besides functions from the standard C library which are always available.
+Beginning with PHP 4.2.0 these functions are enabled by default.
+For older versions you have to configure and compile PHP with --enable-ctype.
+You can disable ctype support with --disable-ctype.
+Builtin support for ctype is available with PHP 4.3.0.
+CyberMUT is a popular Web Payment Service in France, provided by the Crédit Mutuel bank.
+If you are foreign in France, these functions will not be useful for you.
+These functions only provide a link to CyberMUT SDK.
+Be sure to read the CyberMUT Developers Guide for full details of the required parameters.
+These functions allow you to get the date and time from the server where your PHP scripts are running.
+You can use these functions to format the date and time in many different ways.
+Please keep in mind that these functions are dependent on the locale settings of your server.
+Make sure to take daylight saving time and leap years into consideration when working with these functions.
+There is no support for indexes or memo fields.
+Two concurrent webserver processes modifying the same dBase file will very likely ruin your database.
+This extension has no configuration directives defined in php.ini.
+Download and install this library.
+The behaviour of this extension - - including the names of its functions and anything else documented about this extension - - may change without notice in a future release of PHP.
+In order to use the OpenSSL functions you need to install the OpenSSL package.
+The dbx module is a database abstraction layer (db'X', where'X 'is a supported database).
+The dbx functions allow you to access all supported databases using a single calling convention.
+The dbx-functions themselves do not interface directly to the databases, but interface to the modules that are used to support these databases.
+To be able to use a database with the dbx-module, the module must be either linked or loaded into PHP, and the database module must be supported by the dbx-module.
+Currently, following databases are supported, but others will follow:
+Documentation for adding additional database support to dbx can be found at http: / /www.guidance.nl / php / dbx / doc /.
+There are two resource types used in the dbx module.
+The first one is the link - object for a database connection, the second a result - object which helds the result of a query.
+It is a good idea to have the DOM standard available when using this module.
+These functions are mainly to retain compatibilty to older versions of the extension, and should not be used when creating new scripts.
+First, all class attributes are implemented as functions with the same name.
+More information about FrontBase can be found at http: / /www.frontbase.com /.
+Users who installed FrontBase in a non standard directory should always specify the path to fbsql: --with-fbsql= / path / to / fbsql.
+Forms Data Format (FDF) is a format for handling forms within PDF documents.
+You should read the documentation at http: / /partners.adobe.com / asn / developer / acrosdk / forms.html for more information on what FDF is and how it is used in general.
+The general idea of FDF is similar to HTML forms.
+The difference is basically the format how data is transmitted to the server when the submit button is pressed (this is actually the Form Data Format) and the format of the form itself (which is the Portable Document Format, PDF).
+Processing the FDF data is one of the features provided by the fdf functions.
+One may as well take an existing PDF form and populated the input fields with data without modifying the form itself.
+In such a case one would create a FDF document (fdf_create()) set the values of each input field (fdf_set_value()) and associate it with a PDF form (fdf_set_file()).
+The Acrobat reader plugin of your browser recognizes the MimeType, reads the associated PDF form and fills in the data from the FDF document.
+If you look at an FDF-document with a text editor you will find a catalogue object with the name FDF.
+Such an object may contain a number of entries like Fields, F, Status etc..
+The most commonly used entries are Fields which points to a list of input fields, and F which contains the filename of the PDF-document this data belongs to.
+Those entries are referred to in the FDF documentation as / F-Key or / Status-Key.
+Modifying this entries is done by functions like fdf_set_file() and fdf_set_status().
+As of PHP 4.3 you need at least SDK version 5.0.
+The FDF toolkit library is available in binary form only, platforms supported by Adobe are Win32, Linux, Solaris and AIX.
+A fdf resource is a handle to an opened fdf file. fdf resources may be obtained using fdf_create(), fdf_open() and fdf_open_string().
+The following examples shows just the evaluation of form data.
+filePro support in PHP is not enabled by default.
+To enable the bundled read-only filePro support you need to use the --enable-filepro configuration option when compiling PHP.

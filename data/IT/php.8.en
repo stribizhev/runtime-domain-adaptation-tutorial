@@ -1,0 +1,100 @@
+As you can realize, PHP cannot protect your database by itself.
+The following sections aim to be an introduction into the very basics of how to access and manipulate databases within PHP scripts.
+Keep in mind this simple rule: defence in depth.
+In the more place you take the more action to increase the protection of your database, the less probability of that an attacker succeeds, and exposes or abuse any stored secret information.
+Good design of the database schema and the application deals with your greatest fears.
+The first step is always to create the database, unless you want to use an existing third party 's one.
+When a database is created, it is assigned to an owner, who executed the creation statement.
+Usually, only the owner (or a superuser) can do anything with the objects in that database, and in order to allow other users to use it, privileges must be granted.
+You may create different database users for every aspect of your application with very limited rights to database objects.
+The most required privileges should be granted only, and avoid that the same user can interact with the database in different use cases.
+This means that if intruders gain access to your database using one of these credentials, they can only effect as many changes as your application can.
+If the system evolves, new ports will be intended to open to the database, and you have to reimplement the logic in each separate database client.
+Over and above, triggers can be used to transparently and automatically handle fields, which often provides insight when debugging problems with your application or tracing back transactions.
+You may want to estabilish the connections over SSL to encrypt client / server communications for increased security, or you can use ssh to encrypt the network connection between clients and the database server.
+If either of them is done, then monitoring your traffic and gaining informations in this way will be a hard work.
+SSL / SSH protects data travelling from the client to the server, SSL / SSH does not protect the persistent data stored in a database.
+SSL is an on-the-wire protocol.
+Once an attacker gains access to your database directly (bypassing the webserver), the stored sensitive data may be exposed or misused, unless the information is protected by the database itself.
+Encrypting the data is a good way to mitigate this threat, but very few databases offer this type of data encryption.
+The easiest way to work around this problem is to first create your own encryption package, and then use it from within your PHP scripts.
+PHP can assist you in this case with its several extensions, such as Mcrypt and Mhash, covering a wide variety of encryption algorithms.
+The script encrypts the data be stored first, and decrypts it when retrieving.
+See the references for further examples how encryption works.
+In case of truly hidden data, if its raw representation is not needed (i.e. not be displayed), hashing may be also taken into consideration.
+The well-known example for the hashing is storing the MD5 hash of a password in a database, instead of the password itself.
+See also crypt() and md5().
+Using hashed password field
+Many web developers are unaware of how SQL queries can be tampered with, and assume that an SQL query is a trusted command.
+It means that SQL queries are able to circumvent access controls, thereby bypassing standard authentication and authorization checks, and sometimes SQL queries even may allow access to host operating system level commands.
+Direct SQL Command Injection is a technique where an attacker creates or alters existing SQL commands to expose hidden data, or to override valuable ones, or even to execute dangerous system level commands on the database host.
+This is accomplished by the application taking user input and combining it with static parameters to build a SQL query.
+The following examples are based on true stories, unfortunately.
+Owing to the lack of input validation and connecting to the database on behalf of a superuser or the one who can create users, the attacker may create a superuser in your database.
+Splitting the result set into pages... and making superusers (PostgreSQL and MySQL)
+It is common technique to force the SQL parser to ignore the rest of the query written by the developer with - - which is the comment sign in SQL.
+A feasible way to gain passwords is to circumvent your search result pages.
+What the attacker needs only is to try if there is any submitted variable used in SQL statement which is not handled properly.
+These filters can be set commonly in a preceding form to customize WHERE, ORDER BY, LIMIT and OFFSET clauses in SELECT statements.
+If your database supports the UNION construct, the attacker may try to append an entire query to the original one to list passwords from an arbitrary table.
+Using encrypted password fields is strongly encouraged.
+Listing out articles... and some passwords (any database server)
+SQL UPDATEs are also subject to attacking your database.
+These queries are also threatened by chopping and appending an entirely new query to it.
+In this case some schema information must be possessed to manipulate the query successfully.
+This can be acquired by examing the form variable names, or just simply brute forcing.
+There are not so many naming convention for fields storing passwords or usernames.
+From resetting a password... to gaining more privileges (any database server)
+A frightening example how operating system level commands can be accessed on some database hosts.
+Attacking the database host' s operating system (MSSQL Server)
+Some of the examples above is tied to a specific database server.
+This does not mean that a similar attack is impossible against other products.
+Your database server may be so vulnerable in other manner.
+You may plead that the attacker must possess a piece of information about the database schema in most examples.
+You are right, but you never know when and how it can be taken out, and if it happens, your database may be exposed.
+If you are using an open source, or publicly available database handling package, which may belong to a content management system or forum, the intruders easily produce a copy of a piece of your code.
+It may be also a security risk if it is a poorly designed one.
+These attacks are mainly based on exploiting the code not being written with security in mind.
+Never trust on any kind of input, especially which comes from the client side, even though it comes from a select box, a hidden input field or a cookie.
+The first example shows that such a blameless query can cause disasters.
+Never connect to the database as a superuser or as the database owner.
+Use always customized users with very limited privileges.
+Check if the given input has the expected data type.
+PHP has a wide range of input validating functions, from the simplest ones found in Variable Functions and in Character Type Functions (e.g. is_numeric(), ctype_digit() respectively) onwards the Perl compatible Regular Expressions support.
+If the application waits for numerical input, consider to verify data with is_numeric(), or silently change its type using settype(), or use its numeric representation by sprintf().
+Quote each non numeric user input which is passed to the database with addslashes() or addcslashes().
+See the first example.
+As the examples shows, quotes burnt into the static part of the query is not enough, and can be easily hacked.
+You may use stored procedures and previously defined cursors to abstract data access so that users do not directly access tables or views, but this solution has another impacts.
+Besides these, you benefit from logging queries either within your script or by the database itself, if it supports.
+Obviously, the logging is unable to prevent any harmful attempt, but it can be helpful to trace back which application has been circumvented.
+With PHP security, there are two sides to error reporting.
+One is beneficial to increasing security, the other is detrimental.
+For example, if an attacker had gleaned information about a page based on a prior form submission, they may attempt to override variables, or modify them:
+Attacking Variables with a custom HTML page
+The PHP errors which are normally returned can be quite helpful to a developer who is trying to debug a script, indicating such things as the function or file that failed, the PHP file it failed in, and the line number which the failure occured in.
+This is all information that can be exploited.
+It is not uncommon for a php developer to use show_source(), highlight_string(), or highlight_file() as a debugging measure, but in a live site, this can expose hidden variables, unchecked syntax, and other dangerous information.
+Especially dangerous is running code from known sources with built-in debugging handlers, or using common debugging techniques.
+If the attacker can determine what general technique you are using, they may try to brute-force a page, by sending various common debugging strings:
+Exploiting common debugging variables
+Regardless of the method of error handling, the ability to probe a system for errors leads to providing an attacker with more information.
+For example, the very style of a generic PHP error indicates a system is running PHP.
+If the attacker was looking at an .html page, and wanted to probe for the back-end (to look for known weaknesses in the system), by feeding it the wrong data they may be able to determine that a system was built with PHP.
+A function error can indicate whether a system may be running a specific database engine, or give clues as to how a web page or programmed or designed.
+By feeding different pieces of bad data, for example, an attacker can determine the order of authentication in a script, (from the line number errors) as well as probe for exploits that may be exploited in different locations in the script.
+A filesystem or general PHP error can indicate what permissions the webserver has, as well as the structure and organization of files on the web server.
+Developer written error code can aggravate this problem, leading to easy exploitation of formerly "hidden" information.
+There are three major solutions to this issue.
+The first is to scrutinize all functions, and attempt to compensate for the bulk of the errors.
+The second is to disable error reporting entirely on the running code.
+The third is to use PHP 's custom error handling functions to create your own error handler.
+Depending on your security policy, you may find all three to be applicable to your situation.
+One way of catching this issue ahead of time is to make use of PHP' s own error_reporting(), to help you secure your code and find variable usage that may be dangerous.
+By testing your code, prior to deployment, with E_ALL, you can quickly find areas where your variables may be open to poisoning or modification in other ways.
+Once you are ready for deployment, by using E_NONE, you insulate your code from probing.
+Finding dangerous variables with E_ALL
+?php if ($username) {/ / Not initialized or checked before usage $good_login = 1;} if ($good_login == 1) {/ / If above test fails, not initialized or checked before usage fpassthru (" / highly / sensitive / data / index.html");}?
+Database Security
+PHP is subject to the security built into most server systems with respect to permissions on a file and directory basis.
+This allows you to control which files in the filesystem may be read.

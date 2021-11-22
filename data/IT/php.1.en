@@ -1,0 +1,100 @@
+The autoglobal $_FILES exists as of PHP 4.1.0 The $HTTP_POST_FILES array has existed since PHP 4.0.0.
+These arrays will contain all your uploaded file information.
+Using $_FILES is preferred.
+The contents of $_FILES from our example script is as follows.
+Note that this assumes the use of the file upload name userfile, as used in the example script above.
+The original name of the file on the client machine.
+The mime type of the file, if the browser provided this information.
+An example would be "image / gif".
+The size, in bytes, of the uploaded file.
+The temporary filename of the file in which the uploaded file was stored on the server.
+The error code associated with this file upload. ['error'] was added in PHP 4.2.0
+In PHP versions prior 4.1.0 this was named $HTTP_POST_FILES and it 's not an autoglobal variable like $_FILES is.
+When register_globals is turned on in php.ini, additional variables are available.
+Files will by default be stored in the server 's default temporary directory, unless another location has been given with the upload_tmp_dir directive in php.ini.
+The server 's default directory can be changed by setting the environment variable TMPDIR in the environment in which PHP runs.
+This environment variable can also be used to make sure that other operations are working on uploaded files, as well.
+See also the function entries for is_uploaded_file() and move_uploaded_file() for further information.
+The following example will process the file upload that came from a form.
+The PHP script which receives the uploaded file should implement whatever logic is necessary for determining what should be done with the uploaded file.
+You can for example use the $_FILES[ 'userfile']['size'] variable to throw away any files that are either too small or too big.
+Whatever the logic, you should either delete the file from the temporary directory or move it elsewhere.
+The file will be deleted from the temporary directory at the end of the request if it has not been moved away or renamed.
+Multiple files can be uploaded using different name for input.
+It is also possible to upload multiple files simultaneously and have the information organized automatically in arrays for you.
+To do so, you need to use the same array submission syntax in the HTML form as you do with multiple selects and checkboxes:
+Support for multiple file uploads was added in version 3.0.10.
+When register_globals is on, globals for uploaded files are also initialized.
+Each of these will be a numerically indexed array of the appropriate values for the submitted files.
+For instance, assume that the filenames / home / test / review.html and / home / test / xwp.out are submitted.
+Similarly, $_FILES[ 'userfile']['size'][0] would contain review.html's filesize, and so forth.
+PUT method support
+PUT method support has changed between PHP 3 and PHP 4.
+In PHP 4, one should use the standard input stream to read the contents of an HTTP PUT.
+Saving HTTP PUT files with PHP 4
+All documentation below applies to PHP 3 only.
+PHP provides support for the HTTP PUT method used by clients such as Netscape Composer and W3C Amaya.
+PUT requests are much simpler than a file upload and they look something like this:
+This would normally mean that the remote client would like to save the content that follows as: / path / filename.html in your web tree.
+It is obviously not a good idea for Apache or PHP to automatically let everybody overwrite any files in your web tree.
+So, to handle such a request you have to first tell your web server that you want a certain PHP script to handle the request.
+In Apache you do this with the Script In Apache you do this with the Script directive.
+A line like this would do the trick:
+This tells Apache to send all PUT requests for URIs that match the context in which you put this line to the put.php script.
+This assumes, of course, that you have PHP enabled for the .php extension and PHP is active.
+Inside your put.php file you would then do something like this:
+This would copy the file to the location requested by the remote client.
+You would probably want to perform some checks and / or authenticate the user before performing this file copy.
+The only trick here is that when PHP sees a PUT-method request it stores the uploaded file in a temporary file just like those handled but the POST-method.
+The filename of this temporary file is in the $PHP_PUT_FILENAME variable, and you can see the suggested destination filename in the $REQUEST_URI (may vary on non-Apache web servers).
+This destination filename is the one that the remote client specified.
+You could, for example, copy all uploaded files to a special uploads directory.
+Spotting References
+The HTTP Authentication hooks in PHP are only available when it is running as an Apache module and is hence not available in the CGI version.
+In an Apache module PHP script, it is possible to use the header() function to send an "Authentication Required "message to the client browser causing it to pop up a Username / Password input window.
+Note, however, that the above does not prevent someone who controls a non-authenticated URL from stealing passwords from authenticated URLs on the same server.
+Some people use this to "time out" logins, or provide a "log-out "button.
+HTTP Authentication example forcing a new name / password
+This behavior is not required by the HTTP Basic authentication standard, so you should never depend on this.
+Persistent connections are SQL links that do not close when the execution of your script ends.
+When a persistent connection is requested, PHP checks if there' s already an identical persistent connection (that remained open from earlier) - and if it exists, it uses it.
+If it does not exist, it creates the link.
+People who aren' t thoroughly familiar with the way web servers work and distribute the load may mistake persistent connects for what they're not.
+In fact, to be extremely clear about the subject, persistent connections don' t give you any functionality that wasn't possible with their non-persistent brothers.
+This has to do with the way web servers work.
+There are three ways in which your web server can utilize PHP to generate web pages.
+The first method is to use PHP as a CGI "wrapper".
+Because it is destroyed after every request, any resources that it acquires (such as a link to an SQL database server) are closed when it is destroyed.
+In this case, you do not gain anything from trying to use persistent connections - - they simply don 't persist.
+The second, and most popular, method is to run PHP as a module in a multiprocess web server, which currently only includes Apache.
+A multiprocess server typically has one process (the parent) which coordinates a set of processes (its children) who actually do the work of serving up web pages.
+When each request comes in from a client, it is handed off to one of the children that is not already serving another client.
+This means that when the same client makes a second request to the server, it may be serviced by a different child process than the first time.
+What a persistent connection does for you in this case it make it so each child process only needs to connect to your SQL server the first time that it serves a page that makes use of such a connection.
+When another page then requires a connection to the SQL server, it can reuse the connection that child established earlier.
+The last method is to use PHP as a plug-in for a multithreaded web server.
+The behavior is essentially the same as for the multiprocess model described before.
+Note that SAPI support is not available in PHP 3.
+If persistent connections don 't have any added functionality, what are they good for?
+Persistent connections are good if the overhead to create a link to your SQL server is high.
+Like, what kind of database it is, whether or not it sits on the same computer on which your web server sits, how loaded the machine the SQL server sits on is and so forth.
+The bottom line is that if that connection overhead is high, persistent connections help you considerably.
+They cause the child process to simply connect only once for its entire lifespan, instead of every time it processes a page that requires connecting to the SQL server.
+This means that for every child that opened a persistent connection will have its own open persistent connection to the server.
+For example, if you had 20 different child processes that ran a script that made a persistent connection to your SQL server, you 'd have 20 different connections to the SQL server, one from each child.
+Note, however, that this can have some drawbacks if you are using a database with connection limits that are exceeded by persistent child connections.
+If your database has a limit of 16 simultaneous connections, and in the course of a busy server session, 17 child threads attempt to connect, one will not be able to.
+Check your database documentation for information on handling abandoned or idle connections.
+There are a couple of additional caveats to keep in mind when using persistent connections.
+One is that when using table locking on a persistent connection, if the script for whatever reason cannot release the lock, then subsequent scripts using the same connection will block indefinitely and may require that you either restart the httpd server or the database server.
+Another is that when using transactions, a transaction block will also carry over to the next script which uses that connection if script execution ends before the transaction block does.
+Better yet, avoid the problem entirely by not using persistent connections in scripts which use table locks or transactions (you can still use them elsewhere).
+An important summary.
+Persistent connections were designed to have one-to-one mapping to regular connections.
+That means that you should always be able to replace persistent connections with non-persistent connections, and it won 't change the way your script behaves.
+It may (and probably will) change the efficiency of the script, but not its behavior!
+Connection handling
+Getting the title of a remote page
+To connect as a user other than 'anonymous', you need to specify the username (and possibly password) within the URL, such as'ftp: / /user:password@ftp.example.com / path / to / file'. (You can use the same sort of syntax to access files via HTTP when they require Basic authentication.)
+Storing data on a remote server
+You might get the idea from the example above that you can use this technique to write to a remote log file.

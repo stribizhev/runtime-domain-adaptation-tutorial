@@ -1,0 +1,100 @@
+Die Socket-Erweiterung wurde geschrieben, um eine nützliche Schnittstelle zu den mächtigen BSD-Funktionen zur Verfügung zu stellen.
+Es wurde darauf geachtet, dass die Funktionen sowohl unter Win32 als auch unter Unix-Implementierungen arbeiten.
+Fast alle Socket-Funktionen können unter besonderen Umständen fehlschlagen und deshalb eine E_WARNING - Meldung ausgeben, die den aufgetretenen Fehler beschreibt.
+Dies ist manchmal nicht wünschenswert für den Entwickler.
+Zum Beispiel kann die Funktion socket_read() plötzlich eine E_WARNING -Meldung ausgeben, weil die Verbindung unerwartet beendet wurde.
+Normalerweise werden solche Meldungen mit dem @ -Operator unterdrückt und der Fehlercode innerhalb der Anwendung mit der Funktion socket_last_error() aufgefangen.
+Sie können auch die Funktion socket_strerror() mit diesem Fehlercode aufrufen, um einen String, der den Fehler beschreibt, zu erhalten.
+Nähere Informationen finden Sie bei diesen beiden Funktionen.
+Die E_WARNING -Meldungen, die von der Socket-Extension generiert werden, sind auf Englisch, aber die Meldungen, die Sie extra abfragen können, erscheinen in der entsprechenden Sprache, die Sie eingestellt haben (LC_MESSAGES):
+Einfacher TCP / IP Server
+Dieses Beispiel zeigt einen einfachen Echo-Server.
+Passen Sie die Variablen address und port an Ihre Systemumgebung an und führen Sie das Skript aus.
+Dann können Sie sich mit einem Befehl wie: telnet 192.168.1.53 10000 (bei dem adress und port an Ihre Umgebung angepasst ist) mit dem Server verbinden.
+Alles, was Sie eingeben, wird an den Server geschickt und von diesem wieder an Sie zurückgegeben.
+Dieses Beispiel zeigt einen einfachen HTTP-Client, der einen einzelnen Request absetzen kann.
+Er verbindet sich mit einer Seite, setzt einen HEAD-Request ab, gibt die Antwort zurück und wird beendet.
+Schauen Sie sich die POSIX-Funktionen und die Perl-kompatiblen Funktionen für reguläre Ausdrücke an, wenn Sie noch mächtigere Funktionen zur String-Verarbeitung nutzen möchten.
+Diese Funktionen arbeiten mit WDDX zusammen.
+Diese Beispiel wird erzeugen:
+Diese PHP Erweiterung stellt eine parserunabhängige API für XSLT-Transformationen zur Verfügung.
+Falls Sie Hilfe zur alten Erweiterung brauchen, fragen sie bitte in der PHP Mailliste nach.
+Zu beachten ist, dass ZZIPlib nur eine Untermenge der Funktionen zur Verfügung stellt, die in einer vollständigen Implementation des ZIP Algorithmus vorhanden sind.
+Zur Erstellung eines ZIP Archivs muss man sich eines der üblichen ZIP Programme bedienen.
+Die ZIP Unterstützung ist standardmäßig nicht aktiviert.
+Dieses Beispiel öffnet ein ein ZIP Archiv, liest jede Datei innerhalb des Archivs und gibt den Inhalt zurück.
+Das test2.zip Archiv, das in diesem Beispiel benutzt wird, wird mit der Original Distribution der ZZIPlib Bibliothek mitgeliefert.
+Beispiel zur Verwendung der Zip Funktion
+Nachfolgend finden Sie eine Liste der reservierten Wörter, Konstanten und vordefinierter Variablen.
+Sie sollten nicht versuchen, diese Namen als Variablen, Funktionen, Konstanten oder Methodennamen zu verwenden.
+FALSE
+Im Folgenden findest du eine Liste der Funktionen, welche PHP Ressourcen erstellen, benutzen oder löschen.
+Man weiß, ob eine Variable eine Ressource ist, wenn man is_resource() verwendet, den Typen der Ressource erhält man mit get_resource_type().
+Erstellt von
+Verwendet von
+Zerstört von
+PDF Dokument unter Verwendung der CPDF Bibliothek
+Verbindung zu einem IMAP - oder POP3-Server herstellen
+Persistente Verbindung zu einer ingresII Datenbank herstellen.
+Verbindung zu einer Microsoft SQL Server Datenbank herstellen.
+Persistente Verbindung zu einer Microsoft SQL Server Datenbank herstellen.
+MySQL Ergebnis
+Bilder in PDF-Dateien
+Persistente Verbindung zu einer PostgreSQL Datenbank herstellen.
+Persistente Verbindung zu einer Sybase Datenbank über die DB Library herstellen.
+Sybase Ergebnis mit Hilfe der DB Library.
+Verbindung zu einer Sybase Datenbank über die CT Library herstellen.
+Persistente Verbindung zu einer Sybase Datenbank über die CT Library herstellen.
+Sicherheit
+Wenn PHP als Apache-Modul eingesetzt wird, übernimmt es die Benutzerrechte des Apache (üblicherweise user "nobody").
+Das hat verschiedene Auswirkungen auf Sicherheit und Authentifizierung, z.B.:
+Wenn Sie PHP zum Zugriff auf eine Datenbank benutzen, es sei denn diese Datenbank hat eine integrierte Zugriffskontrolle, müssen Sie dem Benutzer "nobody" Zugriffsrechte auf die Datenbank erteilen.
+Das heißt, dass ein böswilliges Skript auch Benutzerkennung und Passwort auf die Datenbank zugreifen, und sie verändern könnte.
+Es ist durchaus möglich, dass ein Web-Spider über die Webseite eines Datenbankadministrators stolpert, und alle Ihre Datenbanken löscht.
+Sie können sich dagegen mit Apache Authentifizierung schützen, oder ein eigenes Zugangsmodell unter Verwendung von LDAP, .htaccess Dateien, etc. entwerfen, und diesen Code als Teil Ihrer PHP Skripte einbinden.
+Es wurde festgestellt, dass wenn einmal die Sicherheitsmaßnahmen so weit eingerichtet sind dass dem PHP User (in diesem Fall ein Apache User) nur mehr ein geringes Risiko bleibt, PHP daran gehindert wird, virenverseuchte Dateien in das Benutzerverzeichnis zu schreiben.
+Oder vielleicht wurde es auch daran gehindert, auf Datenbanken zuzugreifen oder diese gar zu verändern.
+In gleicher Weise wird auch davor abgehalten, "gute" oder "bösartige "Dateien zu schreiben, oder "gute" bzw. "bösartige "Datenbanktransaktionen durchzuführen.
+Ein häufig gemachter Fehler in Punkto Sicherheit ist Apache Root-Rechte zu erteilen, oder die Möglichkeiten von Apache in einer anderen Weise auszuweiten.
+Die Ausweitung der Benutzerrechte für Apache auf root ist sehr gefährlich, und kann dem gesamten System schaden, denn mit sudo, chroot, oder anderwärtig als root zu arbeiten sollte niemand anders als den Sicherheitsprofis überlassen werden.
+Es gibt auch ein paar einfachere Lösungen.
+Sie können auch einen Bereich nur für Apache einrichten, um alle webbasierten Aktivitäten auf nicht-Benutzer - bzw. nicht-System-Dateien einzuschränken.
+Dateisystem - Sicherheit
+PHP als CGI zu nutzen, ist eine Möglichkeit für Installationen, bei denen aus irgendwelchen Gründen kein Modul in die Serversoftware eingebunden werden soll (wie beim Apache) oder für Systeme, bei denen verschiedene CGI-Wrapper genutzt werden sollen, um sichere chroot - und setuid-Umgebungen für Skripte zu schaffen.
+Bei dieser Konfiguration wird das ausführbare PHP-Binary üblicherweise im cgi-bin Verzeichnis des Webservers installiert.
+CERT advisory CA-96.11 spricht sich gegen die Platzierung von Interpretern im cgi-bin Verzeichnis aus.
+Obwohl das PHP-Binary als eigenständiger Interpreter verwendet werden kann, wurde PHP so entwickelt, um den durch diese Konfiguration möglich werdenden Angriffe vorzubeugen:
+Die auf ein Fragezeichen (?) folgende Abfrageinformation in einer URL wird durch das CGI-Interface als Kommandozeilenargument an den Interpreter weitergereicht.
+In der Kommandozeile wird üblicherweise die im ersten Argument angegebene Datei von Interpretern geöffnet und ausgeführt.
+Beim Aufruf als CGI-Binary verweigert PHP die Interpretation der Kommandozeilenargumente.
+Der Teil der URL-Pfadinformation nach dem Namen der PHP Binärdatei, / secret / doc.html wird im allgemeinen benutzt, um den Namen der Datei zu übergeben, die durch das CGI -Programm geöffnet und interpretiert werden soll.
+Normalerweise werden einige Einträge in der Konfigurationsdatei des Webservers benutzt (Apache:
+Bei dieser Konfiguration überprüft der Webserver zuerst die Zugriffsrechte im Verzeichnis / secret und erstellt anschließend den umgeleiteten Aufruf http: / /my.host / cgi-bin / php / secret / script.php.
+So ist jeder Benutzer, der auf / cgi-bin / php zugreifen darf in der Lage, sich zu jedem geschützten Dokument auf dem Webserver Zugriff zu verschaffen.
+Bei PHP können beim Kompilieren die Konfigurationsoption --enable-force-cgi-redirect und zur Laufzeit die Konfigurationsdirektiven doc_root und user_dir Bei PHP können beim Kompilieren die Konfigurationsoption --enable-force-cgi-redirect und zur Laufzeit die Konfigurationsdirektiven doc_root und user_dir benutzt werden, um diesen Angriff zu verhindern, falls der Verzeichnisbaum des Servers Verzeichnisse mit Zugriffsbeschränkungen beinhaltet.
+Ausführliche Informationen über die verschiedenen Kombinationen siehe weiter unten.
+Wenn der Server keine Inhalte hat, die durch Passwort oder IP-basierte Zugriffskontrolle geschützt sind, werden diese Konfigurationsoptionen nicht benötigt.
+Wenn der Webserver keine Redirects erlaubt oder keine Möglichkeit hat, dem PHP-Binary mitzuteilen dass es sich um eine sicher umgeleitete Anfrage handelt, kann die Option --enable-force-cgi-redirect im configure-Script angegeben werden.
+Nichtsdestotrotz müssen Sie sicherstellen, dass Ihre PHP-Skripte nicht auf die eine oder andere Art des Aufrufs angewiesen sind, weder direkt durch http: / /my.host / cgi-bin / php / dir / script.php noch durch einen Redirect http: / /my.host / dir / script.php.
+Beim Apache kann der Redirect durch den Gebrauch von AddHandler und Action konfiguriert werden (siehe unten).
+Diese beim Kompilieren verwendete Option verhindert grundsätzlich den Aufruf von PHP mit einer URL wie http: / /my.host / cgi-bin / php / secretdir / script.php.
+Stattdessen parst PHP in diesem Modus nur dann, wenn der Aufruf durch einen korrekten Redirect des Webservers erfolgte.
+Normalerweise wird der Redirect in der Apache-Konfiguration mit den folgenden Einträgen festgelegt:
+Sollte Ihr Webserver keine Möglichkeit unterstützen, zu übermitteln, ob es sich um einen direkte Aufruf oder einen Redirect handelt, können Sie diese Option nicht verwenden und müssen einen der anderen hier beschriebenen Wege gehen, die CGI-Version zu nutzen.
+Aktiven Inhalt, wie beispielsweise Skripts und ausführbare Dateien, in den Dokumentverzeichnissen des Webservers abzulegen, wird manchmal als unsichere Methode angesehen.
+Sie können das PHP-Skriptverzeichnis durch die Direktive doc_root in der Konfigurationsdatei festlegen, oder Sie setzen die Umgebungsvariable PHP_DOCUMENT_ROOT.
+Wenn sie gesetzt ist, wird die CGI-Version von PHP den Namen der zu öffnenden Datei stets aus doc_root und der Pfadinformation der Anfrage zusammensetzen, sodass man sicher sein kann, dass außerhalb dieses Verzeichnisses keine Skripte ausgeführt werden (außer user_dir, siehe unten).
+Eine weitere hier nützliche Option ist user_dir.
+Wenn das user_dir nicht gesetzt ist, hat nur doc_root Wenn das user_dir nicht gesetzt ist, hat nur doc_root Einfluss auf die zu öffnende Datei.
+Der Aufruf einer URL wie http: / /my.host / ~user / doc.php hat nicht zum Ergebnis, dass eine Datei im Home-Verzeichnis des Benutzers geöffnet wird, sondern eine Datei namens ~user / doc.php unterhalb des doc_root (Ja, ein Verzeichnisname, der mit einer Tilde anfängt [~]).
+Ist das user_dir beispielsweise auf public_php gesetzt, wird eine Anfrage wie http: / /my.host / ~user / doc.php eine Datei namens doc.php im Verzeichnis public_php im Heimatverzeichnis des Benutzers öffnen.
+So können Zugriffe auf die Dokumenten - und Benutzerverzeichnisse separat gesteuert werden.
+Der einzige Nachteil dieses Verfahrens ist, dass eine Zeile ähnlich der folgenden:
+Damit PHP bei dieser Konfiguration die PATH_INFO - und PATH_TRANSLATED -Informationen korrekt auswertet, sollte der PHP-Parser mit der Option --enable-discard-path kompiliert werden.
+PHP wird, wie jedes andere große System auch, ständig geprüft und weiterentwickelt.
+Wie auch bei anderen Scriptsprachen und Programmen auf Systemebene ist der beste Ansatz ein oftmaliges Update, und sich laufend über die letzten Versionen und deren Änderungen zu informieren.
+Heutzutage sind Datenbanken die Hauptkomponenten jeder Webbasierten Applikation, aufgrund welcher Websites verschiedene dynamische Inhalte anbieten können.
+Nachdem heikle oder geheime Informationen in solch einer Datenbank gespeichert werden können, sollten Sie deren Schutz ernsthaft bedenken.
+Um Informationen zu bekommen oder zu speichern, müssen Sie eine legitime Abfrage senden, das Ergebnis holen, und die Verbindung schließen.
+Heutzutage ist die allgemein verwendete Abfragesprache für solche Interaktionen die Structured Query Language (SQL).
+Sehen Sie, wie sich ein Angreifer an einer SQL Abfrage zu schaffen machen kann.

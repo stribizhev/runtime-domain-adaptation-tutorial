@@ -1,0 +1,100 @@
+Es gibt nur eine Syntax für do..while -Schleifen:
+Da diese aber nicht erfüllt, also FALSE ist ($i ist nicht größer als 0), wird die Schleifenausführung beendet.
+Erfahrene C-Anwender kennen auch die Möglichkeit, Programm-Blöcke mit do..while (0) einzuschliessen und dann die break Anweisung zu benutzen.
+Der folgende Programm-Ausschnitt zeigt dies:
+Sie können auch ohne dieses 'Feature' effektive PHP-Programme und Skripte schreiben.
+Häufig ist es erforderlich, eine Anweisung auszuführen, wenn eine bestimmte Bedingung erfüllt ist und eine andere Anweisung, falls sie nicht erfüllt ist.
+Else erweitert eine if -Anweisung um die Ausführung von Anweisungen, sobald der Ausdruck der if -Anweisung als FALSE ausgewertet wird.
+Der folgende Code wird z.B. a ist größer als b anzeigen, wenn $a größer ist als $b, anderenfalls a ist NICHT größer als b:
+Elseif ist, wie der Name schon sagt, eine Verbindung von if und else.
+Wie else erweitert sie eine if -Anweisung um die Ausführung anderer Anweisungen, sobald die normale if -Bedingung als FALSE angesehen wird.
+Anders als bei else wird die Ausführung dieser alternativen Anweisungen nur durchgeführt, wenn die bei elseif angegebene alternative Bedingung als TRUE angesehen wird.
+Der folgende Code wird z.B. a ist größer als b, a ist gleich b oder a ist kleiner als b ausgeben:
+Es kann mehrere elseif -Anweisungen innerhalb einer if -Anweisung geben.
+Die erste elseif -Bedingung (falls vorhanden), die TRUE ist, wird ausgeführt.
+Die Bedeutung der Syntax ist leicht unterschiedlich (falls Sie mit C vertraut sind, das ist das gleiche Verhalten) aber der Grundtenor ist der, dass beide Schreibweisen, bezogen auf das Ergebnis, sich exakt gleich verhalten.
+Die elseif -Anweisung wird nur ausgeführt, wenn die vorausgehende if -Bedingung sowie jede vorherige elseif -Bedingung FALSE ist und die aktuelle elseif -Bedingung TRUE ist.
+Alternative Syntax für Kontroll-Strukturen
+PHP 4 (nicht PHP 3) enthält ein foreach Konstrukt, genau wie Perl und einige andere Sprachen.
+Wenn Sie versuchen foreach mit einer Variable eines anderen Datentyps oder einer nicht initialisierten Variable zu benutzen, gibt PHP einen Fehler aus.
+Es gibt zwei Syntax-Formen; die zweite ist eine unbedeutende, aber sinnvolle Erweiterung der ersten Syntax:
+Die erste Form durchläuft das array_expression -Array.
+Die zweite Form arbeitet genauso, außer dass bei jedem Durchlauf auch der aktuelle Schlüssel der Variablen $key zugewiesen wird.
+Sobald foreach zum ersten Mal ausgeführt wird, wird der interne Array-Pointer automatisch auf das erste Element des Arrays zurück gesetzt.
+Das bedeutet, dass Sie vor einem Durchlauf von foreach reset() nicht aufrufen müssen.
+Deshalb wird auch der Array-Pointer nicht wie bei dem each() -Konstrukt verändert und Veränderungen an ausgegebenen Arrayelementen haben keine Auswirkung auf das originale Array.
+Trotzdem wird der interne Arrayzeiger des originalen Arrays bei der Verarbeitung bewegt.
+For -Schleifen sind die komplexesten Schleifen in PHP.
+Sie funktionieren wie ihr Gegenstück in C.
+Die Syntax einer for -Schleife sieht so aus:
+Der erste Ausdruck (ausdr1) wird beim Schleifenbeginn (ohne jegliche Vorbedingung) geprüft bzw. ausgeführt.
+Zu Beginn jedes Durchlaufs wird nun ausdr2 geprüft.
+Wenn dieser TRUE ist, fährt die Schleife fort mit der Ausführung der nachfolgenden Anweisung.
+Ist das Ergebnis FALSE, wird die Schleife beendet.
+Am Ende jedes Durchlaufs wird ausdr3 geprüft (ausgeführt).
+Ist ausdr2 leer, wird die Schleife endlos oft durchlaufen (PHP wertet diesen, wie in C, implizit als TRUE).
+Das ist nicht so sinnlos, wie Sie vielleicht glauben, weil man häufig eine Schleife erst durch eine bedingte break -Anweisung statt durch eine unwahr werdende for -Bedingung beenden möchte.
+Beachten Sie die folgenden Beispiele.
+Alle geben Zahlen von 1 bis 10 aus:
+Selbstverständlich sieht das erste (oder vielleicht das vierte) Beispiel am besten aus, aber Sie werden noch feststellen, dass es oftmals ganz nützlich sein kann, leere Parameter in for -Schleifen zu verwenden.
+PHP unterstützt auch bei for -Schleifen die alternative "Doppelpunkt-Syntax".
+Andere Sprachen haben für das Durchlaufen eines Hash´s oder Arrays eine foreach -Anweisung.
+PHP 3 hat dies nicht; im Gegensatz zu PHP 4 (vgl. foreach).
+In PHP 3 kann man dafür eine Kombination von while mit der list() - und each() -Funktion einsetzen.
+Beispiele finden Sie in der Dokumentation zu diesen Funktionen.
+Jedes PHP-Skript besteht aus einer Reihe von Anweisungen.
+Eine Anweisung kann aus einem Funktionsaufruf, einer Schleife, einer bedingten Anweisung oder einem Befehl, der nichts macht (eine leere Anweisung), bestehen.
+Jede Anweisung endet gewöhnlich mit einem Semikolon.
+Darüber hinaus können Anweisungen zu einer Anweisungsgruppe zusammengefasst werden, welche durch geschweifte Klammern begrenzt wird.
+Die unterschiedlichen Arten von Anweisungen werden in diesem Abschnitt erläutert.
+Das if -Konstrukt ist eine der wichtigsten Möglichkeiten vieler Programmier-Sprachen, PHP eingeschlossen.
+Es erlaubt die bedingte Ausführung von Programmteilen.
+PHP kennt eine if -Struktur, die ähnlich der Programmiersprache C ist:
+if (ausdr) Anweisung
+Wie im Abschnitt über Ausdrücke beschrieben, wird ausdr auf seinen boolschen Wertinhalt ausgewertet.
+Wenn ausdr als TRUE ausgewertet wird, führt PHP die Anweisung aus, falls die Auswertung FALSE ergibt, wird sie übergangen.
+Mehr Informationen welche Werte als FALSE ausgewertet werden finden Sie im Abschnitt 'Umwandlung nach boolean'.
+Das folgende Beispiel wird a ist größer als b anzeigen, wenn $a größer als $b ist:
+Oft werden Sie die bedingte Ausführung von mehr als einer Anweisung wollen.
+Selbstverständlich ist es nicht erforderlich, jede Anweisung mit einer if -Bedingung zu versehen.
+Statt dessen können Sie mehrere Anweisungen in Gruppen zusammenfassen.
+Das ermöglicht ihnen völlige Flexibilität bei der bedingten Ausführung verschiedenster Programmteile.
+Die switch -Anweisung ist gleichbedeutend einer Reihe von if -Anweisungen mit dem gleichen Parameter.
+Häufig wollen Sie ein und dieselbe Variable (bzw. den selben Ausdruck) mit verschiedensten Werten vergleichen und in Abhängigkeit vom Auswertungsergebnis verschiedene Programmteile ausführen.
+Genau das ermöglicht die switch -Anweisung.
+Die folgenden zwei Beispiele zeigen zwei verschiedene Wege, das Gleiche zu bewirken; eines gebraucht mehrere if -Anweisungen, das andere eine switch -Anweisung:
+Es ist wichtig, die Ausführung einer switch -Anweisung zu verstehen, um Fehler zu vermeiden.
+Zu Beginn wird nichts ausgeführt.
+Erst wenn bei einem case -Teil eine Entsprechung zum switch -Ausdruck vorliegt, werden die darin enthaltenen Anweisungen von PHP ausgeführt.
+PHP fährt dann mit der Abarbeitung des restlichen Codes innerhalb des switch -Blocks fort oder bis zum ersten Auftreten einer break -Anweisung.
+Ohne break am Ende eines case-Teils werden also noch die folgenden case-Blöcke ausgeführt.
+Zum Beispiel:
+Wenn hier $i gleich 0 ist, würde PHP alle print-Anweisungen ausführen!
+Deshalb ist es wichtig break -Anweisungen zu setzen (abgesehen von bestimmten Fällen, in denen Sie diese mit Absicht weglassen).
+Bei einer switch -Anweisung wird die Bedingung also nur einmal überprüft und das Ergebnis mit jeder case -Anweisung verglichen.
+Bei einem elseif -Befehl wird die Bedingung neu geprüft.
+Ist ihre Bedingung komplizierter als ein einfacher Vergleich und / oder in einer umfangreichen Schleife eingebettet, kann eine switch -Anweisung schneller als mehrere if -Befehle sein.
+Dann wird die Kontrolle einfach an den nächsten case-Teil übergeben.
+Ein Spezialfall ist default.
+Dieser Fall trifft auf alles zu, was nicht von den voranstehenden case-Ausdrücken erfasst wurde und sollte als letzte case Anweisung angegeben werden.
+Der case -Ausdruck kann eine Prüfung einfacher Typen sein, also von Integer - oder Fließkomma-Zahlen oder von Strings / Zeichenketten.
+Arrays oder Objekte können nicht benutzt werden, es sei denn, sie wurden in einfache Typen umgewandelt.
+Die alternative Syntax der Kontrollstrukturen gilt auch für switch-Sequenzen.
+Mehr Informationen dazu erhalten Sie unter Alternative Syntax für Kontroll-Strukturen.
+While -Schleifen sind die einfachste Form von Schleifen in PHP.
+Sie funktionieren genau wie in C.
+Die Grundform einer while -Anweisung lautet:
+while (ausdr) Anweisung
+Die Bedeutung einer while -Anweisung ist einfach.
+Sie weist PHP an, einen in ihr eingebetteten Befehl so lange zu wiederholen, wie die while -Bedingung als TRUE ausgewertet wird.
+Wird der Wert während der Ausführung der Anweisungen innerhalb der while -Schleife verändert, endet die Ausführung dieses Anweisungsblocks erst mit dem Ende der Iteration (Jeder Schleifendurchlauf ist eine Iteration).
+Falls die while -Bedingung bereits zu Beginn FALSE ist, werden die Anweisungen der while -Schleife nicht ein einziges Mal durchlaufen.
+Wie bei der if -Anweisung kann man mehrere Anweisungen innerhalb der gleichen while -Schleife angeben, indem man sie mit geschweiften Klammern umschließt oder die alternative Syntax gebraucht:
+Die folgenden Beispiele sind identisch; beide geben Zahlen von 1 bis 10 aus:
+/* Beispiel 1 * / $i = 1; while ($i = 10) {print $i++; / * es wird erst $i ausgegeben, bevor der Wert erhöht wird (Post-Inkrement) * /} / * Beispiel 2 * / $i = 1; while ($i = 10): print $i; $i++; endwhile;
+Die Mitglieder der PHP-Dokumentationsgruppe sind auf dem Titelblatt aufgeführt.
+Dieses Material kann unter den Bedingungen der Open Publication License, v1.0 oder neuer (die aktuellste Version ist unter http: / /www.opencontent.org / openpub / erhältlich) verteilt werden.
+Andere Inkompatibilitäten
+Jede Zeile hat einen Typ, und mehrere Zeilen bilden eine Meldung.
+Jede Meldung beginnt mit der Zeile start und endet mit end.
+Eine Zeile hat folgendes Format:

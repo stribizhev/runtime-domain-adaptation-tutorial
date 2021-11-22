@@ -1,0 +1,100 @@
+Das Entwicklerteam von PHP umfasst dutzende Entwickler, sowie dutzende andere, welche an PHP verwandten Projekten wie PEAR oder dem Dokumentationsprojekt arbeiten.
+Die Zukunft von PHP ist hauptsächlich von seinem Kern, der Zend Engine, geprägt.
+PHP 5 wird die neue Zend Engine 2.0 enthalten.
+Weitere Informationen zur Zend Engine finden Sie auf der Webseite.
+Geschichte von PHP verwandten Projekten
+Seit PHP gewachsen ist, wurde auch begonnen, es als weltweit populäre Entwicklungsplattform anzuerkennen.
+Eine der Interessantesten Arten dies zu sehen war, die im Laufe der Jahre erscheinenden Bücher über PHP zu beobachten.
+Ein Monat später folgte ein von Egon Schmid, Christian Cartus und Richard Blume verfasstes deutsches Buch.
+Das erste englischsprachige Buch über PHP wurde kurz danach veröffentlicht, es war 'Core PHP Programming' von Leon Atkinson.
+Beide Bücher deckten PHP 3.0 ab.
+Nachdem diese Bücher die ersten ihrer Art waren, folgte schnell eine große Anzahl Bücher von einer Menge Autoren und Verlegern.
+Es gibt über 40 englischsprachige Bücher, 50 Bücher in Deutsch, und über 20 Bücher in Französisch!
+Weiters gibt es Bücher über PHP in vielen anderen Sprachen, wie Spanisch, Koreanisch, Japanisch und Hebräisch.
+Diese große Anzahl von Büchern, die von verschiedenen Autoren geschrieben, und vielen Verlegern veröffentlicht wurden, sowie deren Verfügbarkeit in so vielen Sprachen sind ein guter Beweis für den weltweiten Erfolg von PHP.
+Publikationen über PHP
+Soweit wir wissen, erschien der erste Artikel über PHP in einem gedruckten Magazin gegen Ende 1998 in der tschechischen Ausgabe der Computerworld, und behandelte PHP 3.0.
+Wie auch bei den Büchern war dieser der erste von einer ganzen Serie von Artikeln über PHP, welche in verschiedenen populären Magazinen erschienen sind.
+Artikel über PHP erschienen in Dr.
+Artikel über die Migration von ASP-basierten Applikationen nach PHP unter Windows tauchten sogar in Microsoft 's eigenem MSDN auf!
+Bücher über PHP
+PEAR, das PHP Extension and Application Repository (ursprünglich PHP Extension and Add-on Repository) ist PHP 's Version von fundamentalen Klassen, und könnte in der Zukunft zu einem der Hauptwege zur Verteilung von PHP - und C-basierten PHP Erweiterungen zwischen Entwicklern werden.
+Es wurde von Stig S.
+Bakken geschaffen, und ist seiner erstgeborenen Tochter, Malin Bakken, gewidmet.
+Seit Anfang 2000 ist PEAR zu einem großen, signifikanten Projekt mit vielen Entwicklern gewachsen, welche an der Implementierung von gemeinsamer, wiederverwendbarer Funktionalität zum Nutzen der gesamten PHP Gemeinschaft arbeiten.
+PEAR umfasst heute eine große Auswahl an infrastrukturellen Basisklassen, für Datenbankzugriff, Zwischenspeicherung von Inhalten, mathematischen Kalkulationen, eCommerce, und viel, viel mehr.
+Die PHP Initiative zur Qualitätssicherung wurde im Sommer 2000 als Reaktion auf die Kritik, dass PHP Releases für Produktionssysteme nicht genügend getestet würden.
+Das Team besteht nun aus einer Hauptgruppe von Entwicklern mit einem guten Verständnis der PHP Codebasis.
+Diese Entwickler stecken eine Menge ihrer Zeit in das auffinden und Beheben von Fehlern in PHP.
+Zusätzlich gibt es noch viele andere Teammitglieder, die diese Fehlerbehebungen auf den verschiedensten Plattformen testen, und Feedback geben.
+PHP-GTK ist die Lösung von PHP, um clientseitige GUI Applikationen zu schreiben.
+Andrei Zmievski erinnert sich an die Planungs - und Erstellungsphase von PHP-GTK:
+GUI Programmierung hat mich immer schon interessiert und ich fand, dass Gtk + ein sehr nettes Werkzeug ist, außer dass dessen Programmierung in C etwas langwierig ist.
+Nachdem ich die Implementierungen von PyGtk und GTK-Perl miterlebt habe, entschied ich mich zu sehen, ob PHP ebenfalls mit Gtk + verbunden werden könnte, wenn auch minimal.
+Ab August 2000 hatte ich etwas mehr Freizeit, und begann zu experimentieren.
+Meine Hauptvorlage war die PyGTK Implementierung, denn sie war von den Leistungsmerkmalen her ziemlich komplett, und hatte eine nette objektorientierte Schnittstelle.
+James Henstridge, der Autor von PyGtk, hatte in diesen ersten Schritten immer hilfreichen Rat.
+Die Schnittstellen zu all den Gtk + Funktionen per Hand zu schreiben kam nicht in Frage, und so griff ich die Idee eines Code Generators auf, ähnlich wie es PyGTK tat.
+Der Code Generator ist ein PHP Programm, das eine Reihe von .defs Dateien mit den Gtk + Klassen, Konstanten und Information über Methoden liest, und danach C Code generiert, der PHP mit ihnen verbindet.
+Was nicht automatisch generiert werden kann, wird händisch in eine .overrides Datei geschrieben.
+Die Arbeit an dem Code Generator und der Infrastruktur dauerte einige Zeit, da ich im Herbst 2000 nur wenig Zeit für die Arbeit an PHP-GTK erübrigen konnte.
+Nachdem ich PHP-GTK Frank Kronman gezeigt hatte bekam er Interesse, und begann mir bei der Arbeit am Code Generator und der Win32 Implementierung zu helfen.
+Es war richtig aufregend, als wir das erste Hello World Programm schrieben und laufen ließen.
+Die Geschichte schlug prompt SlashDot.
+In dem Gefühl, dass PHP-GTK umfangreich werden könnte, habe ich extra Mailinglisten und CVS Repositories dafür eingerichtet, wie auch mit Hilfe von Colin Viebrock die Website gtk.php.net.
+Die Dokumentation musste ebenfalls erstellt werden, und James Moore begann hierbei zu helfen.
+Seit seiner Freigabe gewinnt PHP-GTK an Popularität.
+Wir haben unser eigenes Dokumentationsteam, das Handbuch wird weiter verbessert, die Leute beginnen Erweiterungen für PHP-GTK, und auch immer mehr Applikationen mit PHP-GTK zu schreiben.
+Dieser Teil enthält Anmerkungen und Tipps zur Installation von Apache mit PHP, sowohl für die Unix als auch für die Windows Version.
+Verwenden Sie Ihre normale Prozedur, um den Apache Server zu starten. (Sie müssen den Server stoppen und wieder starten, und ihn nicht nur mittels einem HUP oder USR1 Signal zu einem Reload veranlassen).
+Es gibt abhängig von Ihrer Apache Installation und Unix Variante viele mögliche Wege den Server zu stoppen und neu zu starten.
+Nachstehend finden Sie einige typische Zeilen für einen Server Restart auf verschiedenen apache / unix Installationen.
+Ersetzen Sie / path / to / mit dem Pfad zu diesen Applikationen auf Ihrem System.
+Verschiedene Beispiele zum Kompilieren von PHP für Apache:
+Dies erstellt eine libphp4.so Shared Library, welche in den Apache geladen wird, wenn eine LoadModule Zeile in der httpd.conf von Apache existiert.
+Die PostgreSQL Unterstützung ist in der libphp4.so Bibliothek eingelagert.
+Die Kompilation als verteiltes Objekt heißt, dass Sie Apache separat kompilieren können, und nicht für alles in PHP hinzugefügte bzw. geänderte neu kompilieren müssen.
+PHP direkt in Apache einzukompilieren (statische Methode) heißt, dass PHP schneller lädt, und schneller läuft.
+Um das Source Code Highlighting Feature verwenden zu können, erstellen Sie einfach eine PHP Skriptdatei, und fügen diesen Code ein: ?php show_source ("original_php_script.php");?.
+Auf Win-Apache müssen alle Backslashes "\" in einer Pfadangabe, wie z.B. "c:\directory\file.ext", in Slashes "/" umgewandelt werden, wie z.B. "c: / directory / file.ext ".
+Wir empfehlen, den Download der Distributionen von dem Ihnen am nächsten liegenden Mirror durchzuführen.
+Installation auf UNIX Systemen
+PHP 4 kann als Pike Modul für den Caudium Webserver erstellt werden.
+Dies wird mit PHP 3 nicht unterstützt.
+Folgen Sie einfach den nachstehenden Instruktionen, um PHP 4 für Caudium zu installieren.
+Caudium Installationsanweisungen
+Installieren Sie Caudium, bevor Sie mit der Installation von PHP 4 beginnen.
+Damit PHP 4 einwandfrei arbeitet, benötigen Sie Pike 7.0.268 oder neuer.
+In diesem Beispiel nehmen wir an, dass Caudium in / opt / caudium / server / installiert ist.
+Starten Sie Caudium neu, sollte er gerade laufen.
+Öffnen Sie die grafische Konfigurationsoberfläche, und wechseln Sie zu dem virtuellen Server, welcher PHP 4 Unterstützung bieten soll.
+Sollte die Dokumentation meinen 'PHP 4 interpreter isn't available', vergewissern Sie sich, dass der Server neu gestartet wurde.
+Prüfen Sie / opt / caudium / logs / debug / default.1 auf Fehler in Bezug auf PHP4.so.
+Vergewissern Sie sich ebenfalls, dass caudium / server / lib / [pike-version] / PHP4.so vorhanden ist.
+Konfigurieren Sie das PHP Script Support Module wenn nötig.
+Sie können Ihr Caudium Modul natürlich mit Unterstützung der verschiedenen in PHP 4 verfügbaren Erweiterungen kompilieren.
+Die Komplette Liste der Konfigurationsoptionen bietet hierfür eine gute Übersicht.
+Die tun Sie, indem Sie ein MySQL Installationsverzeichnis mittels der --with-mysql Option spezifizieren.
+Standardmäßig wird PHP als ein CGI Programm kompiliert.
+Dies erstellt einen Commandline Interpreter, welcher für CGI Processing oder für nicht webbezogenes PHP Scripting verwendet werden kann.
+Haben Sie einen Webserver im Einsatz für welchen PHP eine Modulunterstützung bietet, sollten sie aus Performancegründen dieses Modul verwenden.
+Bitte lesen Sie das Kapitel Sicherheit, wenn Sie PHP als CGI verwenden.
+Haben Sie PHP 3 als CGI Programm erstellt, können Sie Ihren Build mit make bench bewerten.
+Siehe auch mSQL Konfiguration Direktiven in der Konfigurationsdatei.
+Der Parameter ist das ORACLE_HOME Verzeichnis.
+Ist nur angebracht, wenn iODBC, Adabas, Solid, Velocis oder eine spezielle ODBC Schnittstelle aktiviert ist.
+Inkludiert Cybercash MCK Unterstützung.
+Aktiviert mit multi-byte character encoding verwandte Funktionen.
+Das Präfix wird von der Option --prefix bestimmt, default ist / usr / local.
+Geben Sie den Pfad zu dem installierten Netscape an.
+DIR ist das gettext Installationsverzeichnis, default ist / usr / local
+DIR ist das recode Installationsverzeichnis.
+Wenn Sie fhttpd benutzen, bietet das Kompilieren als Modul eine bessere Performance, mehr Kontrolle, sowie die Möglichkeit zur Remote Execution.
+Diese Sektion enthält Anmerkungen und Hinweise zur Installation von PHP auf HP-UX Systemen.
+Installationsanleitung für HP-UX 10
+Nun benötigen Sie flex, holen Sie sich den Source von einem der http: / /www.gnu.org mirrors.
+Es ist in dem non-gnu Verzeichnis der FTP-Site.
+Downloaden Sie die Datei, gunzip, dann tar -xvf 'en Sie sie.
+Laden Sie die Sources von PHP und Apache herunter.
+Wir müssen einige Dateien ändern, dass sie richtig kompiliert werden können.
+Es gibt sicher einen besseren Weg dies zu tun, aber einfacher Weg ist es, lt_target=hpux10.20 in die Zeile 47286 des configure Skriptes zu schreiben.

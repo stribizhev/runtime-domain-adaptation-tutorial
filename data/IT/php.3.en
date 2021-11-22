@@ -1,0 +1,100 @@
+PHP 's development team includes dozens of developers, as well as dozens others working on PHP-related projects such as PEAR and the documentation project.
+The future of PHP is mainly driven by it 's core, the Zend Engine.
+PHP 5 will include the new Zend Engine 2.0.
+To get more information on this engine, see it 's webpage.
+History of PHP related projects
+As PHP grew, it began to be recognized as a world-wide popular development platform.
+One of the most interesting ways of seeing this trend was by observing the books about PHP that came out throughout the years.
+Next month followed a German book authored by Egon Schmid, Christian Cartus and Richard Blume.
+The first book in English about PHP was published shortly afterwards, and was' Core PHP Programming 'by Leon Atkinson.
+Both of these books covered PHP 3.0.
+While these books were the first of their kind - they were followed by a large number of books from a host of authors and publishers.
+There are over 40 books in English, 50 books in German, and over 20 books in French!
+In addition, you can find books about PHP in many other languages, including Spanish, Korean, Japanese and Hebrew.
+Clearly, this large number of books, written by different authors, published by many publishers, and their availability in so many languages - are a strong testimony for PHP 's world-wide success.
+Publications about PHP
+To the best of our knowledge, the first article about PHP in a hard-copy magazine was published in the Czech mutation of Computerworld in the spring of 1998, and covered PHP 3.0.
+As with books, this was the first in a series of many articles published about PHP in various prominent magazines.
+Articles about PHP appeared in Dr.
+Articles about migrating ASP-based applications to PHP under Windows even appear on Microsoft 's very own MSDN!
+Books about PHP
+PEAR, the PHP Extension and Application Repository (originally, PHP Extension and Add-on Repository) is PHP's version of foundation classes, and may grow in the future to be one of the key ways to distribute both PHP and C-based PHP extensions among developers.
+It was created by Stig S.
+Bakken, and is dedicated to his first-born daughter, Malin Bakken.
+Since early 2000, PEAR has grown to be a big, significant project with a large number of developers working on implementing common, reusable functionality for the benefit of the entire PHP community.
+PEAR today includes a wide variety of infrastructure foundation classes for database access, content caching, mathematical calculations, eCommerce and much more.
+The PHP Quality Assurance Initiative was set up in the summer of 2000 in response to criticism that PHP releases were not being tested well enough for production environments.
+The team now consists of a core group of developers with a good understanding of the PHP code base.
+These developers spend a lot of their time localizing and fixing bugs within PHP.
+In addition there are many other team members who test and provide feedback on these fixes using a wide variety of platforms.
+PHP-GTK is the PHP solution for writing client side GUI applications.
+Andrei Zmievski remembers the planing and creation process of PHP-GTK:
+GUI programming has always been of my interests, and I found that Gtk + is a very nice toolkit, except that programming with it in C is somewhat tedious.
+After witnessing PyGtk and GTK-Perl implementations, I decided to see if PHP could be made to interface with Gtk+, even minimally.
+Starting in August of 2000, I began to have a bit more free time so that is when I started experimenting.
+My main guideline was the PyGtk implementation as it was fairly feature complete and had a nice object-oriented interface.
+James Henstridge, the author of PyGtk, provided very helpful advice during those initial stages.
+Hand-writing the interfaces to all the Gtk + functions was out of the question, so I seized upon the idea of code-generator, similar to how PyGtk did it.
+The code generator is a PHP program that reads a set of .defs file containing the Gtk + classes, constants, and methods information and generates C code that interfaces PHP with them.
+What cannot be generated automatically can be written by hand in .overrides file.
+Working on the code generator and the infrastructure took some time, because I could spend little time on PHP-GTK during the fall of 2000.
+After I showed PHP-GTK to Frank Kromann, he got interested and started helping me out with code generator work and Win32 implementation.
+When we wrote the first Hello World program and fired it up, it was extremely exciting.
+The story promptly hit SlashDot.
+Sensing that PHP-GTK might be extensive, I set up separate mailing lists and CVS repositories for it, as well as the gtk.php.net website with the help of Colin Viebrock.
+The documentation would also need to be done and James Moore came in to help with that.
+Since its release PHP-GTK has been gaining popularity.
+We have our own documentation team, the manual keeps improving, people start writing extensions for PHP-GTK, and more and more exciting applications with it.
+This section contains notes and hints specific to Apache installs of PHP, both for Unix and Windows This section contains notes and hints specific to Apache installs of PHP, both for Unix and Windows versions.
+Use your normal procedure for starting the Apache server. (You must stop and restart the server, not just cause the server to reload by use a HUP or USR1 signal.)
+Depending on your Apache install and Unix variant, there are many possible ways to stop and restart the server.
+Below are some typical lines used in restarting the server, for different apache / unix installations.
+You should replace / path / to / with the path to these applications on your systems.
+Different examples of compiling PHP for apache are as follows:
+This will create a libphp4.so shared library that is loaded into Apache using a LoadModule line in Apache 's httpd.conf file.
+The PostgreSQL support is embedded into this libphp4.so library.
+You must NOT use the apxs version that is in the apache sources but the one that is actually installed on your system.
+One is to use the CGI binary (php.exe), the other is to use the Apache module DLL.
+If you chose to configure Apache to use PHP as a CGI binary, you will need to use the show_source() function.
+On Win-Apache all backslashes in a path statement such as "c:\directory\file.ext", must be converted to forward slashes, as "c: / directory / file.ext".
+Downloading PHP, the source code, and binary distributions for Windows can be found at http: / /www.php.net /.
+Unix / HP-UX installs
+PHP 4 can be built as a Pike module for the Caudium webserver.
+Note that this is not supported with PHP 3.
+Follow the simple instructions below to install PHP 4 for Caudium.
+Caudium Installation Instructions
+Make sure you have Caudium installed prior to attempting to install PHP 4.
+For PHP 4 to work correctly, you will need Pike 7.0.268 or newer.
+For the sake of this example we assume that Caudium is installed in / opt / caudium / server /.
+Restart Caudium if it 's currently running.
+Log into the graphical configuration interface and go to the virtual server where you want to add PHP 4 support.
+If the documentation says that the 'PHP 4 interpreter isn't available', make sure that you restarted the server.
+If you did check / opt / caudium / logs / debug / default.1 for any errors related to filename PHP4.so / filename.
+Also make sure that filename caudium / server / lib / [pike-version] / PHP4.so / filename is present.
+Configure the PHP Script Support module if needed.
+You can of course compile your Caudium module with support for the various extensions available in PHP 4.
+See the complete list of configure options for an exhaustive rundown.
+You do this by specifying a MySQL install directory the --with-mysql option.
+The default is to build PHP as a CGI program.
+This creates a commandline interpreter, which can be used for CGI processing, or for non-web-related PHP scripting.
+However, the CGI version enables Apache users to run different PHP-enabled pages under different user-ids.
+A new SAPI named CLI also exists and it has the same name as the CGI binary.
+If you have built PHP 3 as a CGI program, you may benchmark your build by typing make bench.
+If you want to compile an older version, some options will probably not be available.
+DIR is SAP DB base install directory, defaults to / usr / local.
+Make sure to define CUSTOM_ODBC_LIBS and have some odbc.h in your include dirs.
+Include OpenLink ODBC support.
+Do not use unless you are testing the code!
+DIR is the fhttpd sources directory, defaults to / usr / local / src / fhttpd.
+Specify path to the installed Netscape Server.
+DIR is the base Roxen directory, normally / usr / local / roxen / server.
+Build the Roxen module using Zend Thread Safety.
+If you are running fhttpd, building PHP as a module will give better performance, more control and remote execution capability.
+This section contains notes and hints specific to installing PHP on HP-UX systems.
+Installation Instructions for HP-UX 10
+You now need flex, you need to download the source from one of the http: / /www.gnu.org mirrors.
+It is in the filename non-gnu / filename directory of the ftp site.
+Download the file, gunzip, then tar -xvf it.
+Download the PHP and apache sources.
+We need to hack a couple of files so that they can compile ok.
+Firstly the configure file needs to be hacked because it seems to lose track of the fact that you are a hpux machine, there will be a better way of doing this but a cheap and cheerful hack is to put lt_target=hpux10.20 on line 47286 of the configure script.

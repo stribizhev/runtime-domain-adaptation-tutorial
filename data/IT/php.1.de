@@ -1,0 +1,100 @@
+Die Autoglobale $_FILES existiert seit PHP 4.1.0 und das Array $HTTP_POST_FILES seit PHP 4.0.0.
+Diese Arrays enthalten alle Informationen über Ihre hochgeladenen Dateien.
+Die Verwendung von $_FILES wird bevorzugt.
+Im Folgenden sind die Inhalte von $_FILES Im Folgenden sind die Inhalte von $_FILES aus unserem Beispielskript aufgelistet.
+Beachten Sie, dass dies auf der Annahme basiert, dass der Name des Dateiuploads wie in dem obigen Beispielskript userfile ist.
+Der ursprüngliche Dateiname auf der Client Maschine.
+Der Mime-Type der Datei, falls der Browser diese Information zur Verfügung gestellt hat.
+Ein Beispiel wäre "image / gif".
+Die Größe der hochgeladenen Datei in Bytes.
+Der temporäre Dateiname, unter dem die hochgeladene Datei auf dem Server gespeichert wurde.
+Der Fehlercode im Zusammenhang mit dem hochladen der Datei. ['error'] wurde in PHP 4.2.0 eingeführt.
+In den Versionen vor PHP 4.1.0 war dies $HTTP_POST_FILES, und ist keine 'Autoglobale' Variable wie $_FILES.
+Ist register_globals in der php.ini aktiviert, stehen zusätzliche Variablen zur Verfügung.
+Standardmäßig werden Dateien in dem vorgegebenen temporären Verzeichnis des Servers gespeichert, außer es wurde mittels upload_tmp_dir in der php.ini ein anderer Ort konfiguriert.
+Das Standardverzeichnis des Servers kann durch das Setzen der Umgebungsvariablen TMPDIR in der Umgebung, in der PHP ausgeführt wird, geändert werden.
+Mittels dieser Umgebungsvariable kann auch sichergestellt werden, dass auch andere Operationen an hochgeladenen Dateien arbeiten können.
+Weitere Informationen finden Sie auch in den Beschreibungen für is_uploaded_file() und move_uploaded_file().
+Das folgende Beispiel verarbeitet einen von einem HTML-Formular kommenden Dateiupload.
+Das die hochgeladene Datei empfangende Skript sollte die notwendige Logik zur Entscheidung enthalten, was mit der hochgeladenen Datei geschehen soll.
+Sie können zum Beispiel $_FILES[ 'userfile']['size'] benutzen, um zu kleine bzw. zu große Dateien wegzuwerfen.
+Egal welche Logik Sie verwenden, Sie sollten die Datei in dem temporären Verzeichnis entweder löschen, oder an einen anderen Ort verschieben.
+Wurde die Datei in dem temporären Verzeichnis nicht verschoben oder umbenannt, wird sie am Ende des Requests gelöscht.
+Mehrere Dateien können hochgeladen werden, indem Sie verschiedene Namen name für input verwenden.
+Es ist ebenfalls möglich, mehrere Dateien simultan hochzuladen, und die Informationen automatisch in Arrays zu erhalten.
+Um dies zu tun, verwenden Sie in dem HTML Formular die gleiche Array-Sende-Syntax wie bei Auswahllisten mit Mehrfachauswahl und Checkboxen:
+Die Unterstützung für den Upload von mehreren Dateien wurde in PHP 3.0.10 hinzugefügt.
+Ist register_globals Ist register_globals aktiviert, werden auch globale Variablen für die hochgeladenen Dateien initialisiert.
+Jedes von ihnen ist ein numerisch indiziertes Array mit den entsprechenden Werten für die hochgeladenen Dateien.
+Nehmen wir zum Beispiel an, dass die Dateinamen / home / test / review.html und / home / test / xwp.out übermittelt wurden.
+Genauso würde $_FILES[ 'userfile']['size'][0] die Dateigröße von review.html enthalten, usw.
+PUT-Unterstützung
+Die Unterstützung der PUT-Methode hat sich zwischen PHP 3 und PHP 4 geändert.
+In PHP 4 sollten Sie den standard Input-Datenstrom benutzen, um die Inhalte eines HTTP PUT zu lesen.
+Speicher von HTTP PUT Dateien mit PHP 4
+Sämtliche untenstehende Dokumentation betrifft nur PHP 3.
+PHP unterstützt die HTTP PUT-Methode, wie sie von Clients wie Netscape Composer oder W3C Amaya benutzt wird.
+PUT-Anfragen sind weitaus unkomplizierter als ein Dateiupload und sehen etwa so aus:
+Das würde normalerweise bedeuten, dass der entfernte Client den folgenden Inhalt als / path / filename.html im Webverzeichnisbaum speichert.
+Natürlich ist es keine gute Idee, dass PHP oder Apache jeden Benutzer beliebige Dateien überschreiben lassen.
+Um eine solche Anfrage bearbeiten zu können, muss der Webserver erst angewiesen werden, ein bestimmtes PHP-Skript für die Abarbeitung aufzurufen.
+Im Apache wird dies durch die Script - Direktive festgelegt.
+Eine Zeile wie die folgende erledigt dies:
+Diese Zeile legt fest, dass Apache alle PUT-Anfragen für URIs, die dem Kontext entsprechen, in dem diese Zeile steht, an das put.php Skript weiterleitet.
+Dies setzt natürlich voraus, dass PHP aktiv und für die .php-Dateierweiterung registriert ist.
+Innerhalb der put.php-Datei könnte folgendes stehen:
+Dies kopiert die Datei an den vom Client angegebenen Ort.
+Möglicherweise sollen vor dem Kopieren der Datei noch Überprüfungen und / oder Benutzerauthentifizierung stattfinden.
+Wenn PHP eine PUT-Anfrage erhält, wird die Datei genau wie bei der POST-Methode in einem temporären Verzeichnis gespeichert.
+Der Name der temporären Datei findet sich in der Variablen $PHP_PUT_FILENAME; der Name der zu speichernden Datei steht in $REQUEST_URI (kann bei Nicht-Apache Webservern variieren).
+Dieser Zieldateiname wird vom Client festgelegt.
+Man kann den Client auch umgehen; beispielsweise könnten alle hochgeladenen Dateien in ein spezielles Upload-Directory kopiert werden.
+Referenzen entdecken
+Die HTTP-Authentifizierung durch PHP ist nur verfügbar, wenn PHP als Apache-Modul läuft und funktioniert daher nicht mit der CGI-Version.
+In einem PHP-Skript für ein Apache-Modul kann man die Funktion header() benutzen, um die Nachricht "Authentifizierung notwendig "an den Client-Browser zu senden, damit dieser ein Fenster zur Eingabe von Benutzername / Passwort öffnet.
+Sowohl Netscape als auch der Internet Explorer löschen den lokalen Authentifizierungscache des Browserfensters, wenn der Server eine 401-Meldung zurückgibt.
+Manchmal wird dieses Verhalten für das automatische Ausloggen nach Ablauf einer bestimmten Zeitspanne oder für einen Logout-Button genutzt.
+HTTP-Authentifizierung, mit erneuter Anforderung von Name / Passwort
+Dieses Verhalten wird vom Authentifizierungsstandard HTTP Basic nicht gefordert, daher sollte man sich nie darauf verlassen.
+Persistente Verbindungen sind SQL-Verbindungen, die nach Abarbeitung des Skriptes nicht geschlossen werden.
+Wenn eine persistente Verbindung angefordert wird, prüft PHP zuerst, ob bereits eine identische persistente Verbindung (die vielleicht vorher offen geblieben ist) existiert und benutzt sie in diesem Fall.
+Sollte keine Verbindung existieren, wird eine hergestellt.
+Wer nicht durchgängig mit der Art und Weise vertraut ist, wie Webserver arbeiten und die Last verteilen, könnte missverstehen, wofür persistente Verbindungen gedacht sind.
+Persistente Verbindungen bieten keine Funktionalität, die nicht auch von nicht-persistenten Verbindungen bereitgestellt wird.
+Das hat mit der Arbeitsweise von Webservern zu tun.
+Es gibt drei Möglichkeiten, wie ein Webserver PHP zur Generierung von Webseiten einsetzen kann.
+Die erste Methode ist, PHP als CGI -' Wrapper 'zu benutzen.
+Durch die Beendigung des Interpreters nach abgeschlossener Anfrage werden alle Ressourcen, auf die zugegriffen wurde (wie beispielsweise eine Verbindung zu einem SQL - Datenbankserver) wieder geschlossen.
+In diesem Fall erreicht man nichts, wenn man persistente Verbindungen benutzt - sie sind eben nicht beständig.
+Die zweite und populärste Methode ist der Einsatz von PHP als Modul in einem Multiprozess-Webserver, was momentan nur auf den Apache zutrifft.
+Typischerweise hat ein Multiprozess-Webserver einen Prozess (den 'Eltern 'Prozess), der einen Satz weiterer Prozesse (die 'Kinder') koordiniert, welche die eigentliche Arbeit des Bereitstellens der Seiten übernehmen.
+Jede Anfrage, die von einem Client erfolgt, wird an einen untergeordneten Prozess, der noch keine andere Anfrage bearbeitet, weitergereicht.
+Das bedeutet, dass eine zweite Anfrage des gleichen Clients an den Server unter Umständen von einem anderen untergeordneten Prozess als die erste Anfrage bearbeitet wird.
+In diesem Fall sorgt eine persistente Verbindung dafür, dass jeder untergeordnete Prozess sich nur einmal mit dem SQL-Server verbinden muss, wenn eine solche benötigt wird.
+Benötigt dann eine weitere Seite die Verbindung mit dem SQL-Server, kann auf die zurückgegriffen werden, die der untergeordnete Prozess vorher hergestellt hat.
+Die letzte Methode ist, PHP als Plug-in für einen Multithread - Webserver zu benutzen.
+Das Verhalten entspricht im wesentlichen dem oben beschriebenen Multiprozess-Modell.
+Beachten Sie, dass PHP 3 keine Unterstützung für SAPI bietet.
+Wozu dienen persistente Verbindungen, wenn sie keine zusätzliche Funktionalität bieten?
+Persistente Verbindungen sind nützlich, wenn der Aufwand für das Herstellen einer Verbindung zu einem SQL-Server hoch ist.
+Ob dies der Fall ist oder nicht, hängt von vielen Faktoren ab - zum Beispiel, um welche Datenbank es sich handelt, ob sie auf dem gleichen Rechner wie der Webserver läuft oder welche Last die SQL-Maschine zu bewältigen hat usw.
+Grundsätzlich gilt, dass, wenn viele Verbindungen hergestellt werden müssen, persistente Verbindungen außerordentlich hilfreich sind.
+Sie veranlassen den untergeordneten Prozess, sich während seiner gesamten Lebensdauer lediglich einmal mit dem SQL-Server zu verbinden, anstatt bei jedem Aufruf einer Seite, die eine Verbindung benötigt.
+Das heißt, dass jeder untergeordnete Prozess, der eine persistente Verbindung öffnet, seine eigene dauerhafte Verbindung zum Server hat.
+Bei 20 untergeordneten Prozessen, die ein Skript ausführen, das eine persistente Verbindung zum SQL-Server herstellt, hat man beispielsweise 20 verschiedene Verbindungen zum SQL-Server - eine für jeden untergeordneten Prozess.
+Beachten Sie jedoch, dass dies auch ein paar Nachteile haben kann, wenn Sie eine Datenbank mit limitierten Verbindungen benutzen, welche durch persistente Verbindungen überschritten werden.
+Wenn Ihre Datenbank ein Limit von 16 gleichzeitigen Verbindungen hat, und aufgrund einer stark ausgelasteten Server-Session 17 Kind-Prozesse versuchen, eine Verbindung herzustellen, wird es einem nicht gelingen.
+Konsultieren Sie die Dokumentation Ihrer Datenbank bezüglich der Behandlung von aufgegebenen Verbindungen oder Verbindungen im Leerlauf.
+Sie sollten sich zur Vorsicht noch ein paar Gedanken machen, wenn Sie persistente Verbindungen benutzen.
+Einer ist, wenn Sie über eine persistente Verbindung Tabellen sperren und das Skript diese Sperre aus welchem Grund auch immer nicht mehr aufheben kann, nachfolgende Skripte, welche die selbe Verbindung benutzen, blockieren und den Neustart von entweder dem Webserver oder dem Datenbankserver verlangen.
+Ein weiterer ist, dass wenn Sie Transaktionen benutzen, ein Transaktionsblock zu dem nächsten die Verbindung nutzenden Skript übertragen wird, wenn die Ausführung des Skriptes vor dem Transaktionsblock gestoppt wird.
+Besser ist es, wenn Sie dieses Problem gänzlich vermeiden, indem keine persistenten Verbindungen in Skripten benutzen, welche Tabellen sperren oder Transaktionen verwenden (Sie können sie immer noch anderswo benutzen).
+Eine wichtige Zusammenfassung.
+Persistente Verbindungen wurden entwickelt, um eins-zu-eins Abbildungen auf reguläre Verbindungen zu haben.
+Das heißt, dass man immer in der Lage sein sollte, die persistenten Verbindungen durch nicht-persistente zu ersetzten, ohne dass dies den Skriptablauf verändert.
+Es kann (und wird vermutlich auch) die Effizienz des Skriptes beeinflussen, aber nicht dessen Verhalten.
+Verbindungssteuerung
+Den Titel einer entfernten Seite auslesen
+Um sich mit einem anderen Benutzer als 'anonymous' zu verbinden muß ein username (und möglichst ein Passwort) innerhalb der URL angegeben werden, wie z.B. 'ftp: / /user:password@ftp.example.com / pfad / zur / datei'. (Die selbe Syntax kann verwendet werden, um auf Daten via HTTP zuzugreifen, wenn diese eine Basic Authentication benötigen.)
+Daten auf einen entfernten Server speichern
+Obiges Beispiel könnte dazu verleiten, dieses Verfahren zu benutzen, um in ein 'remote log-file' zu schreiben.

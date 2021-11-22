@@ -1,0 +1,100 @@
+SA_RECENT - set status - recent to the number of recent messages in the mailbox
+SA_UIDNEXT - set status - uidnext to the next uid to be used in the mailbox
+SA_UIDVALIDITY - set status - uidvalidity to a constant that changes when uids for the mailbox may no longer be valid
+SA_ALL - set all of the above
+status - flags is also set, which contains a bitmask which can be checked against any of the above constants.
+Subscribe to a new mailbox.
+This function returns the UID for the given message sequence number.
+This function removes the deletion flag for a specified message, which is set by imap_delete() or imap_mail_move().
+Unsubscribe from a specified mailbox.
+Decodes modified UTF-7 text into 8bit data.
+Returns the decoded 8bit data, or FALSE if the input string was not valid modified UTF-7.
+This function is needed to decode mailbox names that contain international characters outside of the printable ASCII range.
+Converts 8bit data to modified UTF-7 text.
+Searches haystack for needle and returns TRUE if it is found in the array, FALSE otherwise.
+If the third parameter strict is set to TRUE then the in_array() function will also check the types of the needle in the haystack.
+In PHP versions before 4.2.0 needle was not allowed to be an array.
+The second condition fails because in_array() is case-sensitive, so the program above will display:
+This will display:
+1.13 found with strict check
+Example 3. in_array() with an array as needle
+See also array_search().
+The include() statement includes and evaluates the specified file.
+The documentation below also applies to require().
+In other words, use require() if you want a missing file to halt processing of the page. include() does not behave this way, the script will continue regardless.
+Be sure to have an appropriate include_path setting as well.
+When a file is included, the code it contains inherits the variable scope of the line on which the include occurs.
+Any variables available at that line in the calling file will be available within the called file, from that point forward.
+Basic include() example
+If the include occurs inside a function within the calling file, then all of the code contained in the called file will behave as though it had been defined inside that function.
+So, it will follow the variable scope of that function.
+Including within functions
+When a file is included, parsing drops out of PHP mode and into HTML mode at the beginning of the target file, and resumes again at the end.
+For this reason, any code inside the target file which should be executed as PHP code must be enclosed within valid PHP start and end tags.
+If "URL fopen wrappers" are enabled in PHP (which they are in the default configuration), you can specify the file to be included using an URL (via HTTP or other supported wrapper - see Appendix I for a list of protocols) instead of a local pathname.
+If the target server interprets the target file as PHP code, variables may be passed to the included file using an URL request string as used with HTTP GET.
+This is not strictly speaking the same thing as including the file and having it inherit the parent file' s variable scope; the script is actually being run on the remote server and the result is then being included into the local script.
+Example 12-5. include() through HTTP
+?php / * This example assumes that www.example.com is configured to parse .php * * files and not .txt files.
+Because include() and require() are special language constructs, you must enclose them within a statement block if it's inside a conditional block.
+Example 12-6. include() and conditional blocks
+?php / / This is WRONG and will not work as desired. if ($condition) include $file; else include $other; / / This is CORRECT. if ($condition) {include $file;} else {include $other;}?
+It is possible to execute a return() It is possible to execute a return() statement inside an included file in order to terminate processing in that file and return to the script which called it.
+Also, it 's possible to return values from included files.
+You can take the value of the include call as you would a normal function.
+Example 12-7. include() and the return() statement
+$bar is the value 1 because the include was successful.
+Notice the difference between the above examples.
+The first uses return() within the included file while the other does not.
+A few other ways to "include" files into variables are with fopen(), file() or by using include() along with Output Control Functions.
+The include_once() statement includes and evaluates the specified file during the execution of the script.
+As the name suggests, it will be included just once.
+include_once() should be used in cases where the same file might be included and evaluated more than once during a particular execution of a script, and you want to be sure that it is included exactly once to avoid problems with function redefinitions, variable value reassignments, etc.
+For examples on using require_once() and include_once(), look at the PEAR code included in the latest PHP source code distributions.
+Example 12-9. include_once() is case sensitive
+Functions
+ingres_autocommit() is called before opening a transaction (before the first call to ingres_query() or just after a call to ingres_rollback() or ingres_commit()) to switch the "autocommit "mode of the server on or off (when the script begins the autocommit mode is off).
+When the autocommit mode is on, every query is automaticaly commited by the server, as if ingres_commit() was called after every call to ingres_query().
+Returns TRUE on success, or FALSE on failure.
+ingres_close() closes the connection to the Ingres server that's associated with the specified link.
+If the link parameter isn 't specified, the last opened link is used.
+ingres_close() isn't usually necessary, as it won't close persistent connections and all non-persistent connections are automatically closed at the end of the script.
+ingres_commit() commits the currently open transaction, making all changes made to the database permanent.
+This closes the transaction.
+A new one can be open by sending a query with ingres_query().
+You can also have the server commit automaticaly after every query by calling ingres_autocommit() before opening the transaction.
+Returns a Ingres II link resource on success, or FALSE on failure.
+ingres_connect() opens a connection with the Ingres database designated by database, which follows the syntax [node_id: :]dbname[ / svr_class].
+The connection is closed when the script ends or when ingres_close() is called on this link.
+All the other ingres functions use the last opened link as a default, so you need to store the returned value only if you use more than one link at a time.
+ingres_fetch_array() Returns an array that corresponds to the fetched row, or FALSE if there are no more rows.
+This function is an extended version of ingres_fetch_row().
+In addition to storing the data in the numeric indices of the result array, it also stores the data in associative indices, using the field names as keys.
+If two or more columns of the result have the same field names, the last column will take precedence.
+To access the other column( s) of the same name, you must use the numeric index of the column or make an alias for the column.
+result_type can be INGRES_NUM for enumerated array, INGRES_ASSOC for associative array, or INGRES_BOTH (default).
+Speed-wise, the function is identical to ingres_fetch_object(), and almost as quick as ingres_fetch_row() (the difference is insignificant).
+ingres_fetch_object() Returns an object that corresponds to the fetched row, or FALSE if there are no more rows.
+This function is similar to ingres_fetch_array(), with one difference - an object is returned, instead of an array.
+Indirectly, that means that you can only access the data by the field names, and not by their offsets (numbers are illegal property names).
+The optional argument result_type is a constant and can take the following values:
+Speed-wise, the function is identical to ingres_fetch_array(), and almost as quick as ingres_fetch_row() (the difference is insignificant).
+ingres_fetch_row() returns an array that corresponds to the fetched row, or FALSE if there are no more rows.
+Each result column is stored in an array offset, starting at offset 1.
+Subsequent call to ingres_fetch_row() would return the next row in the result set, or FALSE if there are no more rows.
+This is the number of bytes used by the server to store the field.
+For detailed information, see the Ingres / OpenAPI User Guide - Appendix C.
+index is the number of the field and must be between 1 and the value given by ingres_num_fields().
+ingres_field_name() returns the name of a field in a query result, or FALSE on failure.
+ingres_field_nullable() returns TRUE if the field can be set to the NULL value and FALSE if it can't.
+This value is used only for decimal, float and money SQL data types.
+ingres_field_type() returns the type of a field in a query result, or FALSE on failure.
+Some of these types can map to more than one SQL type depending on the length of the field (see ingres_field_length()).
+For example "IIAPI_FLT_TYPE" can be a float4 or a float8.
+ingres_num_fields() returns the number of fields in the results returned by the Ingres server after a call to ingres_query()
+For delete, insert or update queries, ingres_num_rows() returns the number of rows affected by the query.
+For other queries, ingres_num_rows() returns the number of rows in the query's result.
+This function is mainly meant to get the number of rows modified in the database.
+If this function is called before using ingres_fetch_array(), ingres_fetch_object() or ingres_fetch_row() the server will delete the result's data and the script won't be able to get them.
+You should instead retrieve the result 's data using one of these fetch functions in a loop until it returns FALSE, indicating that no more results are available.
+See ingres_connect() for parameters details and examples.
