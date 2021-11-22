@@ -41,7 +41,7 @@ virtualenv venv --python=/usr/bin/python3
 
 Now install some Python tools that we will be using
 ```sh
-pip install sacrebleu bpe requests TODO
+pip install sacrebleu subword-nmt requests TODO
 ```
 
 ### Download Moses
@@ -153,9 +153,9 @@ turns into
 
 ```sh
 # Process source
-$TODO_BPE_DIR/apply_bpe.py -c ${src}${trg}.bpe < ${prefix_dev}.tc.${src} > ${prefix_dev}.bpe.${src}
+subword-nmt apply-bpe -c ${models}/${trg}${src}.bpe < ${prefix}.tc.${src} > ${prefix}.bpe.${src}
 # Process target
-$TODO_BPE_DIR/apply_bpe.py -c ${src}${trg}.bpe < ${prefix_dev}.tc.${trg} > ${prefix_dev}.bpe.${trg}
+subword-nmt apply-bpe -c ${models}/${trg}${src}.bpe < ${prefix}.tc.${trg} > ${prefix}.bpe.${trg}
 ```
 
 
