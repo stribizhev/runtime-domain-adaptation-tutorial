@@ -83,6 +83,7 @@ src=en
 trg=de
 prefix_dev=$4
 moses_scripts=~/mosesdecoder/scripts
+models=~/models
 ```
 
 #### Punctuation normalization
@@ -132,13 +133,13 @@ used when training the system.
 ```sh
 # Process source
 $moses_scripts/recaser/truecase.perl \
-  --model trucase.${src} -a \
+  --model ${models}/trucase.${src} -a \
   < ${prefix}.tok.${src} \
   > ${prefix}.tc.${src}
 
 # Process target
 $moses_scripts/recaser/truecase.perl \
-  --model trucase.${trg} -a \
+  --model ${models}/trucase.${trg} -a \
   < ${prefix}.tok.${trg} \
   > ${prefix}.tc.${trg}
 ```
