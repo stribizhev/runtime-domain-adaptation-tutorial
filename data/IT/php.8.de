@@ -1,0 +1,100 @@
+Sie werden merken, dass PHP Ihre Datenbank alleine nicht schützen kann.
+Die folgenden Abschnitte sind eine Einführung in die Grundlagen, wie man innerhalb von PHP Skripten auf Datenbanken zugreift und diese manipuliert.
+Denken Sie an diese einfache Regel: tief gestaffelte Verteidigung.
+Je mehr Platz Sie den Maßnahmen zum Schutz Ihrer Datenbank geben, desto geringer ist die Wahrscheinlichkeit, dass ein Angreifer Erfolg hat, und gespeicherte Geheiminformationen aufdeckt oder missbraucht.
+Gutes Design des Datenbankschemas, und die Applikation wird mit Ihren größten Befürchtungen fertig.
+Der Erste Schritt liegt immer im Erstellen der Datenbank, außer Sie wollen eine bereits existierende Dritter verwenden.
+Ist eine Datenbank erstellt, ist sie einem Eigentümer zugewiesen, welcher das Kommando zum Erstellen ausgeführt hat.
+Gewöhnlich kann nur der Eigentümer (oder ein Superuser) alles mit den Objekten in dieser Datenbank machen, und um anderen Benutzern die Verwendung zu erlauben, müssen Rechte vergeben werden.
+Sie können verschiedene Datenbanknutzer mit sehr limitierten Rechten auf Datenbankobjekte für jeden Aspekt Ihrer Applikation anlegen.
+Nur die wirklich benötigten Rechte sollten gewährt werden, und vermeiden Sie, dass der gleiche Benutzer in verschiedenen Anwendungsfällen mit der Datenbank interagieren kann.
+Das heißt, dass Eindringlinge, welche unter Verwendung einer dieser Referenzen Zugriff auf Ihre Datenbank erlangt haben, nur so viele Änderungen durchführen können, wie es Ihre Applikation kann.
+Wenn sich das System entwickelt, werden neu zu öffnende Ports zu der Datenbank vorgesehen, und Sie müssen die Logik in jedem Datenbank-Client neu implementieren.
+Überdies können Trigger verwendet werden, um transparent und automatisch mit Feldern umzugehen, welche beim debuggen Ihrer Applikation oder beim Zurückverfolgen von Transaktionen oft einen Einblick gewähren.
+Vielleicht wollen Sie die Verbindungen über SSL herstellen, um die Client / Server Kommunikation für eine erhöhte Sicherheit zu verschlüsseln, oder aber auch ssh verwenden, um die Netzwerkverbindung zwischen den Clients und dem Datenbankserver zu verschlüsseln.
+Ist eines davon realisiert, wird ein Monitoring Ihres Verkehrs und das Erlangen von Informationen zu harter Arbeit.
+SSL / SSH schützt zwar die gerade auf dem Weg befindlichen Daten vom Client zum Server, jedoch nicht die dauernd in einer Datenbank gespeicherten Daten.
+SSL ist ein "auf-der-Leitung" Protokoll.
+Hat ein Angreifer direkten Zugriff auf Ihre Datenbank (den Webserver umgehend), können die gespeicherten heiklen Daten aufgedeckt oder zweckentfremdet werden, außer wenn die Information von der Datenbank selbst geschützt ist.
+Die Daten zu verschlüsseln ist ein guter Weg, diese Gefahr zu mildern, doch bieten nur wenige Datenbanken diese Art der Verschlüsselung von Daten.
+Der einfachste Weg, dieses Problem zu umgehen ist, erst einmal Ihr eigenes Verschlüsselungspaket zu erstellen, und dieses dann in Ihren PHP Skripten zu nutzen.
+Mcrypt and Mhash, welche eine große Auswahl an Verschlüsselungsalgorhythmen abdecken.
+Das Skript verschlüsselt die Daten vor dem Speichern, und entschlüsselt diese wieder beim Erhalt.
+Siehe die Verweise für weitere Beispiele, wie Verschlüsselung arbeitet.
+Im Fall von wirklich versteckten Daten, wenn deren unverfälschte Repräsentation nicht nötig ist (z.B. keine Anzeige), ist hashing ebenfalls überlegenswert.
+Das bekannte Beispiel für das Hashing ist das Speichern des MD5 hash eines Passwortes in einer Datenbank, anstatt des Passwortes selbst.
+Siehe auch crypt() und md5().
+Verwenden eines hashed Passwortfeldes
+Viele Entwickler sind sich nicht bewusst, wie man sich an SQL Abfragen zu schaffen machen kann und nehmen an, dass eine SQL Abfrage ein vertrauenswürdiges Kommando ist.
+Das heißt, dass SQL Abfragen Zugriffskontrollen hinters Licht führen, und dadurch Standard Authentifizierungs - und Authorisationschecks umgehen können, und manchmal können SQL Abfragen sogar Zugriff zu Kommandos auf Betriebssystemebene erlauben.
+Direkt SQL Command Injection ist eine Technik, wo ein Angreifer SQL Kommandos erstellt oder existierende verändert, um versteckte Daten sichtbar zu machen, wertvolle Daten zu überschreiben, oder sogar gefährliche Kommandos auf Systemebene des Datenbank-Hosts auszuführen.
+Dies wird durch die Applikation erreicht, welche den Input des Benutzers mit statischen Parametern kombiniert, um eine SQL Abfrage zu erstellen.
+Die folgenden Beispiele basieren - leider - auf wahren Begebenheiten.
+Dank dem Mangel an Input Validierungen, und dem Verbinden zum Datenbankserver als ein Superuser oder jemand der Benutzer anlegen kann, kann ein Angreifer einen Superuser in Ihrer Datenbank anlegen.
+Die Ergebnisliste in mehrere Seiten aufsplitten... und Superuser anlegen (PostgreSQL and MySQL)
+Es ist eine übliche Technik, den SQL Parser mittels dem Kommentarzeichen in SQL - - zu zwingen, den Rest der vom Entwickler geschriebenen Abfrage zu ignorieren.
+Ein gangbarer Weg um Passwörter zu finden ist, Ihre Seiten mit den Suchergebnissen hinters Licht zu führen.
+Der Angreifer braucht nur zu probieren, ob irgendeine übertragene Variable, die in dem SQL Statement verwendet wird, nicht richtig gehandhabt wird.
+Diese Filter können gewöhnlich in einer vorausgehenden Form gesetzt werden, indem WHERE, ORDER BY, LIMIT und OFFSET Klauseln in SELECT Statements umgebaut werden.
+Wenn Ihre Datenbank das UNION Konstrukt unterstützt, kann der Angreifer versuchen, eine komplette Abfrage an das Original anzuhängen, um Paßwörter aus einer willkürlichen Tabelle aufzulisten.
+Die Verwendung von verschlüsselten Passwortfeldern wird ausdrücklich empfohlen.
+Artikel auflisten... und ein paar Passwörter (irgendein Datenbankserver)
+SQL UPDATEs sind ebenfalls ein Anlass, Ihre Datenbank anzugreifen.
+Diese Abfragen sind auch durch das Ändern und Anhängen einer komplett neuen Abfrage gefährdet.
+In diesem Fall muss eine Schemainformation vorhanden sein, um die Abfrage erfolgreich manipulieren zu können.
+Diese kann durch Untersuchen der Variablennamen im Formular, oder simpel mittels brute force gesammelt werden.
+Es gibt nicht so viele Namenskonventionen für Felder, welche Passwörter oder Benutzernamen speichern.
+Vom Zurücksetzen eines Passwortes... zum Erlangen von mehr Rechten (irgendein Datenbankserver)
+Ein furchterregendes Beispiel, wie der Zugriff auf Kommandos auf Betriebssystemebene bei manchen Datenbankservern erfolgen kann.
+Angriff auf das Betriebssystem des Datenbank Hosts (MSSQL Server)
+Manche der obigen Beispiele sind an einen spezifischen Datenbankserver gebunden.
+Das heißt jedoch nicht, dass nicht ein ähnlicher Angriff auf andere Produkte möglich wäre.
+Ihr Datenbankserver könnte auf andere Weise genauso verwundbar sein.
+Sie könnten sich nun darauf berufen, dass der Angreifer in den meisten Beispielen ein Stück Information über das Datenbankschema haben muss.
+Sie haben recht, aber Sie wissen nie, wann und wie es genommen werden kann, und wenn es passiert, kann Ihre Datenbank entblößt werden.
+Wenn Sie ein Open Source, oder öffentlich verfügbares Paket zur Handhabung von Datenbanken verwenden, welches vielleicht zu einem Content Management System oder Forum gehört, können Eindringlinge leicht eine Kopie eines Stücks Ihres Codes erstellen.
+Es kann auch ein Sicherheitsrisiko sein, wenn es sich um ein schlecht designtes Paket handelt.
+Diese Angriffe basieren hauptsächlich auf dem Ausnutzen des Codes, welcher ohne Bedenken auf die Sicherheit geschrieben wurde.
+Vertrauen Sie nie auf irgendeine Art von Input, speziell wenn er von der Clientseite kommt, selbst wenn er von einer Auswahlbox, einem versteckten Eingabefeld, oder einem Cookie kommt.
+Das erste Beispiel zeigt, dass solch eine untadelige Abfrage ein Disaster anrichten kann.
+Stellen Sie nie als Superuser oder Owner einer Datenbank eine Verbindung zur Datenbank her.
+Verwenden Sie immer speziell angelegte Benutzer mit sehr limitierten Rechten.
+Prüfen Sie, ob der gegebene Input dem erwarteten Datentyp entspricht.
+PHP bietet eine große Auswahl an Funktionen zum Validieren des Input, von den einfachsten unter Variablenfunktionen und Character Type Functions (z.B. is_numeric() bzw. ctype_digit()), bis hin zu den Perl kompatiblen Regulären Ausdrücken.
+Wenn die Applikation numerischen Input erwartet, erwägen Sie die Prüfung der Daten mit is_numeric(), oder die Änderung des Typs mit settype(), oder verwenden Sie die numerische Repräsentation mittels sprintf().
+Escapen Sie jeden nicht numerischen Input, welcher zur Datenbank weitergereicht werden soll mit addslashes() oder addcslashes().
+Siehe auch das erste Beispiel.
+Wie dieses Beispiel zeigt, sind in den statischen Teil der Abfrage eingebrachten Escapes nicht genug, und können leicht gehacked werden.
+Sie können stored procedures und vorher definierte Cursor verwenden, um den Datenzugriff zu abstrahieren, sodass Benutzer nicht direkt auf Tabellen oder Views zugreifen, aber diese Lösung hat andere Auswirkungen.
+Abgesehen davon profitieren Sie von einer Protokollierung der Abfragen entweder in Ihrem Skript, oder durch die Datenbank selbst, wenn es hilft.
+Klar, die Protokollierung kann nicht irgendeinen schädlichen Versuch verhindern, aber es kann helfen herauszufinden, welche Applikation umgangen wurde.
+PHP Security hat zwei Seiten der Fehlerbehandlung.
+Eine ist für die Erhöhung der Sicherheit vorteilhaft, die andere ist schädlich.
+Wenn z.B. ein Angreifer Informationen über eine auf einem eingesendeten Formular basierte Seite zusammengetragen hat, kann er versuchen, Variablen zu überschreiben bzw. zu modifizieren:
+Variablen mit einer eigenen HTML Seite angreifen
+Die normalerweise zurückgegebenen PHP Fehler können für den Entwickler hilfreich sein, wenn dieser ein Skript debuggen möchte, Hinweise auf eine nicht korrekt arbeitende Funktion oder Datei, oder die PHP Datei und die Zeilennummer des aufgetretenen Fehlers anzeigen lassen möchte.
+Das sind alles Informationen, die ausgenutzt werden können.
+Es ist für einen PHP Entwickler nicht unüblich, show_source(), highlight_string(), oder highlight_file() zur Fehlersuche zu verwenden, jedoch kann dies in einem lebenden System auch versteckte Variablen, ungeprüfte Syntax und andere gefährliche Informationen aufdecken.
+Speziell gefährlich ist es, Code von bekannten Quellen mit integrierten Debugging Handlern auszuführen, oder weit verbreitete Debuggingtechniken zu verwenden.
+Wenn ein Angreifer die von Ihnen benutzte generelle Technik herausfindet, kann er versuchen, mit Brute-Force Ihre Seite zu knacken, indem er verschiedene allgemein gebräuchliche Debug Strings sendet:
+Ausnutzen von gebräuchlichen Debugging Variablen
+Ungeachtet der Fehlerbehandlungsmethode führt die Möglichkeit ein System nach Fehlermeldungen sondieren dazu, dass einem Angreifer mehr Informationen geboten werden.
+Zum Beispiel weist schon alleine der Stil einer Fehlermeldung darauf hin, dass auf einem System PHP läuft.
+Wenn der Angreifer auf eine .html Seite kommt und untersuchen möchte welches System im Hintergrund läuft (um nach bekannten Systemschwächen zu suchen), könnte dieser mittels der Einspeisung von falschen Daten herausfinden, dass ein System mit PHP aufgebaut ist.
+Ein Fehler einer Funktion gibt Aufschluss darüber, ob ein System eine bestimmte Datenbankapplikation benutzt, oder gibt Hinweise darauf, wie eine Webseite programmiert bzw. entworfen wurde.
+Mit der Einspeisung von falschen Daten kann ein Angreifer z.B. die Reihenfolge der Authentifizierung in einem Skript bestimmen (anhand der Zeilennummern in den Fehlermeldungen), wie auch durch "Herumstochern "Missbrauchsmöglichkeiten an verschiedenen Stellen im Script herausfinden.
+Eine Fehlermeldung des Dateisystems oder eines generellen PHP-Errors welche Rechte der Server hat, wie auch die Struktur und Organisation der Dateien auf dem Webserver.
+Vom Entwickler geschriebene Fehlermeldungen können das Problem verschlimmern, bis hin zum Preisgeben von zuvor "versteckten" Informationen.
+Es gibt drei bedeutende Lösungen zu diesem Thema.
+Die erste ist, alle Funktionen zu überprüfen und zu versuchen, die Menge an Fehlermeldungen zu ersetzen.
+Die zweite ist, die Ausgabe von Fehlermeldungen am laufenden Code generell zu deaktivieren.
+Die dritte ist, sich unter Verwendung der PHP Funktionen zur Fehlerbehandlung seinen eigenen Error-handler zu schreiben.
+Abhängig von Ihrer Sicherheitspolitik könnte jede der drei Lösungen für Sie geeignet sein.
+Ein Weg, diesen Punkt vorzeitig zu behandeln ist, das PHP eigene error_reporting() zu benutzen, um Ihren Code sicherer zu gestalten und möglicherweise gefährliche Nutzungen von Variablen zu entdecken.
+Wenn Sie Ihren Code noch vor dem Einsatz mit E_ALL testen, können Bereiche entdecken, in denen Ihre Variablen eventuell für Verseuchung oder andere Modifikationen offen sind.
+Sind Sie bereit zum Einsatz, können Sie Ihren Code mit E_NONE vor Sondierungen schützen.
+Gefährliche Variablen mit E_ALL finden
+?php if ($username) {/ / Vor Verwendung nicht initialisiert oder geprüft $good_login = 1;} if ($good_login == 1) {/ / Wenn der obige Test fehlschlägt, ist vor der / / Verwendung nicht initialisiert oder geprüft fpassthru (" / highly / sensitive / data / index.html");}?
+Datenbank - Sicherheit
+PHP ist von den in den meisten Serversystemen implementierten Sicherheitseinstellungen hinsichtlich der Berechtigungen auf Datei - und Verzeichnisebene abhängig.
+Dies verleiht Ihnen Kontrolle darüber, welche Dateien in dem Dateisystem gelesen werden dürfen.

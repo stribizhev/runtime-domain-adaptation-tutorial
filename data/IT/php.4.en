@@ -1,0 +1,100 @@
+The PHP code is enclosed in special start and end tags that allow you to jump into and out of "PHP mode".
+What distinguishes PHP from something like client-side JavaScript is that the code is executed on the server.
+If you were to have a script similar to the above on your server, the client would receive the results of running that script, with no way of determining what the underlying code may be.
+You can even configure your web server to process all your HTML files with PHP, and then there 's really no way that users can tell what you have up your sleeve.
+The best things in using PHP are that it is extremely simple for a newcomer, but offers many advanced features for a professional programmer.
+Don' t be afraid reading the long list of PHP's features.
+You can jump in, in a short time, and start writing simple scripts in a few hours.
+Although PHP 's development is focused on server-side scripting, you can do much more with it.
+Read on, and see more in the What can PHP do? section.
+PHP is mainly focused on server-side scripting, so you can do anything any other CGI program can do, such as collect form data, generate dynamic page content, or send and receive cookies.
+But PHP can do much more.
+There are three main fields where PHP scripts are used.
+This is the most traditional and main target field for PHP.
+You need three things to make this work.
+The PHP parser (CGI or server module), a webserver and a web browser.
+You need to run the webserver, with a connected PHP installation.
+You can access the PHP program output with a web browser, viewing the PHP page through the server.
+See the installation instructions section for more information.
+Command line scripting.
+You can make a PHP script to run it without any server or browser.
+You only need the PHP parser to use it this way.
+This type of usage is ideal for scripts regularly executed using cron (on *nix or Linux) or Task Scheduler (on Windows).
+These scripts can also be used for simple text processing tasks.
+See the section about Command line usage of PHP for more information.
+Writing client-side GUI applications.
+PHP is probably not the very best language to write windowing applications, but if you know PHP very well, and would like to use some advanced PHP features in your client-side applications you can also use PHP-GTK to write such programs.
+You also have the ability to write cross-platform applications this way.
+PHP-GTK is an extension to PHP, not available in the main distribution.
+If you are interested in PHP-GTK, visit it 's own website.
+PHP has also support for most of the web servers today.
+For the majority of the servers PHP has a module, for the others supporting the CGI standard, PHP can work as a CGI processor.
+So with PHP, you have the freedom of choosing an operating system and a web server.
+Furthermore, you also have the choice of using procedural programming or object oriented programming, or a mixture of them.
+Although not every standard OOP feature is realized in the current version of PHP, many code libraries and large applications (including the PEAR library) are written only using OOP code.
+With PHP you are not limited to output HTML.
+PHP' s abilities includes outputting images, PDF files and even Flash movies (using libswf and Ming) generated on the fly.
+You can also output easily any text, such as XHTML and any other XML file.
+PHP can autogenerate these files, and save them in the file system, instead of printing it out, forming a server-side cache for your dynamic content.
+One of the strongest and most significant feature in PHP is its support for a wide range of databases.
+Writing a database-enabled web page is incredibly simple.
+The following databases are currently supported:
+FilePro (read-only)
+PHP also has support for talking to other services using protocols such as LDAP, IMAP, SNMP, NNTP, POP3, HTTP, COM (on Windows) and countless others.
+You can also open raw network sockets and interact using any other protocol.
+Talking about interconnection, PHP has support for instantiation of Java objects and using them transparently as PHP objects.
+You can also use our CORBA extension to access remote objects.
+For parsing and accessing XML documents, we support the SAX and DOM standards.
+While using PHP in the ecommerce field, you 'll find the Cybercash payment, CyberMUT, VeriSign Payflow Pro and CCVS functions useful for your online payment programs.
+At last but not least, we have many other interesting extensions, the mnoGoSearch search engine functions, the IRC Gateway functions, many compression utilities (gzip, bz2), calendar conversion, translation...
+As you can see this page is not enough to list all the features and benefits PHP can offer.
+Read on in the sections about installing PHP, and see the function reference part for explanation of the extensions mentioned here.
+Often you need classes with similar variables and functions to another existing class.
+In fact, it is good practice to define a generic class which can be used in all your projects and adapt this class for the needs of each of your specific projects.
+To facilitate this, classes can be extensions of other classes.
+The extended or derived class has all variables and functions of the base class (this is called'inheritance 'despite the fact that nobody died) and what you add in the extended definition.
+It is not possible to substract from a class, that is, to undefine any existing functions or variables.
+Classes are extended using the keyword 'extends'.
+This defines a class Named_Cart that has all variables and functions of Cart plus an additional variable $owner and an additional function set_owner().
+You can still use normal cart functions on named carts:
+This is also called a "parent-child" relationship.
+You can even use this new child class and create another class based on this child class.
+Classes must be defined before they are used!
+If you want the class Named_Cart to extend the class Cart, you will have to define the class Cart first.
+To make it short: the order in which the classes are defined is important.
+The following is valid for PHP 4 only.
+Sometimes it is useful to refer to functions and variables in base classes or to refer to functions in classes that have not yet any instances.
+Instead we call example() as a'class function ', that is, as a function of the class itself, not any object of that class.
+There are class functions, but there are no class variables.
+In fact, there is no object at all at the time of the call.
+Thus, a class function may not use any object variables (but it can use local and global variables), and it may no use $this at all.
+In the above example, class B redefines the function example().
+The original definition in class A is shadowed and no longer available, unless you are refering specifically to the implementation of example() in class A using the ::-operator.
+Write A::example() to do this (in fact, you should be writing parent::example(), as shown in the next section).
+In this context, there is a current object and it may have object variables.
+Thus, when used from WITHIN an object function, you may use $this and object variables.
+You may find yourself writing code that refers to variables and functions in base classes.
+This is particularly true if your derived class is a refinement or specialisation of code in your base class.
+Instead of using the literal name of the base class in your code, you should be using the special name parent, which refers to the name of your base class as given in the extends Instead of using the literal name of the base class in your code, you should be using the special name parent, which refers to the name of your base class as given in the extends declaration of your class.
+By doing this, you avoid using the name of your base class in more than one place.
+Should your inheritance tree change during implementation, the change is easily made by simply changing the extends declaration of your class.
+Basic syntax
+PHP supports' C', 'C++ 'and Unix shell-style comments.
+?php echo "This is a test"; / / This is a one-line c+ + style comment / * This is a multi line comment yet another line of comment * / echo "This is yet another test"; echo "One Final Test"; # This is shell-style style comment?
+The "one-line" comment styles actually only comment to the end of the line or the current block of PHP code, whichever comes first.
+You should be careful not to nest 'C' style comments, which can happen when commenting out large blocks.
+?php / * echo "This is a test"; / * This comment will cause a problem * / * /?
+The one-line comment styles actually only comment to the end of the line or the current block of PHP code, whichever comes first.
+WILL be printed:? skips out of the PHP mode and returns to HTML mode, and / / cannot influence that.
+Instruction separation
+When PHP parses a file, it simply passes the text of the file through until it encounters one of the special tags which tell it to start interpreting the text as PHP code.
+The parser then executes all the code it finds, up until it runs into a PHP closing tag, which tells the parser to just start passing the text through again.
+This is the mechanism which allows you to embed PHP code inside HTML: everything outside the PHP tags is left utterly alone, while everything inside is parsed as code.
+There are four sets of tags which can be used to denote blocks of PHP code.
+Of these, only two (?php...? and script language="php "... / script) are always available; the others can be turned on or off from the php.ini Of these, only two (?php...? and script language="php"... / script) are always available; the others can be turned on or off from the php.ini configuration file.
+While the short-form tags and ASP-style tags may be convenient, they are not as portable as the longer versions.
+Also, if you intend to embed PHP code in XML or XHTML, you will need to use the ?php...? form to conform to the XML.
+The tags supported by PHP are:
+Ways of escaping from HTML
+1. ?php echo( "if you want to serve XHTML or XML documents, do like this\n");?
+This is a shortcut for "? echo expression?" 3. script language="php "echo ("some editors (like FrontPage) don't like processing instructions"); / script 4.% echo ("You may optionally use ASP-style tags");% %= $variable; # This is a shortcut for"% echo... "%

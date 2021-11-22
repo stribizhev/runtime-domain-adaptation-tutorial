@@ -1,0 +1,100 @@
+Since PHP was designed to allow user level access to the filesystem, it 's entirely possible to write a PHP script that will allow you to read system files such as / etc / passwd, modify your ethernet connections, send massive printer jobs out, etc.
+This has some obvious implications, in that you need to ensure that the files that you read from and write to are the appropriate ones.
+Consider the following script, where a user indicates that they 'd like to delete a file in their home directory.
+This assumes a situation where a PHP web interface is regularly used for file management, so the Apache user is allowed to delete files in the user home directories.
+Poor variable checking leads to....
+?php / / removes a file from anywhere on the hard drive that / / the PHP user has access to.
+Check all variables which are submitted.
+More secure file name checking
+Depending on your operating system, there are a wide variety of files which you should be concerned about, including device entries (/ dev / or COM1), configuration files (/ etc / files and the .ini files), well known file storage areas (/ home /, My Documents), etc.
+For this reason, it 's usually easier to create a policy where you forbid everything except for what you explicitly allow.
+In general, security by obscurity is one of the weakest forms of security.
+But in some cases, every little bit of extra security is desirable.
+A few simple techniques can help to hide PHP, possibly slowing down an attacker who is attempting to discover weaknesses in your system.
+By setting expose_php = off in your php.ini file, you reduce the amount of information available to them.
+Another tactic is to configure web servers such as apache to parse different filetypes through PHP, either with an .htaccess directive, or in the apache configuration file itself.
+You can then use misleading file extensions:
+Hiding PHP as another language
+Using unknown types for PHP extensions
+Using html types for PHP extensions
+User Submitted Data
+PHP is a powerful language and the interpreter, whether included in a web server as a module or executed as a separate CGI binary, is able to access files, execute commands and open network connections on the server.
+These properties make anything run on a web server insecure by default.
+PHP is designed specifically to be a more secure language for writing CGI programs than Perl or C, and with correct selection of compile-time and runtime configuration options, and proper coding practices, it can give you exactly the combination of freedom and security you need.
+As there are many different ways of utilizing PHP, there are many configuration options controlling its behaviour.
+A large selection of options guarantees you can use PHP for a lot of purposes, but it also means there are combinations of these options and server configurations that result in an insecure setup.
+The configuration flexibility of PHP is equally rivalled by the code flexibility.
+PHP can be used to build complete server applications, with all the power of a shell user, or it can be used for simple server-side includes with little risk in a tightly controlled environment.
+How you build that environment, and how secure it is, is largely up to the PHP developer.
+This chapter starts with some general security advice, explains the different configuration option combinations and the situations they can be safely used, and describes different considerations in coding for different levels of security.
+A completely secure system is a virtual impossibility, so an approach often used in the security profession is one of balancing risk and usability.
+If every variable submitted by a user required two forms of biometric validation (such as a retinal scan and a fingerprint), you would have an extremely high level of accountability.
+It would also take half an hour to fill out a fairly complex form, which would tend to encourage users to find ways of bypassing the security.
+The best security is often inobtrusive enough to suit the requirements without the user being prevented from accomplishing their work, or over-burdening the code author with excessive complexity.
+Indeed, some security attacks are merely exploits of this kind of overly built security, which tends to erode over time.
+A phrase worth remembering:
+A system is only as good as the weakest link in a chain.
+If all transactions are heavily logged based on time, location, transaction type, etc. but the user is only verified based on a single cookie, the validity of tying the users to the transaction log is severely weakened.
+When testing, keep in mind that you will not be able to test all possibilities for even the simplest of pages.
+The input you may expect will be completely unrelated to the input given by a disgruntled employee, a cracker with months of time on their hands, or a housecat walking across the keyboard.
+This is why it 's best to look at the code from a logical perspective, to discern where unexpected data can be introduced, and then follow how it is modified, reduced, or amplified.
+The Internet is filled with people trying to make a name for themselves by breaking your code, crashing your site, posting inappropriate content, and otherwise making your day interesting.
+It doesn 't matter if you have a small or large site, you are a target by simply being online, by having a server that can be connected to.
+Many cracking programs do not discern by size, they simply trawl massive IP blocks looking for victims.
+Try not to become one.
+One feature of PHP that can be used to enhance security is configuring PHP with register_globals = off.
+By turning off the ability for any user-submitted variable to be injected into PHP code, you can reduce the amount of variable poisoning a potential attacker may inflict.
+They will have to take the additional time to forge submissions, and your internal variables are effectively isolated from user submitted data.
+While it does slightly increase the amount of effort required to work with PHP, it has been argued that the benefits far outweigh the effort.
+Detecting simple variable poisoning
+The greatest weakness in many PHP programs is not inherent in the language itself, but merely an issue of code not being written with security in mind.
+For this reason, you should always take the time to consider the implications of a given piece of code, to ascertain the possible damage if an unexpected variable is submitted to it.
+?php / / remove a file from the user' s home directory... or maybe / / somebody else's? unlink ($evil_var); / / Write logging of their access... or maybe an / etc / passwd entry? fputs ($fp, $evil_var); / / Execute something trivial.. or rm -rf *? system ($evil_var); exec ($evil_var);?
+Will this script only affect the intended files?
+Can this script be used in unintended ways?
+Can this be used in conjunction with other scripts in a negative manner?
+Will any transactions be adequately logged?
+You may also want to consider turning off register_globals, magic_quotes, or other convenience settings which may confuse you as to the validity, source, or value of a given variable.
+Working with PHP in error_reporting( E_ALL) mode can also help warn you about variables being used before they are checked or initialized (so you can prevent unusual data from being operated upon).
+If everything is setup correctly, this file will be parsed by PHP and the following output will make it to your browser:
+Ask your administrator to enable it for you using the Installation Ask your administrator to enable it for you using the Installation chapter of the manual.
+The point of the example is to show the special PHP tag format.
+In this example we used ?php to indicate the start of a PHP tag.
+You may jump in and out of PHP mode in an HTML file like this all you want.
+There are many text editors and Integrated Development Environments (IDEs) that you can use to create, edit and manage PHP files.
+A Note on Word Processors:
+Word processors such as StarOffice Writer, Microsoft Word and Abiword are not good choices for editing PHP files.
+Something Useful
+One of the most powerful features of PHP is the way it handles HTML forms.
+The basic concept that is important to understand is that any form element in a form will automatically be available to your PHP scripts.
+Please read the manual section on Variables from outside of PHP for more information and examples on using forms with PHP.
+Here 's an example HTML form:
+There is nothing special about this form.
+It is a straight HTML form with no special tags of any kind.
+In this file you would have something like this:
+Printing data from our form
+A sample output of this script may be:
+You are 22 years old.
+There is nothing more to it.
+The $_POST[ "name"] and $_POST["age"] variables are automatically set for you by PHP.
+Earlier we used the $_SERVER autoglobal, now above we just introduced the $_POST Earlier we used the $_SERVER autoglobal, now above we just introduced the $_POST autoglobal which contains all POST data.
+Notice how the method of our form is POST.
+If we used the method GET then our form information would live in the $_GET If we used the method GET then our form information would live in the $_GET autoglobal instead.
+You may also use the $_REQUEST autoglobal if you don 't care the source of your request data.
+It contains a mix of GET, POST, COOKIE and FILE data.
+Using old code with new versions of PHP
+See the section titled What can PHP do for more information.
+On most servers this is the default extension for PHP files, but ask your server administrator to be sure.
+Just create your .php files and put them in your web directory and the server will magically parse them for you.
+Let 's say you want to save precious bandwidth and develop locally.
+Your first PHP-enabled page
+Two of the most important recent changes that affect old code are:
+The deprecation of the old $HTTP_*_VARS arrays (which need to be indicated as global when used inside a function or method).
+The older $HTTP_*_VARS arrays, such as $HTTP_POST_VARS, still exist and have since PHP 3.
+External variables are no longer registered in the global scope by default.
+In other words, as of PHP 4.2.0 the PHP directive register_globals is off by default in php.ini.
+The preferred method of accessing these values is via the autoglobal arrays mentioned above.
+Whether on or off, $_GET[ 'id'] is available.
+Dealing with Forms
+We are going to check what sort of browser the person viewing the page is using.
+In order to do that we check the user agent string that the browser sends as part of its HTTP request.

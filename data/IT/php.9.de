@@ -1,0 +1,100 @@
+Da PHP entwickelt wurde um Zugriffe auf das Dateisystem auf Benutzebene zu erlauben, ist es natürlich auch möglich ein PHP Skript zu schreiben das Ihnen erlaubt Systemdateien wie / etc / passwd zu lesen, Ethernetverbindungen zu modifizieren, enorme Druckaufträge zu senden, etc.
+Dies hat offensichtliche Implikationen, indem Sie sicherstellen müssen, dass alle von Ihnen zu lesenden bzw. zu schreibenden Dateien auch die richtigen sind.
+Stellen Sie sich folgendes Skript vor, in dem ein User zum Ausdruck bringt, dass gerne eine Datei in seinem Heimatverzeichnis löschen möchte.
+Dies geht von einer Situation aus, in der ein PHP Web-Interface regelmäßig zum Dateimanagement verwendet wird, und der Apache User ist auch berechtigt, in seinem Heimatverzeichnis Dateien zu löschen.
+Schlechte Variablenprüfung führt zu....
+?php / / löscht eine Datei irgendwo auf der Festplatte, wo der / / Benutzer die nötigen Rechte besitzt.
+Prüfen Sie alle übertragenen Variablen.
+Sicherere Dateinamensprüfung
+Abhängig vom Betriebssystem gibt es eine große Anzahl Dateien mit der Sie sich befassen sollten, inklusive Einträge für Geräte (/ dev / oder com1), Konfigurationsdateien (/ etc / Dateien und die .ini Dateien), gut bekannte Verzeichnisse (/ home /, My Documents), etc.
+Aus diesem Grund ist es gewöhnlich einfacher eine Vorgangsweise einzuführen, bei der außer den von Ihnen explizit erlaubten Dingen alles verboten ist.
+Generell ist Sicherheit durch Unklarheit eine der schwächsten Formen von Sicherheit.
+Aber in manchen Fällen ist ein klein Wenig mehr an extra Sicherheit wünschenswert.
+Ein paar einfache Techniken helfen PHP zu Verstecken, um einen nach Schwächen in Ihrem System suchenden Angreifer möglicherweise langsamer zu machen.
+Wenn Sie in Ihrer php.ini expose_php = off setzen, reduzieren Sie damit die ihm zur Verfügung stehenden Informationen.
+Apache entweder mittels einer .htaccess Direktive oder in der Apache Konfigurationsdatei selbst so konfigurieren, dass dieser verschiedene Dateitypen durch PHP parst.
+So können Sie irreführende Dateierweiterungen verwenden:
+PHP als andere Sprache ausgeben
+Verwenden von unbekannten Typen für PHP Dateierweiterungen
+Verwenden von html Typen für PHP Dateierweiterungen
+Vom Nutzer übermittelte Daten
+PHP ist eine mächtige Sprache, und der Interpreter, der in einen Webserver als Modul oder als separate CGI -Version eingebunden werden kann, kann auf Dateien zugreifen, Befehle ausführen und Netzwerkverbindungen zu einem Server herstellen.
+Diese Eigenschaften können einen Webserver unsicher machen, wenn man es bei den Voreinstellungen belässt.
+Mit der richtigen Wahl der Einstellungen beim Kompilieren und zur Laufzeit bietet PHP genau die Kombination aus Freiheit und Sicherheit, die gerade benötigt wird.
+Da es sehr viele verschiedene Möglichkeiten gibt, PHP zu nutzen, gibt es viele Konfigurationseinstellungen, die das Verhalten von PHP beeinflussen.
+Allerdings bedeutet das auch, dass es Kombinationen gibt, die eine Installation mit nur ungenügender Sicherheit zur Folge haben.
+Die Flexibilität der Konfiguration konkurriert mit der Flexibilität in der Programmierung.
+Mit PHP können komplette Server Applikationen mit allen Möglichkeiten eines Shell Benutzers erstellt werden, oder auch nur einfache Server Side Includes mit einem minimalen Risiko in einer streng kontrollierten Umgebung.
+Wie die Umgebung erstellt wird, und wie sicher diese ist, ist zu einem großen Teil die Sache des PHP Entwicklers.
+Dieses Kapitel beginnt mit einigen generellen Ratschlägen zur Sicherheit, erklärt die verschiedenen Kombinationen der Konfigurationseinstellungen und unter welchen Gegebenheiten sie sicher genutzt werden können, und beschreibt verschiedene Überlegungen zur Programmierung für verschiedene Sicherheitsstufen.
+Ein komplett sicheres System ist praktisch ein Ding der Unmöglichkeit, weshalb ein unter Sicherheitsprofis oft genutzter Ansatz ist, einen Mittelweg zwischen Risiko und Verwendbarkeit zu finden.
+Wenn jede von einem Benutzer übermittelte Variable zwei Formen von biometrischer Prüfung (wie z.B. ein Scan der Netzhaut und ein Fingerabdruck) verlangen würde, wäre eine extrem hohe Ebene der Verantwortlichkeit erreicht.
+Ein sehr komplexes Formular auszufüllen würde auch eine halbe Stunde in Anspruch nehmen, die Benutzer dazu ermuntern könnte, Wege zur Umgehung der Sicherheitsmaßnahmen zu suchen.
+Die beste Sicherheit ist oft unaufdringlich genug um den Anforderungen zu entsprechen, ohne den Benutzer an seiner Arbeit zu hindern oder den Code-Autor mit übertriebener Komplexität zu überlasten.
+Tatsächlich sind einige Sicherheitsangriffe nur die Folge von allzu strengen Sicherheitsmaßnahmen, was mit der Zeit nur zu deren Unterminierung führt.
+Eine Phrase die es wert ist, sich an sie zu erinnern:
+Ein System ist nur so gut wie das schwächste Glied in der Kette.
+Wenn alle Transaktionen mittels Zeit, Ort, Transaktionstyp, etc. streng mitprotokolliert werden, der Benutzer aber nur mittels einem einzigen Cookie verifiziert wird, lässt die Zuverlässigkeit für die Bindung des Benutzers an das Transaktions-Log bedrohlich nach.
+Denken Sie während der Tests daran, dass Sie selbst für die einfachsten Seiten nicht alle Möglichkeiten testen können.
+Der von Ihnen vielleicht erwartete Input wird zu dem eines verstimmten Mitarbeiters oder eines Crackers der Monate Zeit hat, oder einer Katze, die über die Tastatur läuft in keinerlei Zusammenhang stehen.
+Deshalb betrachten Sie Ihren Code am Besten aus der logischen Perspektive um zu erkennen, wo unerwartete Daten eingebracht werden können und fragen sich dann, wie diese modifiziert, reduziert, oder weiter ausgeführt werden.
+Das Internet ist voll von Leuten die versuchen, sich durch Entschlüsseln / zerstören Ihres Codes, den Zusammenbruch Ihres Systems, Einsetzen von unangebrachten Inhalten, und anderen, Ihren Tag interessant gestaltenden Maßnahmen, einen Namen zu machen.
+Es ist egal, ob Sie eine kleine oder große Site haben, Sie sind einfach ein Ziel wenn Sie online sind oder wenn Sie einen Server haben, zu dem man eine Verbindung aufbauen kann.
+Viele Cracker-Programme erkennen nicht die Größe, sondern durchsieben einfach gewaltige IP Blöcke im Netz, um Opfer zu finden.
+Versuchen Sie, keines zu werden.
+Ein Feature von PHP zur Erhöhung der Sicherheit ist die Konfiguration von PHP mit register_globals = off.
+Mit Deaktivierung der Möglichkeit, irgendeine vom Benutzer übertragenen Variable in den PHP Code zu injizieren, können Sie die Anzahl "vergifteter" Variablen reduzieren, welche ein potentieller Angreifer zufügen könnte.
+Dieser benötigt mehr Zeit, um sich Übermittlungen auszudenken, und Ihre internen Variablen sind effektiv von den übergebenen Benutzervariablen isoliert.
+Während dies den benötigten Aufwand mit PHP zu arbeiten leicht erhöht ist dargelegt, dass die Vorteile gegenüber dem Aufwand klar überwiegen.
+Entdecken einfacher Manipulationen von Variablen
+In vielen PHP Programmen liegt die größte Schwäche nicht an der Sprache selbst, sondern bloß an Code, der nicht mit dem nötigen Augenmerk auf die Sicherheit geschrieben wurde.
+Deshalb sollten Sie sich immer Zeit nehmen, die Implikationen eines gegebenen Codestücks zu bedenken, um einen möglichen Schaden durch eine eventuell unerwartete übergebene Variable festzustellen.
+?php / / lösche eine Datei aus dem Benutzer-Verzeichnis... / / oder vielleicht dem eines anderen Benutzers? unlink ($evil_var); / / Schreibe die Log-Information von deren Zugriff... / / oder vielleicht einen / etc / passwd Eintrag? fputs ($fp, $evil_var); / / Führe etwas triviales aus... oder rm -rf *? system ($evil_var); exec ($evil_var);?
+Wird sich dieses Skript nur auf die vorgesehenen Dateien auswirken?
+Kann dieses Skript auf nicht vorgesehene Art genutzt werden?
+Kann dies in Verbindung mit anderen Skripten in einer negativen Art benutzt werden?
+Werden alle Transaktionen ausreichend geloggt?
+Sie könnten auch Überlegungen anstellen, ob Sie nicht register_globals, magic_quotes, oder andere bequeme Einstellungen abschalten, welche Sie in Punkto Gültigkeit, Herkunft, oder Inhalt einer gegebenen Variable durcheinanderbringen könnten.
+Mit PHP im error_reporting( E_ALL) Modus zu arbeiten kann auch helfen, Sie vor Variablen zu warnen, welche benutzt werden, bevor sie geprüft oder initialisiert wurden (so können Sie verhindern, dass mit ungewöhnlichen Daten gearbeitet wird).
+Stellen Sie sich die Datei wie eine normale HTML-Datei vor, die eine spezielle Menge von Tags zur Verfügung stellt, mit denen Sie viele interessante Dinge machen können.
+Sie können lokal auf jedem Betriebssystem entwickeln, aber sie müssen natürlich auch einen passenden Web-Server installieren.
+Anschließend folgte die PHP-Anweisung.
+Mit dem schließenden Tag,?, wurde der PHP-Modus wieder verlassen.
+Sie können an jeder Stelle und so oft Sie wollen, in den PHP-Modus wechseln und ihn wieder verlassen.
+Es gibt eine ganze Reihe von Text-Editoren und Integrated Development Environments (IDEs), mit denen Sie Ihre PHP-Dateien erstellen, bearbeiten und managen können.
+Anmerkung zu Textverarbeitungen:
+Textverarbeitungen wie StarOffice Writer, Microsoft Word und Abiword sind keine gute Wahl, um PHP-Dateien zu bearbeiten.
+Nützliches
+Eine der mächtigsten Funktionen von PHP ist die Art, wie HTML-Formulare verarbeitet werden.
+Sie sollten wissen, dass jedes Element eines Formulars automatisch in Ihren PHP-Skripts verfügbar ist.
+Bitte lesen Sie die Seite Variablen außerhalb von PHP für weitere Informationen und Beispiele über das Benutzen von Formularen mit PHP.
+Hier ist ein Beispiel-HTML-Formular:
+An diesem Formular ist nichts Besonderes.
+Es ist ein normales HTML-Formular ohne irgendwelche speziellen Tags.
+Diese Datei könnte so aussehen:
+Daten des Formulars ausgeben
+Die Ausgabe dieses Skripts könnte so aussehen:
+Sie sind 22 Jahre alt.
+Es sollte einfach zu verstehen sein, was hier passiert.
+Die Variablen $_POST[ "name"] und $_POST["alter"] werden für Sie automatisch von PHP gesetzt.
+Weiter oben haben wir das autoglobale Array $_SERVER eingeführt, jetzt benutzen wir hier das - ebenfalls autoglobale - Array $_POST, dass alle POST-Daten enthält.
+Beachten Sie, dass die im Formular verwendete Methode POST ist.
+Hätten wir GET verwendet, dann wären die Daten unseres Formulars stattdessen im autoglobalen Array $_GET verfügbar.
+Sie können auch das autoglobale Array $_REQUEST benutzen, wenn die Quelle der Daten keine Rolle spielt.
+Dieses Array enthält die GET-, POST-, COOKIE - und FILE-Daten.
+Alten Code mit neuen PHP-Versionen benutzen
+Dieser Text behandelt nur das Erstellen von dynamischen Web-Seiten, obwohl PHP natürlich nicht nur dafür geeignet ist.
+Sie können sie genauso wie normale HTML-Seiten erstellen und bearbeiten.
+In diesem Tutorial gehen wir davon aus, dass auf Ihrem Server die PHP-Unterstützung aktiviert ist und dass die Dateiendung .php PHP zugeordnet ist.
+Wenn Ihr Server PHP unterstützt, müssen Sie nichts machen.
+Ihre erste PHP-erweiterte Seite
+Zwei der wichtigsten aktuellen Änderungen, die alten Code betreffen, sind:
+Die Missbilligung der alten $HTTP_*_VARS -Arrays (die global gemacht werden mussten, wenn man sie innerhalb einer Funktion nutzen wollte).
+Die älteren $HTTP_*_VARS -Arrays, wie $HTTP_POST_VARS, existierten bereits seit PHP 3 und sind auch immer noch verfügbar.
+Externe Variablen werden standardmäßig nicht mehr im globalen Namensraum registriert.
+Mit anderen Worten, seit PHP 4.2.0 ist off die Standard-Einstellung für die PHP-Direktive register_globals.
+Die empfohlene Methode, auf diese Werte zuzugreifen, ist, die oben genannten autoglobalen Arrays zu verwenden.
+Unabhängig davon, ob on oder off, ist immer $_GET[ 'id'] verfügbar.
+Formulare verarbeiten
+Wir wollen prüfen, welchen Browser die Person, die die Seite besucht, benutzt.
+Um das zu tun, prüfen wir den "user agent "-String, den der Browser als Teil seiner HTTP-Anforderung sendet.

@@ -1,0 +1,100 @@
+Der PHP-Code steht zwischen speziellen Anfangs - und Schlusstags, mit denen man in den PHP-Modus und zurück wechseln kann.
+Was PHP von clientseitigen Sprachen wie Javaskript unterscheidet, ist dass der Code auf dem Server ausgeführt wird.
+Sollten Sie ein Skript wie das obige auf ihrem Server ausführen, würde der Besucher nur das Ergebnis empfangen, ohne die Möglichkeit herauszufinden, wie der zugrundeliegende Code aussieht.
+Sie können ihren Webserver auch anweisen, alle ihre HTML-Dateien mit PHP zu parsen, denn dann gibt es wirklich nichts, das dem Benutzer sagt, was sie in petto haben.
+Das Beste an der Verwendung von PHP ist, dass es für Neulinge extrem simpel ist, aber auch einen riesigen Funktionsumfang für den professionellen Programmierer bietet.
+Scheuen Sie sich nicht, die lange Liste der PHP-Funktionen zu lesen.
+Sie können einsteigen, und binnen weniger Stunden bereits mit dem Schreiben von einfachen Skripten beginnen.
+Auch wenn die Entwicklung von PHP auf serverseitige Skripte fokussiert ist, können Sie mit PHP weitaus mehr anstellen.
+Lesen Sie mehr im Abschnitt Was kann PHP?
+Formulardaten sammeln, dynamische Inhalte für Websites generieren oder Cookies senden und empfangen.
+Aber PHP kann noch viel mehr.
+Es gibt drei Hauptgebiete, in denen PHP Skripte genutzt werden.
+Dies ist traditionelle und auch Hauptfeld von PHP.
+Sie benötigen dazu drei Dinge.
+Den PHP Parser (CGI oder Server-Modul), einen Webserver und einen Webbrowser.
+Sie müssen den Webserver, verbunden mit einer PHP Installation laufen lassen.
+Sie können Sich Ausgabe der PHP Programme über den Server mit einem Webbrowser ansehen.
+Für weitere Informationen lesen Sie bitte im Abschnitt Installation weiter.
+Skripte auf der Kommandozeile.
+Sie können auch PHP Skripte schreiben, um sie ohne einen Server oder einen Browser laufen zu lassen.
+Hierfür benötigen Sie nur den PHP Parser.
+Diese Art der Verwendung ist für die regelmäßig auszuführende Skripte mittels cron (unter *nix oder Linux) oder dem Task Scheduler (unter Windows).
+Diese Skripte können auch für einfache Aufgaben zur Verarbeitung von Text verwendet werden.
+Weitere Informationen dazu finden Sie im Abschnitt Using PHP from the command line.
+Schreiben clientseitiger GUI Applikationen.
+PHP ist wahrscheinlich nicht die allerbeste Sprache um GUI-Applikationen zu schreiben, aber wenn Sie PHP sehr gut kennen und einige weiterführende Funktionen in Ihren clientseitigen Applikationen nutzen möchten, können Sie PHP-GTK nutzen, um derartige Programme zu schreiben.
+Auf diese Art haben Sie auch die Möglichkeit, Plattformübergreifende Applikationen zu schreiben.
+PHP-GTK ist eine Erweiterung von PHP, welche in der Hauptdistribution nicht enthalten ist.
+Sollten Sie daran interessiert sein, besuchen Sie die PHP-GTK Website.
+HP-UX, Solaris und OpenBSD), Microsoft Windows, Mac OS X, RISC OS, und wahrscheinlich anderen.
+Für den Großteil der Server bietet PHP ein eigenes Modul, für die anderen, welche den CGI Standard unterstützen, kann PHP als CGI Prozessor arbeiten.
+So haben Sie Freiheit, PHP auf dem Betriebssystem und dem Webserver Ihrer Wahl laufen zu lassen.
+Weiters können Sie je nach Vorliebe prozedural, objektorientiert, oder gemischt programmieren.
+Auch wenn in der derzeitigen Version von PHP nicht jedes Standard OOP Feature realisiert ist, sind viele Bibliotheken und große Applikationen (inklusive der PEAR Bibliothek) exklusiv unter Verwendung von OOP Code geschrieben worden.
+Mit PHP sind Sie nicht auf die Ausgabe von HTML beschränkt.
+Seine Fähigkeiten umfassen auch das dynamische Generieren von Bildern, PDF Dateien und Flash Animationen (mittels libswf und Ming).
+Sie können auch leicht jede Art von Text, wie XHTML oder irgendeine andere XML Datei ausgeben.
+PHP kann diese Dateien automatisch generieren und im Dateisystem speichern, anstatt diese nur auszugeben bzw. auszudrucken, und formt auch serverseitigen Zwischenspeicher Ihrer dynamischen Inhalte.
+Vielleicht die größte und bemerkenswerteste Stärke von PHP ist seine Unterstützung für eine breite Masse von Datenbanken.
+Eine datenbankgestützte Website zu erstellen ist unglaublich einfach.
+Die folgenden Datenbanken werden zur Zeit unterstützt:
+FilePro (nur Lesezugriff)
+PHP unterstützt auch die Kommunikation mit anderen Services, welche Protokolle wie LDAP, IMAP, SNMP, NNTP, POP3, HTTP, COM (auf Windows) und unzählige andere unterstützen.
+Sie können auch einfache Netzwerk Sockets öffnen, und unter Verwendung irgendeines Protokolls kommunizieren.
+PHP bietet auch Unterstützung zur Instantiierung von Java Objekten, und deren transparente Verwendung als PHP Objekte.
+Sie können auch unsere CORBA Erweiterung verwenden, um auf entfernte Objekte zuzugreifen.
+Für den Zugriff und das Parsen von XML Dokumenten unterstützen wir die Standards SAX und DOM.
+Wenn Sie PHP im Bereich des E-Commerce nutzen, werden Sie Funktionen für Cybercash Payment, CyberMUT, VeriSign Payflow Pro und CCVS für Ihre Onlineprogramme zur Zahlungsabwicklung zu schätzen lernen.
+Wir haben viele andere interessante Erweiterungen, wie mnoGoSearch für Suchmaschinen, die IRC Gateway Funktionen, viele Komprimierungswerkzeuge (gzip, bz2), Kalenderumrechnung, Übersetzung...
+Wie Sie sehen können, reicht diese Seite nicht aus, um alle Möglichkeiten und Vorteile von PHP aufzulisten.
+Lesen Sie im Abschnitt Installation weiter, und konsultieren Sie auch die Funktionsreferenz für weitere Erläuterungen der einzelnen hier erwähnten Erweiterungen.
+Oft braucht man Klassen mit in einer anderen Klasse ähnlichen Variablen und Funktionen.
+So ist es eine gute Vorgehensweise, eine in allen Ihren Projekten verwendbare Oberklasse zu definieren, und diese dann den Bedürfnissen Ihrer einzelnen Projekte anzupassen.
+Um dies zu erleichtern, können Klassen andere Klassen erweitern.
+Die erweiterte bzw. abgeleitete Klasse verfügt über alle Variablen und Funktionen der Basisklasse (dies wird 'Vererbung 'genannt, obwohl niemand gestorben ist), und was Sie in der erweiterten Definition hinzufügen.
+Sie können keine existierenden Variablen oder Funktionen 'wegdefinieren'.
+Klassen werden mittels dem Schlüsselwort 'extends' erweitert.
+Hier wird die Klasse Named_Cart definiert, die über alle Variablen und Funktionen von Cart, plus der Variable $owner und der Funktion set_owner() verfügt.
+Sie können noch immer die normalen Cart Funktionen an Named_Cart anwenden:
+Dies wird auch eine "Eltern-Kind" Beziehung genannt.
+Sie können auch diese neue Unterklasse verwenden und eine neue, auf dieser Klasse basierenden Klasse erstellen.
+Bevor Sie Klassen verwenden können, müssen Sie diese definieren.
+Wenn Sie wollen, dass Named_Cart die Klasse Cart erweitert, müssen Sie Cart erst definieren.
+Kurz gesagt ist die Reihenfolge, in der die Klassen definiert werden, sehr wichtig.
+Die folgende Beschreibung ist nur für PHP 4 gültig.
+Manchmal ist es hilfreich, auf Funktionen in Basisklassen bzw. auf Funktionen in Klassen zuzugreifen, die noch keine Instanzen haben.
+Stattdessen rufen wir example() als 'Klassenfunktion 'auf, d.h. als Funktion der Klasse selbst, und nicht irgendein Objekt dieser Klasse.
+Es gibt Klassenfunktionen, aber keine Klassenvariablen.
+Tatsächlich gibt es zur Zeit des Aufrufs kein Objekt.
+Deshalb darf eine Klassenfunktion keine Objektvariablen benutzen (aber sie kann lokale und globale Variablen verwenden), und sie darf $this ebenfalls nicht benutzen.
+In dem obigen Beispiel definiert Klasse B die Funktion example() neu.
+Die ursprüngliche Definition in Klasse A ist überschattet und nicht länger verfügbar, außer Sie verweisen mittels des ::-Operators speziell auf example() in Klasse A.
+Schreiben Sie A::example(), um dies zu tun (Tatsächlich sollten Sie parent::example() schreiben, wie im nächsten Abschnitt beschrieben).
+In diesem Kontext besteht ein Objekt, das Objektvariablen haben kann.
+Deshalb können Sie auch $this und Objektvariablen verwenden, wenn sie von innerhalb einer Objektfunktion verwendet werden.
+Wahrscheinlich wollen Sie auch Code schreiben, der sich auch auf Variablen und Funktionen in Basisklassen bezieht.
+Dies gilt speziell dann, wenn Ihre abgeleitete Klasse eine Verfeinerung oder Spezialisierung von Code in Ihrer Basisklasse ist.
+Anstatt in Ihrem Code den wörtlichen Namen der Basisklasse zu verwenden, sollten Sie den speziellen Namen parent verwenden, welcher sich auf den in der Deklaration Ihrer Klasse mittels extends gegebenen Namen Ihrer Basisklasse bezieht.
+So vermeiden Sie die mehrfache Verwendung des Namens der Basisklasse.
+Sollte sich Ihr Vererbungsbaum während der Implementation ändern, brauchen Sie nur mehr die extends Deklaration Ihrer Klasse zu ändern.
+Grundlagen der Syntax
+PHP unterstützt 'C', 'C++' und Unix-Shell-artige Kommentare.
+?php echo "Dies ist ein Test"; / / Dies ist ein einzeiliger Kommentar im C++-Stil. / * Dies ist ein mehrzeiliger Kommentar und noch eine Kommentar-Zeile * / echo "Dies ist noch ein Test"; echo "... und ein letzter Test"; # Dies ist ein Shell-artiger Kommentar.?
+Die einzeiligen Kommentar-Arten kommentieren sämtlichen Text bis zum Zeilenende oder bis zum Ende des aktuellen PHP-Blocks aus, je nachdem, was zuerst eintritt.
+Man sollte darauf achten, nicht mehrere ´C´-artigen Kommentare ineinander zu setzen, was vorkommen kann, wenn man große Blöcke auskommentiert.
+?php / * echo "Dies ist ein Test"; / * Dieser Kommentar wird ein Problem verursachen. * / * /?
+Die einzeiligen Kommentar-Arten kommentieren den Text tatsächlich nur bis zum Zeilenende oder bis zum Ende des aktuellen PHP-Blocks aus, je nachdem, was zuerst eintritt.
+Das heißt, dass HTML Code nach / /? ausgegeben wird:? steigt aus dem PHP-Modus aus und kehrt in den HTML Modus zurück, ohne dass / / dies beeinflussen könnte.
+Abgrenzung von Anweisungen
+Während des Parsens einer Datei geht PHP den Text solange einfach durch, bis einer der speziellen Tags gefunden wird, der PHP mitteilt, dass ab nun mit der Interpretation des Textes als PHP Code zu beginnen ist.
+Der Parser führt nun den Code solange aus, bis er auf einen schließenden PHP Tag stößt, welcher dem Parser mitteilt, den Text ab hier wieder nur einfach durchzugehen.
+Das ist der Mechanismus der es erlaubt, PHP Code in HTML einzubinden: alles außerhalb der PHP Tags wird einfach alleine gelassen, während alles innerhalb dieser Tags als Code geparsed wird.
+Es gibt vier Arten von Tags, welche die Böcke mit PHP Code kennzeichnen.
+Davon sind nur zwei immer verfügbar (?php...? and script language="php "... / script), die anderen können in der Konfigurationsdatei php.ini Davon sind nur zwei immer verfügbar (?php...? and script language="php"... / script), die anderen können in der Konfigurationsdatei php.ini aktiviert bzw. deaktiviert werden.
+Die Tags in der Kurzform bzw. im ASP-Stil mögen zwar praktisch erscheinen, sind jedoch nicht so portabel wie die längeren Versionen.
+Wenn Sie weiters beabsichtigen, PHP Code in XML oder XHTML einzubinden, werden Sie die XML-konformen ?php...? verwenden müssen.
+Die von PHP unterstützten Tags sind:
+Möglichkeiten, den HTML-Bereich zu verlassen
+1. ?php echo( "In XHTML - oder XML-konformen Dokumenten benutzen Sie diese Syntax\n");?
+Dies ist eine Abkürzung für "? echo expression?" 3. script language="php "echo ("manche Editoren(wie FrontPage) mögen keine ´processing instructions´"); / script 4.% echo ("Optional können Sie auch Tags im ASP-Stil verwenden");% %= $variable; # Das ist ein Abkürzung fuer"% echo... "%

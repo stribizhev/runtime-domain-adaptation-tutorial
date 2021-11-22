@@ -1,0 +1,100 @@
+Am Anfang dieses Kapitels hatten wir gesagt, wir würden die verschiedenen Arten von Anweisungen beschreiben und, wie versprochen, Ausdrücke können Anweisungen sein.
+Trotzdem ist nicht jeder Ausdruck eine Anweisung.
+In diesem Fall hat eine Anweisung die Form ´Ausdr´ ´; ´, d. h. ein Ausdruck gefolgt von einem Semikolon.
+In ´$b=$a=5; ´ ist $a=5 ein gültiger Ausdruck, aber für sich allein keine Anweisung. ´$b=$a=5 ;´ ist jedoch eine gültige Anweisung.
+Ein letzter Punkt, der noch zu erwähnen ist, ist der ´wahr´-Wert von Ausdrücken.
+PHP stellt eine vollständige und mächtige Implementat von Ausdrücken bereit und, deren vollständige Dokumentation den Rahmen dieses Manuals sprengen würde.
+Die obigen Beispiele sollten Ihnen einen guten Eindruck darüber verschaffen, was Ausdrücke sind und wie man nützliche Ausdrücke konstruieren kann.
+In PHP 3 und PHP 4 verhalten sich die Konstruktoren unterschiedlich.
+Die PHP 4 Semantik wird dringend empfohlen.
+Konstruktoren sind Funktionen innerhalb einer Klasse, die automatisch aufgerufen wird, sobald Sie mittels new eine neue Instanz erstellen.
+In PHP 3 wird eine Funktion zum Konstruktor, wenn sie den gleichen Namen wie die Klasse hat.
+Die Klasse Auto_Cart entspricht der Klasse Cart und hat einen Konstruktor, der Cart bereits mit einem Artikel der Nummer "10" initialisiert, sobald ein neuer Auto_Cart mittels "new "erstellt wird.
+Konstruktoren können Argumente übernehmen, die optional sein können, was sie sehr praktisch macht.
+Um eine Klasse auch ohne Parameter verwenden zu können, sollten alle Parameter für Konstruktoren optional sein, indem sie mit Standardwerten ausgestattet werden.
+Sie können auch den Operator @ verwenden, um Fehlermeldungen innerhalb des Konstruktors zu unterdrücken, z.B. @new.
+In PHP 3 haben abgeleitete Klassen und Konstruktoren ein paar Einschränkungen.
+Sie sollten das folgende Beispiel sorgfältig lesen, um diese Einschränkungen zu verstehen.
+In PHP 3 wird bei dem obigen Beispiel kein Konstruktor aufgerufen.
+Die Regel in PHP 3 lautet: 'Ein Konstruktor ist eine Funktion mit dem gleichen Namen wie die Klasse'.
+Dies ist in PHP 4 mit der Einführung einer anderen Regel behoben:
+Wenn eine Klasse keinen Konstruktor hat, wird der Konstruktor der Basisklasse aufgerufen, so dieser existiert.
+In PHP 3 wird die Funktion B() in der Klasse A plötzlich zum Konstruktor in Klasse B, auch wenn dies nie beabsichtigt war.
+PHP 3 kümmert sich nicht darum, ob die Funktion in Klasse B definiert, oder ob sie nur vererbt wurde.
+Dies ist in PHP 4 mit einer modifizierten Regel behoben: 'Ein Konstruktor ist eine Funktion mit dem selben Namen wie die Klasse, in der sie definiert wurde'.
+Weder PHP 3, noch PHP 4 rufen vom Konstruktor der abgeleiteten Klasse aus automatisch Konstruktoren der Basisklasse auf.
+Wenn angebracht, ist der Aufruf von Konstruktoren aufwärts Ihre Aufgabe.
+In PHP 3 und PHP 4 gibt es keine Destruktoren.
+Stattdessen können Sie register_shutdown_function() verwenden, um die meisten Effekte von Destruktoren zu simulieren.
+Destruktoren sind Funktionen die automatisch aufgerufen werden, wenn ein Objekt entweder mittels unset(), oder durch Verlassen des Gültigkeitsbereiches zerstört wird.
+Es gibt in PHP keine Destruktoren.
+Eine Klasse ist eine Sammlung von Variablen und Funktionen, die mit diesen Variablen arbeiten.
+Eine Klasse wird folgendermaßen definiert:
+Sie besteht aus einem assoziativen Array von Produkten im Einkaufswagen und zwei Funktionen zum Hinzufügen und Entfernen von Artikeln.
+Die folgenden warnenden Bemerkungen gelten für PHP 4.
+Der Name stdClass ist reserviert, da er intern von Zend benutzt wird.
+Sie können in PHP keine Klasse mit dem Namen stdClass haben.
+Die Funktionsnamen __sleep und __wakeup Die Funktionsnamen __sleep und __wakeup sind in PHP Klassen "magisch".
+Sie können in Ihren Klassen keine Funktionen mit diesen Namen haben, außer Sie wollen sie mit dieser "magischen" Funktionalität assoziieren.
+Mehr Informationen dazu finden Sie weiter unten.
+Sämtliche mit __ beginnende Funktionsnamen sind PHP als "magisch" vorbehalten.
+Es wird empfohlen, in PHP keine Funktionsnamen mit __ zu verwenden, außer Sie möchten dokumentierte "magische" Funktionalität.
+Um Variablen mit nicht konstanten Werten zu initialisieren, benötigen Sie eine Funktion zur Initialisierung, welche beim Erstellen eines Objektes automatisch von der Klasse aufgerufen wird.
+Eine solche Funktion wird Konstruktor genannt (siehe unten).
+Klassen sind Typen, das heißt sie sind die Blaupausen für reale Variablen.
+Um sie zu nutzen, muss zunächst eine Variable mit dem Operator new angelegt werden.
+Dies erstellt die Objekte $cart und $another_cart aus der Klasse Cart.
+3 Artikel mit der Artikelnummer 0815 werden $another_cart hinzugefügt.
+Sowohl $cart als auch $another_cart haben die Funktionen add_item(), remove_item() und die Variable items.
+Dies sind verschiedene Funktionen und Variablen.
+Sie können sich Objekte ähnlich den Verzeichnissen in einem Dateisystem vorstellen.
+Sie können in einem Dateisystem zwei verschiedene Dateien README.TXT haben, solange sie sich in verschiedenen Verzeichnissen befinden.
+So wie Sie in Verzeichnissen den vollen Pfadnamen eingeben müssen, um jede Datei von dem obersten Verzeichnis aus zu erreichen, müssen Sie auch den vollen Namen der aufzurufenden Funktion angeben:
+Das heißt für PHP, dass das Hauptverzeichnis der globale Namensbereich, und der Separator des Pfadnamens - wäre.
+Deshalb benennen die Namen $cart - items und $another_cart - items auch zwei verschiedene Variablen.
+Beachten Sie, dass die Variable $cart - items, und nicht $cart - $items genannt wird, da ein Variablenname in PHP nur ein einziges Dollarzeichen hat.
+Als die Klasse Cart geschrieben wurde war nicht bekannt, dass das Objekt später $cart oder $another_cart genannt wird.
+Deshalb können Sie innerhalb der Klasse Cart selbst auch nicht $cart - items schreiben.
+Um nun die eigenen Funktionen und Variablen innerhalb einer Klasse anzusprechen, können Sie die Pseudo-Variable $this verwenden, welche Sie auch als 'meine eigene' oder 'aktuelles Objekt 'verstehen können.
+Deshalb kann '$this - items[$artnr] += $num' auch als 'addiere $num zu $artnr in meinem eigenen Array items', oder 'addiere $num zu $artnr im Array items innerhalb des aktuellen Objektes 'lesen.
+Es gibt ein paar angenehme Funktionen, um mit Klassen und Objekten umzugehen.
+Mehr darüber erfahren Sie im Kapitel Klassen - und Objekt-Funktionen.
+serialize() prüft, ob Ihre Klasse eine Funktion mit dem magischen Namen __sleep enthält.
+Wenn dem so ist, wird diese Funktion vor einer Serialisierung ausgeführt.
+Sie kann das Objekt aufräumen und soll ein Array mit den Namen aller Variablen des zu serialisierenden Objektes zurückgeben.
+Die beabsichtigte Verwendung von __sleep ist, eventuelle Datenbankverbindungen des Objektes zu schließen, noch offene Daten zu committen, oder ähnliche Säuberungsaktionen durchzuführen.
+Weiters ist diese Funktion hilfreich, wenn Sie sehr große Objekte haben, die nicht komplett gespeichert werden müssen.
+Umgekehrt prüft unserialize() die Existenz einer Funktion mit dem magischen Namen __wakeup.
+Die vorgesehene Verwendung von __wakeup ist die Wiederherstellung von Datenbankverbindungen, welche während der Serialisierung verloren gegangen sein könnten, sowie andere Neuinitialisierungen.
+Referenzen innherhalb des Konstruktors
+Referenzen innerhalb des Konstruktors können zu verwirrenden Resultaten führen.
+Dieser Abschnitt hilft, Probleme zu vermeiden.
+Prüfen wir, ob zwischen $bar1, die mittels dem Operator zum Kopieren = erstellt wurde, und $bar2, die mittels dem Referenzoperator = erstellt wurde, besteht...
+Scheinbar besteht kein Unterschied, aber tatsächlich existiert ein signifikanter: $bar1 und $globalref[ 0] sind NICHT referenziert, d.h. sie sind NICHT die selbe Variable.
+Das kommt daher, dass "new" nicht automatisch eine Referenz, sondern eine Kopie zurückgibt.
+Das zurückgeben von Kopien anstatt von Referenzen stellt keinen Performanceverlust dar (da PHP 4 und höher Reference Counting verwendet).
+Was erwarten Sie? / / ...dass sowohl $bar1, als auch $globalref[ 0] ihre Namen ändern... $bar1 - setName('set from outside'); / / wie bereits zuvor erwähnt, ist dies nicht der Fall $bar1 - echoName(); $globalref[0] - echoName(); / * Ausgabe: set from outside set in constructor * / / / lassen Sie uns den Unterschied zwischen $bar2 and $globalref[1] ansehen $bar2 - setName('set from outside'); / / glücklicherweise sind sie nicht nur nicht gleich, sondern auch die selbe / / Variable; demnach sind $bar2 - name und $globalref[1] - name ebenfalls gleich $bar2 - echoName(); $globalref[1] - echoName(); / * Ausgabe: set from outside set from outside * /
+Ein anderes, letztes Beispiel zum Verständnis:
+Die "magischen" Funktionen __sleep und __wakeup
+Referenzen in PHP
+In PHP 3 verlieren Objekte während des Prozesses der Serialisierung und Deserialisierung ihre Assoziation zur Klasse.
+Die resultierende Variable ist vom Typ Objekt, hat aber keine Klasse und keine Methoden, weshalb sie ziemlich unbrauchbar ist (Sie wurde wie ein Array, jedoch mit einer ziemlich komischen Syntax).
+Die folgende Information ist nur für PHP 4 gültig.
+serialize() gibt eine Zeichenkette zurück, die eine Byte-Strom-Repräsentation irgendeines in PHP speicherbaren Wertes enthält. unserialize() kann diese Zeichenkette verwenden, um die ursprünglichen Variablenwerte wieder herzustellen.
+Die Verwendung von serialize zum Speichern eines Objektes wird alle Variablen innerhalb eines Objektes speichern.
+Die Funktionen in einem Objekt werden nicht gespeichert, sondern nur der Name der Klasse.
+Das heißt, wenn Sie ein Objekt $a der Klasse A in page1.php haben und dieses serialisieren, erhalten Sie eine Zeichenkette, die sich auf die Klasse A bezieht, und alle Werte der in $a enthaltenen Variablen enthält.
+Wenn Sie $a der Klasse A in page2.php mittels unserialize wiederherstellen möchten, muss die Definition von Klasse A in page2.php vorhanden sein.
+Dies kann zum Beispiel durch das Speichern der Klassendefiniton von Klasse A in einer Include-Datei, und das Einbinden dieser Datei sowohl in page1.php und page2.php realisiert werden.
+Wenn Sie mit Sessions arbeiten und session_register() verwenden, um Objekte zu registrieren, so werden diese Objekte am Ende der PHP Seite serialisiert, und in jeder folgenden Seite automatisch via unserialize wiederhergestellt.
+Das heißt, dass diese Objekte auf jeder Ihrer Seite auftauchen können, sobald sie Teil Ihrer Session sind.
+Es wird ausdrücklich empfohlen, dass Sie die Klassendefinitionen der so registrierten Objekte in allen Ihren Seiten einbinden, auch wenn Sie diese Klassen eigentlich nicht auf allen Ihren Seiten benötigen.
+Würde also $a in dem obigen Beispiel mittels session_register( "a") ein Teil einer Session, sollten Sie die Datei classa.inc nicht nur in page1.php und page2.php, sondern in all Ihre Seiten einbinden.
+Erinnern Sie sich noch an die Grundrechenarten aus der Schule?
+Arithmetische Operatoren
+Summe von $a und $b.
+Differenz von $a und $b.
+Produkt von $a und $b.
+Rest von $a geteilt durch $b.
+Der Divisions-Operator ("/") gibt immer eine Fließkommazahl zurück, sogar wenn die zwei Operanden Ganzzahlen sind (oder Zeichenketten, die nach Ganzzahlen umgewandelt wurden).
+Zuweisungsoperatoren

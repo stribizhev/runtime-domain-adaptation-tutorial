@@ -1,0 +1,100 @@
+Die Basisklasse beschreibt ein beliebiges Gemüse, ob es eßbar ist oder nicht, sowie seine Farbe.
+Die Subklasse Spinat fügt eine Methode hinzu, um sie zu kochen und eine weitere, um herauszufinden, ob sie gekocht ist.
+?php / / Basisklasse mit Eigenschaften und Methoden class Gemuese {var $essbar; var $farbe; function Gemuese ($essbar, $farbe="grün ") {$this - essbar = $essbar; $this - farbe = $farbe;} function ist_essbar() {return $this - essbar;} function welche_farbe() {return $this - farbe;}} / / Ende der Klasse Gemuese / / erweitert die Basisklasse class Spinat extends Gemuese {var $gekocht = false; function Spinat() {$this - Gemuese (true, "grün");} function koche_es() {$this - gekocht = true;} function ist_gekocht() {return $this - gekocht;}} / / Ende der Klasse Spinat?
+Wir definieren auch einige Hilfsfunktionen, hauptsächlich um eine hübsche Ausgabe der Variablen zu erhalten.
+Methoden\n"; zeige_methoden($leafy); echo "\nAbstammung:\n"; klassen_abstammung("leafy", "Spinat"); klassen_abstammung("leafy", "Gemuese");? / pre
+Objekt leafy gehört nicht zu einer Subklasse von Spinat Objekt leafy gehört zur Klasse spinat einer Subklasse von Gemuese
+Die Komponenten stellen Schnittstellen bereit, welche die verfügbaren Funktionen, aber nicht deren Implementierung bekanntgeben (z.B. auf welcher Maschine die Komponente gespeichert ist und die Executable, die sie enthält).
+Man sich das wie einen super Remote Procedure Call (RPC) Mechanismus mit einigen grundlegenden Objekten vorstellen.
+Es trennt die Implementation von der Schnittstelle.
+Die COM Funktionen sind nur in der Windowsversion von PHP verfügbar.
+Für diese Funktionen ist keine Installation erforderlich, diese gehören zum Grundbestand von PHP.
+Folgende Konstanten werden von dieser Erweiterung definiert und stehen nur zur Verfügung, wenn die Erweiterung entweder statisch in PHP kompiliert oder dynamisch zur Laufzeit geladen wurde.
+Mit der ClibPDF können Sie PDF-Dokumente mit PHP erstellen.
+Funktionalität und API der ClibPDF sind der PDFlib ähnlich.
+Diese Dokumentation sollten Sie zusammen mit dem ClibPDF-Handbuch lesen, weil letzteres diese Bibliothek viel ausführlicher erklärt.
+Die Namen vieler Funktionen in der ClibPDF, im PHP-Modul und in der PDFlib Die Namen vieler Funktionen in der ClibPDF, im PHP-Modul und in der PDFlib sind gleich.
+Außer cpdf_open() nehmen alle Funktionen die Bezeichnung des Dokuments als ihren ersten Parameter.
+Diese Bezeichnung wird gegenwärtig nicht intern verwendet, weil ClibPDF die gleichzeitige Erzeugung mehrerer PDF-Dokumente nicht unterstützt.
+Da das Ergebnis nicht vorhersehbar ist, sollten Sie es am besten nicht einmal testen.
+Die Folgen, die das in einer multi-threaded Umgebung hätte, kann ich nicht abschätzen.
+Laut ClibPDF-Autor wird sich das in einer der nächsten Versionen ändern (als dieses geschrieben wurde, war Version 1.10 aktuell).
+Verwenden Sie das pdflib-Modul, wenn Sie diese Funktionalität benötigen.
+Eine nette Eigenschaft der ClibPDF (und der PDFlib) ist die Möglichkeit, das PDF-Dokument vollständig im Speicher zu erzeugen, ohne temporäre Dateien zu verwenden.
+Eine weitere nette Eigenschaft von ClibPDF ist die Tatsache, dass jede Seite jederzeit geändert werden kann, selbst wenn schon eine neue Seite geöffnet wurde.
+Die Funktion cpdf_set_current_page() erlaubt es, die aktuelle Seite zu verlassen und mit den Änderungen einer anderen Seite fortzufahren.
+Die meisten Funktionen sind ziemlich einfach zu benutzen.
+Der schwierigste Teil ist wahrscheinlich die Erzeugung eines sehr einfachen PDF-Dokuments überhaupt.
+Das folgende Beispiel sollte für Sie eine gute Starthilfe sein.
+Es erzeugt ein Dokument mit einer Seite.
+Die Seite enthält den Umriss des Textes "Times-Roman" in 30-Punkt-Schrift.
+Der Text ist unterstrichen.
+Um die ClibPDF-Funktionen benutzen zu können, müssen Sie das ClibPDF-Paket installieren.
+Es ist zum Herunterladen erhältlich von FastIO, aber für deren kommerzielle Verwendung ist es erforderlich, dass Sie eine Lizenz erwerben.
+Für PHP wird cpdflib = 2 benötigt.
+Damit diese Funktionen zur Verfügung stehen, müssen Sie PHP mit --with-cpdflib[ =DIR] übersetzen.
+DIR ist das cpdflib-Installationsverzeichnis, standardmäßig / usr.
+Zusätzlich können Sie die jpeg - und tiff-Bibliotheken für die Verwendung durch ClibPDF angeben.
+Das erreichen Sie, indem Sie an ihre Konfigurationszeile die Optionen --with-jpeg-dir[ =DIR] --with-tiff-dir[=DIR] anfügen.
+Die pdflib-Distribution enthält ein komplexeres Beispiel, das eine Reihe von Seiten mit einer Analoguhr erzeugt.
+Hier ist dieses Beispiel, das unter Verwendung der ClibPDF-Erweiterung in PHP konvertiert wurde:
+Beispiel 2. pdfclock-Beispiel der pdflib 2.0 Distribution
+Siehe auch die Dokumentation der PDFlib -Erweiterung.
+Diese Funktionen erlauben die Nutzung der CrackLib Bibliothek, die dazu verwendet werden kann, die 'Stärke' eines Passworts zu überprüfen.
+CrackLib Beispiel
+Die Funktionen dieser Extension überprüfen, ob ein Zeichen oder eine Zeichenkette in eine bestimmte Zeichenklasse fällt, unter Berücksichtigung der momentanen locale-Einstellung (Siehe auch setlocale()).
+Beim Aufruf mit einem Integer-Argument verhalten sich diese Funktionen exakt wie ihre C-Gegenstücke aus ctype.h.
+Beim Aufruf mit einem String-Argument überprüfen Sie jedes einzelne Zeichen und geben nur TRUE zurück, wenn jedes einzelne Zeichen die angeforderten entsprechenden Kriterien erfüllt.
+Beim Aufruf mit einer leeren Zeichenkette wird immer TRUE zurückgegeben.
+Sobald irgendetwas anderes als String oder Integer als Argument übergeben wird, wird sofort FALSE zurückgegeben.
+Keine außer der Funktionen aus der C-Bibliothek, die immer verfügbar sind.
+Seit PHP 4.2.0 sind diese Funktionen standardmäßig aktiviert.
+In älteren Versionen müssen Sie PHP mit --enable-ctype konfigurieren.
+Sie können die cytpe-Unterstützung mit --disable-ctype abschalten.
+Ab PHP 4.3.0 ist eine integrierte ctype-Unterstützung vorhanden.
+CyberMUT ist ein populärer französischer Service der Bank Crédit Mutuel für das Bezahlen im Web.
+Wenn Sie nicht aus Frankreich sind werden Sie mit diesen Funktionen nichts anfangen können.
+Diese Funktionen stellen nur eine Verbindung zum CyberMUT SDK her.
+Lesen Sie auf jeden Fall den CyberMUT Developers Guide für alle Details der benötigten Parameter.
+Diese Funktionen ermöglichen es Ihnen, Datums - und Zeitangaben vom Server, auf dem PHP läuft, abzufragen.
+Die Ausgabe von Datums - und Zeitangaben kann mit Hilfe dieser Funktionen in unterschiedlichster Weise formatiert werden.
+Beachten Sie bitte, dass diese Funktionen von den lokalen Systemeinstellungen Ihres Servers abhängen.
+Ein besonderes Augenmerk sollten Sie auf Sommer - und Winterzeit und Schaltjahre haben.
+Es gibt keine Unterstützug für Indizes oder Memo-Felder.
+Zwei gleichzeitig ablaufende Webserver-Prozesse, die die selbe dBase-Datei bearbeiten, werden ihre Datenbank zerstören.
+Diese Datenbank-Art wird auch von der Berkeley DB und GDBM verwendet.
+Diese Erweiterung ist EXPERIMENTELL.
+Damit Ihnen diese Funktionen zur Verfügung stehen, müssen Sie php mit der Ingres-Unterstützung kompilieren, indem Sie die Option --with-ingres angeben.
+Seien Sie gewarnt und verwenden Sie diese Erweiterung auf eigenes Risiko.
+Das dbx Modul ist eine Datenbank-Abstraktionsschicht (db 'X', wobei 'X 'eine unterstützte Datenbank ist).
+Die dbx Funktionen ermöglichen Ihnen den Zugriff auf alle unterstützten Datenbanken mit einer einzigen Aufrufkonvention.
+Die dbx Funktionen stellen selbst keinen direkten Kontakt zu den Datenbanken her, sondern benutzen dafür jene Module, welche die jeweilige Datenbank unterstützen.
+Um eine Datenbank mit dem dbx-Modul verwenden zu können, muss das Modul entweder gelinkt oder in PHP geladen sein, und das Datenbankmodul muss von dem dbx-Modul unterstützt werden.
+Derzeit werden folgende Datenbanken unterstützt, und weitere werden folgen:
+Eine Dokumentation, wie dbx weitere Datenbankunterstützung hinzugefügt werden kann, finden Sie unter http: / /www.guidance.nl / php / dbx / doc /.
+Im dbx-Modul werden zwei Resourcetypen verwendet.
+Der erste ist ein Link-Objekt für eine Datenbankverbindung, der zweite ist ein Result-Objekt, welches das Ergebnis einer Abfrage enthält.
+Dieses Modul definiert eine Reihe von Klassen.
+Die DOM XML Funktionen geben einen Parsebaum eines XML Dokumentes zurück, dessen Elemente jeweils einer der nachstehenden Klassen angehören.
+DomAttribute - specified - - Überprüft, ob ein Attribut gesetzt ist.
+Über diese Funktionen können Sie auf FrontBase Datenbank-Server zugreifen.
+Sie müssen den FrontBase Datenbank-Server oder die fbsql-Client-Bibliotheken installieren, um die Funktionen nutzen zu können.
+Forms Data Format (FDF) ist ein Format zur Verarbeitung von Formularen innerhalb von PDF Dokumenten.
+Weiterführende Informationen zu FDF und dessen Verwendung sind unter http: / /partners.adobe.com / asn / developer / acrosdk / forms.html zu finden.
+Der Ansatz den FDF verfolgt, ist vergleichbar mit dem üblicher HTML Formulare.
+Die wesentlichen Unterschiede liegen in der Übertragung der Daten nach Absenden des Formulars (dies ist das eigentliche Form Data Format), sowie in dem Format des Dokuments welches das Formular enthält(PDF).
+Die Verarbeitung der FDF Daten ist eine der Möglichkeiten, die die FDF Funktionen bereitstellen.
+Darüber hinaus kann man beispielsweise innerhalb eines vorhandenen PDF Formulars die Input Felder dynamisch mit Daten füllen, ohne das Formular selbst zu verändern.
+Hierzu erzeugt man das FDF Dokument (fdf_create()), setzt die Werte der jeweiligen Input Felder (fdf_set_value()) und verbindet es mit dem jeweiligen PDF Formular (fdf_set_file()).
+Nachdem man das FDF Dokument, mit dem passenden MimeType application / vnd.fdf versehen, ausgegeben hat, erkennt das Acrobat Reader PlugIn des Browsers den MimeType und füllt das Zielformular mit den Daten des FDF Dokuments.
+Betrachtet man ein FDF Dokument mit einem Text Editor, findet sich dort ein Katalog-Objekt FDF.
+Dieses Objekt kann mehrere Einträge der Art Fields, F, Status etc.. enthalten.
+Die gebräuchlichsten Einträge sind Fields, welches zu einer Anzahl von Input Feldern verweist, sowie F das den Dateinamen des zugehörigen PDF Dokuments enthält.
+Diese Einträge finden sich in der FDF Dokumentation unter / F-Key oder / Status-Key.
+Modifikationen dieser Einträge werden mit Hilfe der Funktionen fdf_set_file() und fdf_set_status() vorgenommen.
+Ab PHP-Version 4.3 ist mindestens die Version 5.0 des FDF-SDKs erforderlich.
+Von Adobe unterstütze Plattformen sind Win32, Linux, Solaris und AIX.
+Der Parameter fdf ist ein Zeiger auf eine geöffnete FDF-Datei. fdf Ressource-Parameter werden von den Funktionen fdf_create(), fdf_open() und fdf_open_string() zurückgegeben.
+Das Beispiel zeigt die Auswertung der Formular Daten.
+filePro ist eingetragenes Warenzeichen von fP Technologies, Inc.
+Mehr Informationen zu filePro finden Sie unter http: / /www.fptech.com /.
