@@ -46,7 +46,7 @@ def translate_and_save(url, sources, targets, uid, lang):
 
         translation = translate(url, source, uid, lang)
         print(translation)
-        save(source, target, uid, lang)
+        save(url, source, target, uid, lang)
 
     delete_all_updates(url, uid, lang)
 
