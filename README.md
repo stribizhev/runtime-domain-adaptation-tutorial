@@ -108,7 +108,9 @@ cat ${prefix}.${trg} \
 ```
 
 #### Tokenization
-Tokenization separates TODO 
+Tokenization takes running text as input to output the text where words and other items have spaces inserted between them. Example of a tokenized version for the input sentence: *"I feel weird," said Alice to Bob's cat.*
+is
+*" I feel weird , " said Alice to Bob 's cat .*
 
 ```sh
 # Process source
