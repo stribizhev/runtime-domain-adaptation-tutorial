@@ -53,15 +53,16 @@ git clone https://github.com/moses-smt/mosesdecoder.git ~/mosesdecoder
 
 ## Data preparation
 First we need to prepare the data that we will be using to adapt the generic NMT
-model to the domain of the document we want to translate. We will download the
-data and the model, set up some tools and preprocess the data.
+model to the domain of the document we want to translate. First we will set up some tools and preprocess the data.
 
-### Downloading the data and the NMT model
-You should download MT and data preprocessing models. Data is found in `data` folder.
-```sh
-wget http://TODO.tar.gz
-tar zxvf TODO.tar.gz
-cd TODO
+```
+data/
+├─ news/
+├─ medical/
+models/
+├─ ende.bpe
+├─ trucase.de
+├─ trucase.en
 ```
 
 ### Preprocessing the data
@@ -75,15 +76,17 @@ These steps are needed to convert the text into a form that's expected by the
 NMT model.
 
 #### Set some variables
+
 These will be used down below.
-```sh
-# TODO
-prefix=$1
+```
 src=en
 trg=de
-prefix_dev=$4
 moses_scripts=~/mosesdecoder/scripts
-models=~/models
+models=models
+```
+Next choose one of the files from `data/medical` data and set `prefix` to file name ommiting the language code (e.g., `data/medical/EMEA.de-en.6`):
+```sh
+prefix=
 ```
 
 #### Punctuation normalization
@@ -108,9 +111,9 @@ cat ${prefix}.${trg} \
 ```
 
 #### Tokenization
-Tokenization takes running text as input to output the text where words and other items have spaces inserted between them. Example of a tokenized version for the input sentence: *"I feel weird," said Alice to Bob's cat.*
+Tokenization takes running text as input to output the text where words and other items have spaces inserted between them. Example of a tokenized version for the input sentence: *"I feel funky," said Alice to Bob's cat.*
 is
-*" I feel weird , " said Alice to Bob 's cat .*
+*" I feel funky , " said Alice to Bob 's cat .*
 
 ```sh
 # Process source
@@ -126,9 +129,8 @@ cat ${prefix}.norm.${trg} \
 
 #### Truecasing
 Truecasing converts word casing into a standard form regardless of its place in
-the sentence. E.g., common nouns that appear at the start of the sentence get
-lowercased, proper nouns get uppercased.
-
+the sentence. E.g., English common nouns that appear at the start of the sentence get
+lowercased, while propernouns are left as is.
 Truecasing uses a pre-trained truecasing model that must match the one that was
 used when training the system.
 
@@ -175,9 +177,9 @@ adaptation webservice, your unique ID and source and target files.
 
 ```sh
 ./client.py --uid $UID \
-  --source ./TODO/source --target ./TODO/target \
+  --source ${prefix}.bpe.${src} --target ${prefix}.bpe.${trg} \
   http://localhost:$PORT \
-  > output.dynamic.$trg
+  > output.dynamic.${trg}
 ```
 
 ### Regular translation (scenario b)
@@ -186,9 +188,9 @@ command as previously without supplying the `--target` option.
 
 ```sh
 ./client.py --uid $UID \
-  --source ./TODO/source \
+  --source ${prefix}.bpe.${src} \
   http://localhost:$PORT \
-  > output.regular.$trg
+  > output.regular.${trg}
 ```
 
 ### Calculating results
@@ -196,10 +198,10 @@ Calculate BLEU for both outputs to compare the quality of translations.
 
 ```sh
 # Calculate BLEU for the translations that used runtime domain adaptation
-sacrebleu output.dynamic.$trg < ./TODO/target | tee dynamic.bleu
+sacrebleu ${prefix}.$trg < output.dynamic.$trg | tee dynamic.bleu
 
 # Calculate BLEU for the translations that didn't use runtime domain adaptation
-sacrebleu output.regular.$trg < ./TODO/target | tee regular.bleu
+sacrebleu ${prefix}.$trg < output.regular.$trg | tee regular.bleu
 ```
 What translation quality improvement (as measured in BLEU) did you get? If you used one of the medical texts, you probably got two or more BLEU point improvement. 
 Try to repeat the same steps, but this time use one of the news articles (`data/news`)!
