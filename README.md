@@ -214,5 +214,8 @@ You can get the number of tokens by running `wc -w < ${prefix}.tc.${trg}`
 and you can get the number of types by running `cat ${prefix}.tc.${trg} | tr " " "\n" | sort | uniq | wc -l`
 
 
+We plotted the token-to-type ratio against the difference between BLEU scores of translation obtained with and without runtime-domain adaptation: 
 
 ![Delta BLEU vs token-to-type ratio](bleu_vs_ttr.png)
+
+We also calculated Spearman's Rho (rs), which measures the strength and direction of the relationship between two variables. We obtained *rs*=0.63, (*p*=0.00017) for this data, which suggests that the association between token-to-type ratio and the improvement of translation quality can be considered statistically significant.
