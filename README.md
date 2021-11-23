@@ -207,4 +207,12 @@ Try to repeat the same steps, but this time use one of the news articles (`data/
 ### Big Picture
 If you managed to translate both the text from the medical domain and one of the news articles, you probably noticed that runtime-domain adaptation was more effective for the text from the medical domain but less so for the news article. At least, that is the general trend we found.  After translating *all* news articles and *all* texts from the medical domain in both scenarios, we found that, on average, the runtime-domain adaptation yielded a 6.2 BLEU improvement for texts from the medical domain. In comparison, it gave only 1.7 BLEU improvement for the news articles. 
 
+So what are the deciding factors on whether or not runtime-domain adaptation will improve translation quality? 
+One aspect that has an impact on the effectiveness of runtime-domain adaptation is the repetitiveness of text. Texts that tend to be technical reuse the same words and phrases often, while texts that aim to entertain tend to strive for the opposite by using richer vocabulary. A proxy for text repetitiveness is the token-to-type ratio. That is the ratio between the number of running words (tokens) and unique words (types) in the sentence. For example, the sentence "*the black cat and the withe cat .*" has 8 tokens, but only 6 types (*"the" "black" "cat" "and" "white" "."*), thus its token-to-type ratio is 1.33. 
+
+You can get the number of tokens by running `wc -w < ${prefix}.tc.${trg}`
+and you can get the number of types by running `cat ${prefix}.tc.${trg} | tr " " "\n" | sort | uniq | wc -l`
+
+
+
 ![Delta BLEU vs token-to-type ratio](bleu_vs_ttr.png)
