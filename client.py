@@ -38,7 +38,7 @@ def translate_and_save(url, sources, targets, uid):
     delete_all_updates(url, uid)
 
     for source, target in zip(sources, targets):
-        translation = translate(source, uid)
+        translation = translate(url, source, uid)
         print(translation)
         save(source, target, uid)
 
@@ -48,7 +48,7 @@ def only_translate(url, sources, uid):
     delete_all_updates(url, uid)
 
     for source, target in sources:
-        translation = translate(source, uid)
+        translation = translate(url, source, uid)
         print(translation)
 
 
