@@ -4,6 +4,7 @@ In this tutorial we will learn how to use Marian to translate texts using
 on-the-fly domain adaptation [1] to improve translation quality by adapting the NMT
 model to the text at hand. 
 
+![on-the-fly domain adaptation workflow](graphics/workflow.png)
 
 
 ## Software dependencies
@@ -216,7 +217,7 @@ and you can get the number of types by running `cat ${prefix}.tc.${trg} | tr " "
 
 We plotted the token-to-type ratio against the difference between BLEU scores of translation obtained with and without runtime-domain adaptation: 
 
-![Delta BLEU vs token-to-type ratio](bleu_vs_ttr.png)
+![Delta BLEU vs token-to-type ratio](graphics/bleu_vs_ttr.png)
 
 We also calculated Spearman's Rho (rs), which measures the strength and direction of the relationship between two variables. We obtained *rs*=0.63, (*p*=0.00017) for this data, which suggests that the association between token-to-type ratio and the improvement of translation quality can be considered statistically significant.
 
