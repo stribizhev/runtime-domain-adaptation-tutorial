@@ -205,7 +205,7 @@ sacrebleu output.regular.$trg < ./TODO/target | tee regular.bleu
 What translation quality improvement (as measured in BLEU) did you get? If you used one of the medical texts, you probably got two or more BLEU point improvement. 
 Try to repeat the same steps, but this time use one of the news articles (`data/news`)!
 
-### Big Picture
+## Big Picture
 If you managed to translate both the text from the medical domain and one of the news articles, you probably noticed that runtime-domain adaptation was more effective for the text from the medical domain but less so for the news article. At least, that is the general trend we found.  After translating *all* news articles and *all* texts from the medical domain in both scenarios, we found that, on average, the runtime-domain adaptation yielded a 6.2 BLEU improvement for texts from the medical domain. In comparison, it gave only 1.7 BLEU improvement for the news articles. 
 
 So what are the deciding factors on whether or not runtime-domain adaptation will improve translation quality? 
@@ -221,5 +221,5 @@ We plotted the token-to-type ratio against the difference between BLEU scores of
 
 We also calculated Spearman's Rho (rs), which measures the strength and direction of the relationship between two variables. We obtained *rs*=0.63, (*p*=0.00017) for this data, which suggests that the association between token-to-type ratio and the improvement of translation quality can be considered statistically significant.
 
-### References
+## References
 [1] Farajian, M. Amin, Marco Turchi, Matteo Negri, and Marcello Federico. "Multi-domain neural machine translation through unsupervised adaptation." In Proceedings of the Second Conference on Machine Translation, pp. 127-137. 2017.
