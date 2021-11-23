@@ -205,4 +205,6 @@ What translation quality improvement (as measured in BLEU) did you get? If you u
 Try to repeat the same steps, but this time use one of the news articles (`data/news`)!
 
 ### Big Picture
+If you managed to translate both the text from the medical domain and one of the news articles, you probably noticed that runtime-domain adaptation was more effective for the text from the medical domain but less so for the news article. At least, that is the general trend we found.  After translating *all* news articles and *all* texts from the medical domain in both scenarios, we found that, on average, the runtime-domain adaptation yielded a 6.2 BLEU improvement for texts from the medical domain. In comparison, it gave only 1.7 BLEU improvement for the news articles. 
+
 ![Delta BLEU vs token-to-type ratio](bleu_vs_ttr.png)
