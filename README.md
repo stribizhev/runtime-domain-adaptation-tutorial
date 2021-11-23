@@ -201,6 +201,8 @@ sacrebleu output.dynamic.$trg < ./TODO/target | tee dynamic.bleu
 # Calculate BLEU for the translations that didn't use runtime domain adaptation
 sacrebleu output.regular.$trg < ./TODO/target | tee regular.bleu
 ```
+What translation quality improvement (as measured in BLEU) did you get? If you used one of the medical texts, you probably got two or more BLEU point improvement. 
+Try to repeat the same steps, but this time use one of the news articles (`data/news`)!
 
 ### Big Picture
 ![Delta BLEU vs token-to-type ratio](bleu_vs_ttr.png)
