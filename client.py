@@ -20,7 +20,7 @@ def translate(url, text, uid, lang):
             'srclang': lang,
         }
     }
-    res = req.post(f"{url}/save", data=data)
+    res = req.post(f"{url}/translate", data=data)
     res.raise_for_status()
     translation = res.json()['output']
     return translation
@@ -34,7 +34,7 @@ def save(url, source, target, uid, lang):
             'srclang': lang,
         }
     }
-    res = req.post(f"{url}/translate", data=data)
+    res = req.post(f"{url}/save", data=data)
     res.raise_for_status()
 
 def translate_and_save(url, sources, targets, uid, lang):
