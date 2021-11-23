@@ -178,7 +178,9 @@ adaptation webservice, your unique ID and source and target files.
 ```sh
 ./client.py --uid $UID \
   --source ${prefix}.bpe.${src} --target ${prefix}.bpe.${trg} \
-  http://localhost:$PORT \
+  http://localhost:$PORT | \
+  sed "s/@@//g" | \
+  $moses_scripts/tokenizer/detokenizer.perl -l ${trg} \
   > output.dynamic.${trg}
 ```
 
@@ -189,7 +191,9 @@ command as previously without supplying the `--target` option.
 ```sh
 ./client.py --uid $UID \
   --source ${prefix}.bpe.${src} \
-  http://localhost:$PORT \
+  http://localhost:$PORT | \
+  sed "s/@@//g" | \
+  $moses_scripts/tokenizer/detokenizer.perl -l ${trg} \
   > output.regular.${trg}
 ```
 
@@ -198,10 +202,10 @@ Calculate BLEU for both outputs to compare the quality of translations.
 
 ```sh
 # Calculate BLEU for the translations that used runtime domain adaptation
-sacrebleu ${prefix}.$trg < output.dynamic.$trg | tee dynamic.bleu
+sacrebleu ${prefix}.$trg -lc < output.dynamic.$trg | tee dynamic.bleu
 
 # Calculate BLEU for the translations that didn't use runtime domain adaptation
-sacrebleu ${prefix}.$trg < output.regular.$trg | tee regular.bleu
+sacrebleu ${prefix}.$trg -lc < output.regular.$trg | tee regular.bleu
 ```
 What translation quality improvement (as measured in BLEU) did you get? If you used one of the medical texts, you probably got two or more BLEU point improvement. 
 Try to repeat the same steps, but this time use one of the news articles (`data/news`)!
