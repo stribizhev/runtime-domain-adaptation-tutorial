@@ -35,17 +35,17 @@ def save(url, source, target, uuid):
     res.raise_for_status()
 
 def translate_and_save(url, sources, targets, uuid):
-    delete_all_updates(uuid)
+    delete_all_updates(url, uuid)
 
     for source, target in zip(sources, targets):
         translation = translate(source, uuid)
         print(translation)
         save(source, target, uuid)
 
-    delete_all_updates(uuid)
+    delete_all_updates(url, uuid)
 
 def only_translate(url, sources, uuid):
-    delete_all_updates(uuid)
+    delete_all_updates(url, uuid)
 
     for source, target in sources:
         translation = translate(source, uuid)
