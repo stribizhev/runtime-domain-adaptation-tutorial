@@ -1,8 +1,7 @@
 # Runtime domain adaptation
+This tutorial is about on-the-fly domain adaptation [1] for improved translation quality by adapting the NMT model to the text at hand. This tutorial is part of the Machine Translation Half-Marathon, for which we have set up a docker container with Marian and Lucene translation memory. If you end up doing this Tutorial on your  own time and infrastructure, you might want to read about how to set it up ![here](https://github.com/marian-cef/marian-examples/tree/master/adaptive) and use models from ![here](https://drive.google.com/file/d/1P-qrHHBVV75eXho1PaKsi9znjzucUrtY/view?usp=sharing). 
+
 ## Introduction
-In this tutorial we will learn how to use Marian to translate texts using
-on-the-fly domain adaptation [1] to improve translation quality by adapting the NMT
-model to the text at hand. 
 
 ![on-the-fly domain adaptation workflow](graphics/workflow.png)
 
