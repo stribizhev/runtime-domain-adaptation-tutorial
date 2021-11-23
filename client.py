@@ -4,7 +4,7 @@ import requests as req
 import argparse as ag
 
 
-def delete_all_updates(url, uuid):
+def delete_all_updates(url, uid):
     data = {
         'uid': uid,
     }
@@ -23,7 +23,7 @@ def translate(url, text, uid):
     translation = res.json()['output']
     return translation
 
-def save(url, source, target, uuid):
+def save(url, source, target, uid):
     data = {
         'source': source,
         'target': target,
@@ -34,21 +34,21 @@ def save(url, source, target, uuid):
     res = req.post(f"{url}/translate", data=data)
     res.raise_for_status()
 
-def translate_and_save(url, sources, targets, uuid):
-    delete_all_updates(url, uuid)
+def translate_and_save(url, sources, targets, uid):
+    delete_all_updates(url, uid)
 
     for source, target in zip(sources, targets):
-        translation = translate(source, uuid)
+        translation = translate(source, uid)
         print(translation)
-        save(source, target, uuid)
+        save(source, target, uid)
 
-    delete_all_updates(url, uuid)
+    delete_all_updates(url, uid)
 
-def only_translate(url, sources, uuid):
-    delete_all_updates(url, uuid)
+def only_translate(url, sources, uid):
+    delete_all_updates(url, uid)
 
     for source, target in sources:
-        translation = translate(source, uuid)
+        translation = translate(source, uid)
         print(translation)
 
 
