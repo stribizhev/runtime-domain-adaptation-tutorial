@@ -110,7 +110,7 @@ moses_scripts=~/mosesdecoder/scripts
 models=models
 # We need an unique identifier to use when translating so that the saved sentences
 # don't clash among the participants of this tutorial
-UID=$USER-$RANDOM
+UUID=$USER-$RANDOM
 # For this tutorial, we will rely on existing translation services that are made
 # available on localhost on ports 5010 through 5016. Here we randomize the port
 # to achieve load balanding. You should set the PORT to a specific value if you're
@@ -210,7 +210,7 @@ Run the `client.py` script by supplying it with an url to the runtime domain
 adaptation webservice, your unique ID and source and target files.
 
 ```sh
-./client.py --uid $UID \
+./client.py --uid $UUID \
   --source ${prefix}.bpe.${src} --target ${prefix}.bpe.${trg} \
   http://localhost:$PORT | \
   sed "s/@@//g" | \
@@ -223,7 +223,7 @@ To translate without using runtime domain adaptation, simply use the same
 command as previously without supplying the `--target` option.
 
 ```sh
-./client.py --uid $UID \
+./client.py --uid $UUID \
   --source ${prefix}.bpe.${src} \
   http://localhost:$PORT | \
   sed "s/@@//g" | \
