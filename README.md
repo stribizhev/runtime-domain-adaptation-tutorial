@@ -1,4 +1,4 @@
-# Runtime domain adaptation
+# On-the-Fly Domain Adaptation
 This tutorial is about on-the-fly domain adaptation [1] for improved translation
 quality by adapting the NMT model to the text at hand. This tutorial is part of
 the Machine Translation Half-Marathon, for which we have set up a docker
