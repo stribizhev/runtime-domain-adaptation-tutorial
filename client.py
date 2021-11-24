@@ -7,7 +7,6 @@ import argparse as ag
 def delete_all_updates(url, uid, lang):
     data = {
         'uid': uid,
-        'srclang': lang,
     }
     res = req.post(f"{url}/delete", json=data)
     res.raise_for_status()
