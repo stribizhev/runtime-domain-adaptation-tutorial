@@ -88,6 +88,9 @@ src=en
 trg=de
 moses_scripts=~/mosesdecoder/scripts
 models=models
+# We need an unique identifier to use when translating so that the saved sentences
+# don't clash among the participants of this tutorial
+UID=$USER-$RANDOM
 ```
 Next choose one of the files from `data/medical` data and set `prefix` to file name ommiting the language code (e.g., `data/medical/EMEA.de-en.6`):
 ```sh
