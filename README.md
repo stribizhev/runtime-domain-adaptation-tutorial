@@ -291,6 +291,11 @@ direction of the relationship between two variables. We obtained *rs*=0.63,
 token-to-type ratio and the improvement of translation quality can be considered
 statistically significant.
 
+### Caveats
+So on-the-fly domain adaptation works well for texts with a high word and phrase repetition rate, but when does it work poorly? 
+On-the-fly domain adaptation is unsuitable for cases when the same target word or phrase is translated inconsistently (an example might be two different projects with inconsistent terminology conventions). It also won't work well when the text being translated is not from a novel domain. Last but not least,  on-the-fly domain adaptation is much slower and more resource-demanding and thus is not suitable for speed-critical applications. 
+
+
 ## References
 [1] Farajian, M. Amin, Marco Turchi, Matteo Negri, and Marcello Federico.
 "Multi-domain neural machine translation through unsupervised adaptation." In
