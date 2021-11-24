@@ -224,7 +224,7 @@ adaptation webservice, your unique ID and source and target files.
 ~/tutorial/client.py --uid $UUID \
   --source ${prefix}.bpe.${src} --target ${prefix}.bpe.${trg} \
   --source-lang ${src} http://localhost:$PORT | \
-  sed "s/@@//g" | \
+  sed "s/@@ //g" | \
   $moses_scripts/tokenizer/detokenizer.perl -l ${trg} \
   > output.dynamic.${trg}
 ```
@@ -237,7 +237,7 @@ command as previously without supplying the `--target` option.
 ~/tutorial/client.py --uid $UUID \
   --source ${prefix}.bpe.${src} \
   --source-lang ${src} http://localhost:$PORT | \
-  sed "s/@@//g" | \
+  sed "s/@@ //g" | \
   $moses_scripts/tokenizer/detokenizer.perl -l ${trg} \
   > output.regular.${trg}
 ```
