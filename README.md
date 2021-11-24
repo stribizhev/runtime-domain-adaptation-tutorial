@@ -1,8 +1,21 @@
 # Runtime domain adaptation
-This tutorial is about on-the-fly domain adaptation [1] for improved translation quality by adapting the NMT model to the text at hand. This tutorial is part of the Machine Translation Half-Marathon, for which we have set up a docker container with [Marian](https://marian-nmt.github.io/) and Lucene translation memory. If you end up doing this Tutorial on your  own time and infrastructure, you might want to read about how to set it up [here](https://github.com/marian-cef/marian-examples/tree/master/adaptive) and use models from [here](http://data.statmt.org/heafield/models.tar.gz). 
+This tutorial is about on-the-fly domain adaptation [1] for improved translation
+quality by adapting the NMT model to the text at hand. This tutorial is part of
+the Machine Translation Half-Marathon, for which we have set up a docker
+container with [Marian](https://marian-nmt.github.io/) and Lucene translation
+memory. If you end up doing this Tutorial on your own time and infrastructure,
+you might want to read about how to set it up
+[here](https://github.com/marian-cef/marian-examples/tree/master/adaptive) and
+use models from [here](http://data.statmt.org/heafield/models.tar.gz).
 
 ## Introduction
-Although on-the-fly domain adaptation can be used in various ways, in this tutorial, we consider a scenario that mimics the workflow of a professional translator. We will translate sentences one by one. After receiving each machine translation, we will imitate post-editing and give feedback by returning the corresponding reference translation to the translation system. This way, upon receiving the subsequent translation requests, the machine translation model can be adapted using relevant sentences from the translation memory. 
+Although on-the-fly domain adaptation can be used in various ways, in this
+tutorial, we consider a scenario that mimics the workflow of a professional
+translator. We will translate sentences one by one. After receiving each machine
+translation, we will imitate post-editing and give feedback by returning the
+corresponding reference translation to the translation system. This way, upon
+receiving the subsequent translation requests, the machine translation model can
+be adapted using relevant sentences from the translation memory.
 
 ![on-the-fly domain adaptation workflow](graphics/workflow.png)
 
@@ -13,7 +26,13 @@ For this tutorial, we have set up:
   3. A service that glues both together by handling requests
   4. Pre-installed the necessary tools
   
-If you end up doing this Tutorial on your  own time and infrastructure, you might want to read about how to set it up [here](https://github.com/marian-cef/marian-examples/tree/master/adaptive) and use models from [here](http://data.statmt.org/heafield/models.tar.gz). Apart from those we will be using multiple different tools to preprocess the data and measure the translation quality at the end. You must install these tools before you begin to work on your enviroment.
+If you end up doing this Tutorial on your own time and infrastructure, you might
+want to read about how to set it up
+[here](https://github.com/marian-cef/marian-examples/tree/master/adaptive) and
+use models from [here](http://data.statmt.org/heafield/models.tar.gz). Apart
+from those we will be using multiple different tools to preprocess the data and
+measure the translation quality at the end. You must install these tools before
+you begin to work on your enviroment.
 
 ### Pre-installed tools
 These tools should already be available on the shared server we're using for the
@@ -58,7 +77,8 @@ git clone https://github.com/moses-smt/mosesdecoder.git ~/mosesdecoder
 
 ## Data preparation
 First we need to prepare the data that we will be using to adapt the generic NMT
-model to the domain of the document we want to translate. First we will set up some tools and preprocess the data.
+model to the domain of the document we want to translate. First we will set up
+some tools and preprocess the data.
 
 ```
 data/
@@ -119,9 +139,10 @@ cat ${prefix}.${trg} \
 ```
 
 #### Tokenization
-Tokenization takes running text as input to output the text where words and other items have spaces inserted between them. Example of a tokenized version for the input sentence: *"I feel funky," said Alice to Bob's cat.*
-is
-*" I feel funky , " said Alice to Bob 's cat .*
+Tokenization takes running text as input to output the text where words and
+other items have spaces inserted between them. Example of a tokenized version
+for the input sentence: *"I feel funky," said Alice to Bob's cat.* is *" I feel
+funky , " said Alice to Bob 's cat .*
 
 ```sh
 # Process source
@@ -219,20 +240,42 @@ What translation quality improvement (as measured in BLEU) did you get? If you u
 Try to repeat the same steps, but this time use one of the news articles (`data/news`)!
 
 ## Big Picture
-If you managed to translate both the text from the medical domain and one of the news articles, you probably noticed that runtime-domain adaptation was more effective for the text from the medical domain but less so for the news article. At least, that is the general trend we found.  After translating *all* news articles and *all* texts from the medical domain in both scenarios, we found that, on average, the runtime-domain adaptation yielded a 6.2 BLEU improvement for texts from the medical domain. In comparison, it gave only 1.7 BLEU improvement for the news articles. 
+If you managed to translate both the text from the medical domain and one of the
+news articles, you probably noticed that runtime-domain adaptation was more
+effective for the text from the medical domain but less so for the news article.
+At least, that is the general trend we found. After translating *all* news
+articles and *all* texts from the medical domain in both scenarios, we found
+that, on average, the runtime-domain adaptation yielded a 6.2 BLEU improvement
+for texts from the medical domain. In comparison, it gave only 1.7 BLEU
+improvement for the news articles.
 
-So what are the deciding factors on whether or not runtime-domain adaptation will improve translation quality? 
-One aspect that has an impact on the effectiveness of runtime-domain adaptation is the repetitiveness of text. Texts that tend to be technical reuse the same words and phrases often, while texts that aim to entertain tend to strive for the opposite by using richer vocabulary. A proxy for text repetitiveness is the token-to-type ratio. That is the ratio between the number of running words (tokens) and unique words (types) in the sentence. For example, the sentence "*the black cat and the withe cat .*" has 8 tokens, but only 6 types (*"the" "black" "cat" "and" "white" "."*), thus its token-to-type ratio is 1.33. 
+So what are the deciding factors on whether or not runtime-domain adaptation
+will improve translation quality? One aspect that has an impact on the
+effectiveness of runtime-domain adaptation is the repetitiveness of text. Texts
+that tend to be technical reuse the same words and phrases often, while texts
+that aim to entertain tend to strive for the opposite by using richer
+vocabulary. A proxy for text repetitiveness is the token-to-type ratio. That is
+the ratio between the number of running words (tokens) and unique words (types)
+in the sentence. For example, the sentence "*the black cat and the withe cat .*"
+has 8 tokens, but only 6 types (*"the" "black" "cat" "and" "white" "."*), thus
+its token-to-type ratio is 1.33.
 
-You can get the number of tokens by running `wc -w < ${prefix}.tc.${trg}`
-and you can get the number of types by running `cat ${prefix}.tc.${trg} | tr " " "\n" | sort | uniq | wc -l`
+You can get the number of tokens by running `wc -w < ${prefix}.tc.${trg}` and
+you can get the number of types by running `cat ${prefix}.tc.${trg} | tr " "
+"\n" | sort | uniq | wc -l`
 
 
 We plotted the token-to-type ratio against the difference between BLEU scores of translation obtained with and without runtime-domain adaptation: 
 
 ![Delta BLEU vs token-to-type ratio](graphics/bleu_vs_ttr.png)
 
-We also calculated Spearman's Rho (rs), which measures the strength and direction of the relationship between two variables. We obtained *rs*=0.63, (*p*=0.00017) for this data, which suggests that the association between token-to-type ratio and the improvement of translation quality can be considered statistically significant.
+We also calculated Spearman's Rho (rs), which measures the strength and
+direction of the relationship between two variables. We obtained *rs*=0.63,
+(*p*=0.00017) for this data, which suggests that the association between
+token-to-type ratio and the improvement of translation quality can be considered
+statistically significant.
 
 ## References
-[1] Farajian, M. Amin, Marco Turchi, Matteo Negri, and Marcello Federico. "Multi-domain neural machine translation through unsupervised adaptation." In Proceedings of the Second Conference on Machine Translation, pp. 127-137. 2017.
+[1] Farajian, M. Amin, Marco Turchi, Matteo Negri, and Marcello Federico.
+"Multi-domain neural machine translation through unsupervised adaptation." In
+Proceedings of the Second Conference on Machine Translation, pp. 127-137. 2017.
