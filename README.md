@@ -1,5 +1,5 @@
 # Runtime domain adaptation
-This tutorial is about on-the-fly domain adaptation [1] for improved translation quality by adapting the NMT model to the text at hand. This tutorial is part of the Machine Translation Half-Marathon, for which we have set up a docker container with ![Marian](https://marian-nmt.github.io/) and Lucene translation memory. If you end up doing this Tutorial on your  own time and infrastructure, you might want to read about how to set it up ![here](https://github.com/marian-cef/marian-examples/tree/master/adaptive) and use models from ![here](http://data.statmt.org/heafield/models.tar.gz). 
+This tutorial is about on-the-fly domain adaptation [1] for improved translation quality by adapting the NMT model to the text at hand. This tutorial is part of the Machine Translation Half-Marathon, for which we have set up a docker container with [Marian](https://marian-nmt.github.io/) and Lucene translation memory. If you end up doing this Tutorial on your  own time and infrastructure, you might want to read about how to set it up [here](https://github.com/marian-cef/marian-examples/tree/master/adaptive) and use models from [here](http://data.statmt.org/heafield/models.tar.gz). 
 
 ## Introduction
 Although on-the-fly domain adaptation can be used in various ways, in this tutorial, we consider a scenario that mimics the workflow of a professional translator. We will translate sentences one by one. After receiving each machine translation, we will imitate post-editing and give feedback by returning the corresponding reference translation to the translation system. This way, upon receiving the subsequent translation requests, the machine translation model can be adapted using relevant sentences from the translation memory. 
@@ -13,7 +13,7 @@ For this tutorial, we have set up:
   3. A service that glues both together by handling requests
   4. Pre-installed the necessary tools
   
-If you end up doing this Tutorial on your  own time and infrastructure, you might want to read about how to set it up ![here](https://github.com/marian-cef/marian-examples/tree/master/adaptive) and use models from ![here](http://data.statmt.org/heafield/models.tar.gz). Apart from those we will be using multiple different tools to preprocess the data and measure the translation quality at the end. You must install these tools before you begin to work on your enviroment.
+If you end up doing this Tutorial on your  own time and infrastructure, you might want to read about how to set it up [here](https://github.com/marian-cef/marian-examples/tree/master/adaptive) and use models from [here](http://data.statmt.org/heafield/models.tar.gz). Apart from those we will be using multiple different tools to preprocess the data and measure the translation quality at the end. You must install these tools before you begin to work on your enviroment.
 
 ### Pre-installed tools
 These tools should already be available on the shared server we're using for the
