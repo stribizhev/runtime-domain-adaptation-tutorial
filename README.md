@@ -10,9 +10,9 @@ For this tutorial, we have set up:
   1. Marian NMT framework with on-the-fly domain adaptation capability running as a web service
   2. Lucene translation memory service 
   3. A service that glues both together by handling requests
-If you end up doing this Tutorial on your  own time and infrastructure, you might want to read about how to set it up ![here](https://github.com/marian-cef/marian-examples/tree/master/adaptive) and use models from ![here](http://data.statmt.org/heafield/models.tar.gz). 
-
-Apart from those we will be using multiple different tools to preprocess the data and measure the translation quality at the end. These tools must be installed before we begin.
+  4. Pre-installed the necessary tools
+  
+If you end up doing this Tutorial on your  own time and infrastructure, you might want to read about how to set it up ![here](https://github.com/marian-cef/marian-examples/tree/master/adaptive) and use models from ![here](http://data.statmt.org/heafield/models.tar.gz). Apart from those we will be using multiple different tools to preprocess the data and measure the translation quality at the end. You must install these tools before you begin to work on your enviroment.
 
 ### Pre-installed tools
 These tools should already be available on the shared server we're using for the
