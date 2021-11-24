@@ -81,13 +81,18 @@ model to the domain of the document we want to translate. First we will set up
 some tools and preprocess the data.
 
 ```
-data/
-├─ news/
-├─ medical/
-models/
-├─ ende.bpe
-├─ trucase.de
-├─ trucase.en
+git clone https://github.com/tilde-nlp/runtime-domain-adaptation-tutorial ~/tutorial
+```
+This should give you: 
+```
+tutorial/
+├─data/
+  ├─ news/
+  ├─ medical/
+├─models/
+  ├─ ende.bpe
+  ├─ trucase.de
+  ├─ trucase.en
 ```
 
 ### Preprocessing the data
