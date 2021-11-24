@@ -46,7 +46,7 @@ virtualenv venv --python=/usr/bin/python3
 
 Now install some Python tools that we will be using
 ```sh
-pip install sacrebleu subword-nmt requests TODO
+pip install sacrebleu subword-nmt requests
 ```
 
 ### Download Moses
