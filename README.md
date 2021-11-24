@@ -122,9 +122,9 @@ UUID=$USER-$RANDOM
 # following along on your own hardware
 PORT=501$(expr $RANDOM % 7)
 ```
-Next choose one of the files from `~/tutorial/data/medical` data and set `prefix` to file name ommiting the language code (e.g., `~/tutorial/data/medical/EMEA.de-en.6`):
+Next choose one of the files from `~/tutorial/data/medical` data and set `prefix` to file name ommiting the language code (e.g., `~/tutorial/data/medical/EMEA.de-en.1`):
 ```sh
-prefix=
+prefix=~/tutorial/data/medical/EMEA.de-en.1
 ```
 
 #### Punctuation normalization
