@@ -116,7 +116,7 @@ models=~/tutorial/models
 # We need an unique identifier to use when translating so that the saved sentences
 # don't clash among the participants of this tutorial
 UUID=$USER-$RANDOM
-# For this tutorial, we will rely on existing translation services that are made
+# For this tutorial, we will rely on existing translation services that have been made
 # available on localhost on ports 5010 through 5016. Here we randomize the port
 # to achieve load balanding. You should set the PORT to a specific value if you're
 # following along on your own hardware
@@ -209,6 +209,12 @@ translator who's translating a document by post-editing an NMT system's outputs.
 In scenario a) the *translator* will be continuously submitting the post-edited
 sentences to supply the NMT system with examples to use to adapt to the domain
 of the document. In scenario b) run-time domain adaptation will not be used.
+
+Note, during the tutorial we will be connecting to existing translation services
+that have been made available on localhost. If you're following along on your
+own hardware you should set up [the adaptive Marian
+example](https://github.com/marian-cef/marian-examples/tree/master/adaptive) and
+use that with models from [here](http://data.statmt.org/heafield/models.tar.gz).
 
 ### Runtime domain adaptation (scenario a)
 Run the `client.py` script by supplying it with an url to the runtime domain
