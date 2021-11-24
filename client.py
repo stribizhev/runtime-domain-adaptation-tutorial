@@ -53,10 +53,9 @@ def translate_and_save(url, sources, targets, uid, lang):
 def only_translate(url, sources, uid, lang):
     delete_all_updates(url, uid, lang)
 
-    for source, target in sources:
+    for source in sources:
         source = source.rstrip()
-        target = target.rstrip()
-
+       
         translation = translate(url, source, uid, lang)
         print(translation)
 
