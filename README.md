@@ -81,13 +81,18 @@ model to the domain of the document we want to translate. First we will set up
 some tools and preprocess the data.
 
 ```
-data/
-├─ news/
-├─ medical/
-models/
-├─ ende.bpe
-├─ trucase.de
-├─ trucase.en
+git clone https://github.com/tilde-nlp/runtime-domain-adaptation-tutorial ~/tutorial
+```
+This should give you: 
+```
+tutorial/
+├─data/
+  ├─ news/
+  ├─ medical/
+├─models/
+  ├─ ende.bpe
+  ├─ trucase.de
+  ├─ trucase.en
 ```
 
 ### Preprocessing the data
@@ -107,7 +112,7 @@ These will be used down below.
 src=en
 trg=de
 moses_scripts=~/mosesdecoder/scripts
-models=models
+models=~/tutorial/models
 # We need an unique identifier to use when translating so that the saved sentences
 # don't clash among the participants of this tutorial
 UUID=$USER-$RANDOM
@@ -117,7 +122,7 @@ UUID=$USER-$RANDOM
 # following along on your own hardware
 PORT=501$(expr $RANDOM % 7)
 ```
-Next choose one of the files from `data/medical` data and set `prefix` to file name ommiting the language code (e.g., `data/medical/EMEA.de-en.6`):
+Next choose one of the files from `~/tutorial/data/medical` data and set `prefix` to file name ommiting the language code (e.g., `~/tutorial/data/medical/EMEA.de-en.6`):
 ```sh
 prefix=
 ```
@@ -191,9 +196,9 @@ turns into
 
 ```sh
 # Process source
-subword-nmt apply-bpe -c ${models}/${trg}${src}.bpe < ${prefix}.tc.${src} > ${prefix}.bpe.${src}
+subword-nmt apply-bpe -c ${models}/${src}${trg}.bpe < ${prefix}.tc.${src} > ${prefix}.bpe.${src}
 # Process target
-subword-nmt apply-bpe -c ${models}/${trg}${src}.bpe < ${prefix}.tc.${trg} > ${prefix}.bpe.${trg}
+subword-nmt apply-bpe -c ${models}/${src}${trg}.bpe < ${prefix}.tc.${trg} > ${prefix}.bpe.${trg}
 ```
 
 
