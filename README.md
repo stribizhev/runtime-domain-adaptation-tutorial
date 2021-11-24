@@ -191,9 +191,9 @@ turns into
 
 ```sh
 # Process source
-subword-nmt apply-bpe -c ${models}/${trg}${src}.bpe < ${prefix}.tc.${src} > ${prefix}.bpe.${src}
+subword-nmt apply-bpe -c ${models}/${src}${trg}.bpe < ${prefix}.tc.${src} > ${prefix}.bpe.${src}
 # Process target
-subword-nmt apply-bpe -c ${models}/${trg}${src}.bpe < ${prefix}.tc.${trg} > ${prefix}.bpe.${trg}
+subword-nmt apply-bpe -c ${models}/${src}${trg}.bpe < ${prefix}.tc.${trg} > ${prefix}.bpe.${trg}
 ```
 
 
