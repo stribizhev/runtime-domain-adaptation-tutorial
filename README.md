@@ -215,7 +215,7 @@ Run the `client.py` script by supplying it with an url to the runtime domain
 adaptation webservice, your unique ID and source and target files.
 
 ```sh
-./client.py --uid $UUID \
+~/tutorial/client.py --uid $UUID \
   --source ${prefix}.bpe.${src} --target ${prefix}.bpe.${trg} \
   http://localhost:$PORT | \
   sed "s/@@//g" | \
@@ -228,7 +228,7 @@ To translate without using runtime domain adaptation, simply use the same
 command as previously without supplying the `--target` option.
 
 ```sh
-./client.py --uid $UUID \
+~/tutorial/client.py --uid $UUID \
   --source ${prefix}.bpe.${src} \
   http://localhost:$PORT | \
   sed "s/@@//g" | \
