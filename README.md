@@ -111,6 +111,11 @@ models=models
 # We need an unique identifier to use when translating so that the saved sentences
 # don't clash among the participants of this tutorial
 UID=$USER-$RANDOM
+# For this tutorial, we will rely on existing translation services that are made
+# available on localhost on ports 5010 through 5016. Here we randomize the port
+# to achieve load balanding. You should set the PORT to a specific value if you're
+# following along on your own hardware
+PORT=501$(expr $RANDOM % 7)
 ```
 Next choose one of the files from `data/medical` data and set `prefix` to file name ommiting the language code (e.g., `data/medical/EMEA.de-en.6`):
 ```sh
