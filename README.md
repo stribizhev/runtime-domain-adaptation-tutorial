@@ -5,10 +5,14 @@ This tutorial is about on-the-fly domain adaptation [1] for improved translation
 Although on-the-fly domain adaptation can be used in various ways, in this tutorial, we consider a scenario that mimics the workflow of a professional translator. We will translate sentences one by one. After receiving each machine translation, we will imitate post-editing and give feedback by returning the corresponding reference translation to the translation system. This way, upon receiving the subsequent translation requests, the machine translation model can be adapted using relevant sentences from the translation memory. 
 ![on-the-fly domain adaptation workflow](graphics/workflow.png)
 
-
 ## Software dependencies
-We will be using multiple different tools to preprocess the data and measure the
-translation quality at the end. These tools must be installed before we begin.
+For this tutorial, we have set up: 
+  1. Marian NMT framework with on-the-fly domain adaptation capability running as a web service
+  2. Lucene translation memory service 
+  3. A service that glues both together by handling requests
+If you end up doing this Tutorial on your  own time and infrastructure, you might want to read about how to set it up ![here](https://github.com/marian-cef/marian-examples/tree/master/adaptive) and use models from ![here](http://data.statmt.org/heafield/models.tar.gz). 
+
+Apart from those we will be using multiple different tools to preprocess the data and measure the translation quality at the end. These tools must be installed before we begin.
 
 ### Pre-installed tools
 These tools should already be available on the shared server we're using for the
