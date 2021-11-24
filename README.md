@@ -3,6 +3,7 @@ This tutorial is about on-the-fly domain adaptation [1] for improved translation
 
 ## Introduction
 Although on-the-fly domain adaptation can be used in various ways, in this tutorial, we consider a scenario that mimics the workflow of a professional translator. We will translate sentences one by one. After receiving each machine translation, we will imitate post-editing and give feedback by returning the corresponding reference translation to the translation system. This way, upon receiving the subsequent translation requests, the machine translation model can be adapted using relevant sentences from the translation memory. 
+
 ![on-the-fly domain adaptation workflow](graphics/workflow.png)
 
 ## Software dependencies
